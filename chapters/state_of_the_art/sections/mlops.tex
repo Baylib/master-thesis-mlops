@@ -2,17 +2,169 @@
 
 In this section we will try to describe key aspect of MLOps as can be found in today's literature.
 
+Given this overview of features required for and processes affected by MLOps, it’s
+clearly not something data teams—or even the data-driven organization at large—can
+ignore. Nor is it an item to check off of a list (“yes, we do MLOps!”), but rather a
+complex interplay between technologies, processes, and people that requires disci‐
+pline and time to do correctly.\cite{treveil2020introducing}(p.38)
+
+
 \subsection{Description}\label{subsec:description}
 MLOps or Machine Learning Operations is the automation of Machine learning development workflow and operations.
 It's an extension of DevOps practices adapted to machine learning model development and data operations.
 MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle.
 
 \begin{figure}[!htbp]
-    \caption{MLOps lifecycle~\cite{mlops-definition-tools-and-challenge}}
+    \caption{MLOps lifecycle\cite{mlops-definition-tools-and-challenge}}
     \centering
     \includegraphics[scale=0.5]{images/ml-dev-ops}
     \label{fig:ml-dev-ops}
 \end{figure}
+
+
+\subsection{Actors/People}\label{subsec:actors}
+
+\begin{figure}[!htbp]
+    \caption{Realistic picture of a machine learning model life cycle inside an average
+    organization today\cite{treveil2020introducing}(p.6)}
+    \centering
+    \includegraphics[scale=0.5]{images/mlops-people}
+    \label{fig:mlop-people}
+\end{figure}
+
+MLOps is also, at a higher level, a critical part of transparent strategies for machine
+learning. Upper management and the C-suite should be able to understand as well as
+data scientists what machine learning models are deployed in production and what
+effect they’re having on the business. Beyond that, they should arguably be able to
+drill down to understand the whole data pipeline (i.e., the steps taken to go from raw
+data to final output) behind those machine learning models. MLOps, as described in
+this book, can provide this level of transparency and accountability.\cite{treveil2020introducing}(p.11)
+
+MLOps isn’t just for data scientists; a diverse group of experts across the organization
+has a role to play not only in the ML model life cycle, but the MLOps strategy as well.
+In fact, each person—from the subject matter expert on the business side to the most
+technical machine learning architect—plays a critical part in the maintenance of ML
+models in production. This is ultimately important not only to ensure the best possi‐
+ble results from ML models (good results generally lead to more trust in ML-based
+systems as well as increased budget to build more), but, perhaps more pointedly, to
+protect the business from the risks outlined in Chapter 1.\cite{treveil2020introducing}(p.22)
+
+
+\subsection{Workflow}\label{subsec:workflow}
+
+
+\subsubsection{Developing Models}
+
+\begin{figure}[!htbp]
+    \caption{Model development highlighted in the larger context of the ML project life
+    cycle\cite{treveil2020introducing}(p.41)}
+    \centering
+    \includegraphics[scale=0.5]{images/developing-models-intro}
+    \label{fig:developing-models-intro}
+\end{figure}
+
+
+\subsubsection{Prepare for production}
+
+\begin{figure}[!htbp]
+    \caption{Preparing for production highlighted in the larger context of the ML project
+    life cycle\cite{treveil2020introducing}(p.59)}
+    \centering
+    \includegraphics[scale=0.5]{images/prep-prod-intro}
+    \label{fig:prep-prod-intro}
+\end{figure}
+
+
+\subsubsection{Deploy in production}
+
+\begin{figure}[!htbp]
+    \caption{Preparing for production highlighted in the larger context of the ML project
+    life cycle\cite{treveil2020introducing}(p.73)}
+    \centering
+    \includegraphics[scale=0.5]{images/deploy-prod}
+    \label{fig:deploy-prod}
+\end{figure}
+
+CI/CD concepts apply to traditional software engineering, but they apply just as well
+to machine learning systems and are a critical part of MLOps strategy. After success‐
+fully developing a model, a data scientist should push the code, metadata, and docu‐
+mentation to a central repository and trigger a CI/CD pipeline. An example of such
+pipeline could be:
+1. Build the model
+a. Build the model artifacts
+b. Send the artifacts to long-term storage
+c. Run basic checks (smoke tests/sanity checks)
+d. Generate fairness and explainability reports
+2. Deploy to a test environment
+a. Run tests to validate ML performance, computational performance
+b. Validate manually
+3. Deploy to production environment
+a. Deploy the model as canary
+b. Fully deploy the model
+Many scenarios are possible and depend on the application, the risks from which the
+system should be protected, and the way the organization chooses to operate. Gener‐
+ally speaking, an incremental approach to building a CI/CD pipeline is preferred: a
+simple or even naïve workflow on which a team can iterate is often much better than
+starting with complex infrastructure from scratch.\cite{treveil2020introducing}(p.74)
+
+\subsubsection{Monitor and FeedBack}
+
+\begin{figure}[!htbp]
+    \caption{Monitoring and feedback loop highlighted in the larger context of the ML
+    project life cycle\cite{treveil2020introducing}(p.85)}
+    \centering
+    \includegraphics[scale=0.5]{images/monitor-intro}
+    \label{fig:monitor-intro}
+\end{figure}
+
+How Often Should Models Be Retrained?
+One of the key questions teams have regarding monitoring and retraining is: how
+often should models be retrained? Unfortunately, there is no easy answer, as this
+question depends on many factors, including:
+The domain
+Models in areas like cybersecurity or real-time trading need to be updated regu‐
+larly to keep up with the constant changes inherent in these fields. Physical mod‐
+els, like voice recognition, are generally more stable, because the patterns don’t
+often abruptly change. However, even more stable physical models need to adapt
+to change: what happens to a voice recognition model if the person has a cough
+and the tone of their voice changes?
+The cost
+Organizations need to consider whether the cost of retraining is worth the
+improvement in performance. For example, if it takes one week to run the whole
+data pipeline and retrain the model, is it worth a 1\% improvement?
+The model performance
+In some situations, the model performance is restrained by the limited number of
+training examples, and thus the decision to retrain hinges on collecting enough
+new data.\cite{treveil2020introducing}(p.86)
+
+Understanding Model Degradation
+Once a machine learning model is trained and deployed in production, there are two
+approaches to monitor its performance degradation: ground truth evaluation and
+input drift detection. Understanding the theory behind and limitations of these
+approaches is critical to determining the best strategy.\cite{treveil2020introducing}(p.89)
+
+\begin{figure}[!htbp]
+    \caption{Continuous delivery for end-to-end machine learning process\cite{treveil2020introducing}(p.95)}
+    \centering
+    \includegraphics[scale=0.5]{images/feedback-loop-intro}
+    \label{fig:feedback-loop-intro}
+\end{figure}
+
+Ordinary software is built to satisfy specifications. Once an application is deployed,
+its ability to fulfill its objective does not degrade. ML models, by contrast, have objec‐
+tives statistically defined by their performance on a given dataset. As a result, their
+performance changes, usually for the worse, when the statistical properties of the data
+change.
+In addition to ordinary software maintenance needs (bug correction, release
+upgrades, etc.), this performance drift has to be carefully monitored. We have seen
+that performance monitoring based on the ground truth is the cornerstone, while
+drift monitoring can provide early warning signals. Among possible drift mitigation
+measures, the workhorse is definitely retraining on new data, while model modifica‐
+tion remains an option. Once a new model is ready to be deployed, its improved per‐
+formance can be validated thanks to shadow scoring or, as a second choice, A/B
+testing. This enables proving that the new model is better in order to improve the
+performance of the system.\cite{treveil2020introducing}(p.103)
+
 
 \subsection{Maturity Models}\label{subsec:maturity-models}
 \cite{mlops-maturity-model} they propose a maturity model that goes from manual MLOps to fully automated MLOps.
@@ -28,3 +180,9 @@ ML pipelines.\cite{mlops-definition-tools-and-challenge}
 \end{figure}
 
 \subsection{MLOps Workflow}\label{subsec:mlops-workflow}
+
+
+\subsection{MLOps is not AI for DevOps}\label{subsec:mlops-is-not-ai-for-devops}
+In the literature, one might encounter the concept of Artificial Intelligence for DevOps (AI for DevOps)which is the study.
+It's not the same as MLOps but of course as MLOps derives from DevOps it can also benefit from AI for DevOps,
+but it's not the purpose of our actual research.

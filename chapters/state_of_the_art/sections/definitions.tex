@@ -1,2 +1,27 @@
 \section{Definitions}\label{sec:stdefinitions}
 \subsection{CI/CD workflows}
+
+\subsection{Deployment Strategies}
+
+To understand the details of a deployment pipeline, it is important to distinguish
+among concepts often used inconsistently or interchangeably.
+Integration
+The process of merging a contribution to a central repository (typically merging
+a Git feature branch to the main branch) and performing more or less complex
+tests.
+Delivery
+As used in the continuous delivery (CD) part of CI/CD, the process of building a
+fully packaged and validated version of the model ready to be deployed to
+production.
+Deployment
+The process of running a new model version on a target infrastructure. Fully
+automated deployment is not always practical or desirable and is a business deci‐
+sion as much as a technical decision, whereas continuous delivery is a tool for the
+development team to improve productivity and quality as well as measure pro‐
+gress more reliably. Continuous delivery is required for continuous deployment,
+but it also provides enormous value without.
+Release
+In principle, release is yet another step, as deploying a model version (even to the
+production infrastructure) does not necessarily mean that the production work‐
+load is directed to the new version. As we will see, multiple versions of a model
+can run at the same time on the production infrastructure.\cite{treveil2020introducing}(p.77)

@@ -1,11 +1,56 @@
 \section{Tools}\label{sec:tools}
 
+In this section we will present some of the tools that the literature recommend to implement a MLops workflow.
+
 \subsection{Docker}
+But storing this metadata is not enough. Deploying to production should automati‐
+cally and reliably rebuild this environment on the target machine. In addition, the
+target machine will typically run multiple models simultaneously, and two models
+may have incompatible dependency versions. Finally, several models running on the
+same machine could compete for resources, and one misbehaving model could hurt
+the performance of multiple cohosted models.
+Containerization technology is increasingly used to tackle these challenges. These
+tools bundle an application together with all of its related configuration files, libraries,
+and dependencies that are required for it to run across different operating environ‐
+ments. Unlike virtual machines (VMs), containers do not duplicate the complete
+operating system; multiple containers share a common operating system and are
+therefore far more resource efficient.
+The most well-known containerization technology is the open source platform
+Docker. Released in 2014, it has become the de facto standard. It allows an application
+to be packaged, sent to a server (the Docker host), and run with all its dependencies
+in isolation from other applications.\cite{treveil2020introducing}(p.80)
+
 \subsection{Kubernetes}
+
+Docker with Kubernetes can provide a powerful infrastructure to host applications,
+including ML models. Leveraging these products greatly simplifies the implementa‐
+tion of the deployment strategies—like blue-green deployments or canary releases—
+although they are not aware of the nature of the deployed applications and thus can’t
+natively manage the ML performance analysis. Another major advantage of this type
+of infrastructure is the ability to easily scale the model’s deployment.\cite{treveil2020introducing}(p.81)
+
 \subsection{Version Control and CI/CD Pipelines}
 Gitea, Gitlab, Azure Devops, Github with their relative
 \subsection{Airflow}
+General pipeline tool that as a git sync functionality to generate new pipelines.
+encountered in:
 \subsection{Kubeflow}
+Machine learning pipeline tool on kubernetes.
+Kubeflow offers many ...
+It can be used with other pipelines tools to be integrated with other workflows.
 \subsection{Argo}
+\subsection{AutoML}
+
+AutoML is the automation of the modeling aspect of machine learning.
+A crude and straightforward example of AutoML is an Excel spreadsheet that performs linear regression.
+You tell Excel which column is the target to predict and then which column is the feature.
+More sophisticated AutoML systems work similarly.
+You select what value you want to predict—for example,image classification, a numerical trend,
+categorical text classification, or perhaps clustering.
+Then the AutoML software system performs many of the same techniques that a data scientist would perform,
+including hyperparameter tuning, algorithm selection, and model explainability.
+All major cloud platforms have AutoML tools embedded into MLOps platforms.
+As a result, AutoML is an option for all cloud-based machine learning projects and is increasingly becoming another productivity enhancement for them.\cite{gift2021practical}(9\%)
+
 \subsection{Worth Mentioning tools}
 Flux,...
