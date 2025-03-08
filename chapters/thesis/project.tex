@@ -1,5 +1,39 @@
-\chapter{Thesis project: A standard MLOps CI/CD workflow}
+\chapter{Thesis project: A standard MLOps CI/CD workflow}\label{ch:thesis-project:-a-standard-mlops-ci/cd-workflow}
 \chaptermark{Thesis : MLOps WorkFlow}
-\section{Introduction}
+\section{Introduction}\label{sec:introduction}
+Following our state-of-the-art research we wanted to describe and implement a standard MLOps workflow.
+I should be easily used on current project to improve their level of maturity or to initiate a new project with a solid
+base to be fast in production.
 
-\section{Conclusion}
+\section{Tools}\label{sec:tools2}
+In this section we will list all the tools we picked from our previous research.
+As our workflow should be standard it should remain tools agnostic.
+
+\subsection{Git Repositories and CI/CD}\label{subsec:github}
+GitHub will be used to store and version control our codes repositories and configurations.
+It will also be used to implement our CI/CD pipelines with GitHub actions.
+
+\subsection{IAC, Containers and Registry}\label{subsec:dockerhub}
+To benefit from containerization we will use docker to containerize our applications and models.
+DockerHub will be used to store and version our Docker containers and Helm charts.
+
+\subsection{Kubernetes}\label{subsec:kubernetes}
+We will use a kubernetes cluster to benefit from its orchestration and deployment strategies.
+
+\subsection{Airflow}\label{subsec:airflow}
+We will use airflow for our DataOps pipelines and to integrate our kubeflow pipelines.
+
+\subsection{Kubeflow}\label{subsec:kubeflow}
+We will mainly use the storage solutions and pipelines offered by Kubeflow.
+
+\subsection{ArgoCD}\label{subsec:argocd}
+ArgoCD will be used to implement our GitOps strategy.
+
+\section{Infrastructure}\label{sec:infrastructure}
+
+
+\section{Workflow}\label{sec:workflow}
+
+
+\section{Conclusion}\label{sec:conclusion}
+Airflow pipelines and kubeflow pipelines to easily integrate DataOps and MLOps pipelines together to reach more automation as the project gains maturity.
