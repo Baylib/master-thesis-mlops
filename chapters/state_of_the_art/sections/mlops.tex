@@ -2,17 +2,13 @@
 
 In this section we will try to describe key aspect of MLOps as can be found in today's literature.
 
-Given this overview of features required for and processes affected by MLOps, it’s
-clearly not something data teams—or even the data-driven organization at large—can
-ignore. Nor is it an item to check off of a list (“yes, we do MLOps!”), but rather a
-complex interplay between technologies, processes, and people that requires disci‐
-pline and time to do correctly.\cite{treveil2020introducing}(p.38)
-
-
 \subsection{Description}\label{subsec:description}
 MLOps or Machine Learning Operations is the automation of Machine learning development workflow and operations.
 It's an extension of DevOps practices adapted to machine learning model development and data operations.
-MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle.
+MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle (articles,).
+
+MLOps with clearly defined workflow and infrastructure can provide transparency and accountability to Upper Management and Business.\cite{treveil2020introducing}(p.11)
+You don't need to be an engineer to understand the flow of operations and what is required to work it out.
 
 \begin{figure}[!htbp]
     \caption{MLOps lifecycle\cite{mlops-definition-tools-and-challenge}}
@@ -21,8 +17,28 @@ MLOps almost never taken alone and DataOps is an integrated part of the full MLO
     \label{fig:ml-dev-ops}
 \end{figure}
 
+MLOps is essential for data teams and organizations, as it involves a complex integration of technologies, processes, and people, requiring ongoing discipline and time to implement effectively.
+It is not a one-time task but a continuous effort to ensure successful machine learning operations.\cite{treveil2020introducing}(p.38)
 
-\subsection{Actors/People}\label{subsec:actors}
+
+\subsection{Why MLOps?}
+
+A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development is evolving towards team-based development.
+They also show that in a result the adoption of DevOps practices is increasing and the required skills in infrastructure and deployment are evolving.
+
+In this regard, they also identified the following obstacles among others\cite{DBLP:journals/corr/abs-2103-08942}:
+    \begin{itemize}
+        \item Accessibility of data
+        \item Building training pipelines
+        \item Deployment and target environment (on-premise, cloud)
+        \item Tracking and comparing training
+        \item Collaborating on projects
+        \item Lack of guidelines
+    \end{itemize}
+
+Since then, we will see that some of those difficulties have been tackled, tools exist and are currently reviewed in the literature.
+
+\subsection{Roles in MLOps}\label{subsec:actors}
 
 \begin{figure}[!htbp]
     \caption{Realistic picture of a machine learning model life cycle inside an average
@@ -32,22 +48,30 @@ MLOps almost never taken alone and DataOps is an integrated part of the full MLO
     \label{fig:mlop-people}
 \end{figure}
 
-MLOps is also, at a higher level, a critical part of transparent strategies for machine
-learning. Upper management and the C-suite should be able to understand as well as
-data scientists what machine learning models are deployed in production and what
-effect they’re having on the business. Beyond that, they should arguably be able to
-drill down to understand the whole data pipeline (i.e., the steps taken to go from raw
-data to final output) behind those machine learning models. MLOps, as described in
-this book, can provide this level of transparency and accountability.\cite{treveil2020introducing}(p.11)
+As we already said, Machine learning development is now team based and requires collaboration across diverse roles.
+From business experts to technical architects each role contributes to the lifecycle of machine learning models.
+They will ensure maintenance, optimization, build and deployment trust, and mitigate business risks\cite{treveil2020introducing}(p.22).
 
-MLOps isn’t just for data scientists; a diverse group of experts across the organization
-has a role to play not only in the ML model life cycle, but the MLOps strategy as well.
-In fact, each person—from the subject matter expert on the business side to the most
+Data scientist is the obvious starting role.
+Around the data scientist, in the context of MLops the literature
+propose roles\cite{treveil2020introducing}(p.14),
+\begin{itemize}
+    \item Subject-Matter Experts
+    \item Data Scientists
+    \item Data Engineers
+    \item DevOps engineers
+    \item Software engineers
+    \item Model Risk Managers
+    \item Machine Learning architects
+\end{itemize}
+
+\textit{Each person—from the subject-matter-expert on the business side to the most
 technical machine learning architect—plays a critical part in the maintenance of ML
-models in production. This is ultimately important not only to ensure the best possi‐
-ble results from ML models (good results generally lead to more trust in ML-based
-systems as well as increased budget to build more), but, perhaps more pointedly, to
-protect the business from the risks outlined in Chapter 1.\cite{treveil2020introducing}(p.22)
+models in production}\cite{treveil2020introducing}(p.22).
+
+In figure \ref{fig:mlop-people}, they propose an example of those roles within an organization.
+
+
 
 
 \subsection{Workflow}\label{subsec:workflow}
