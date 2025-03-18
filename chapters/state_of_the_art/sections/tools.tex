@@ -1,47 +1,55 @@
 \section{Tools and Frameworks}\label{sec:tools}
 
-In this section we will present some of the tools that the literature recommend to implement a MLops workflow.
+In this section we will present some of the tools that the literature recommend to implement MLOps workflow.
 
-\subsection{Docker}
-But storing this metadata is not enough. Deploying to production should automati‐
-cally and reliably rebuild this environment on the target machine. In addition, the
-target machine will typically run multiple models simultaneously, and two models
-may have incompatible dependency versions. Finally, several models running on the
-same machine could compete for resources, and one misbehaving model could hurt
-the performance of multiple cohosted models.
-Containerization technology is increasingly used to tackle these challenges. These
-tools bundle an application together with all of its related configuration files, libraries,
-and dependencies that are required for it to run across different operating environ‐
-ments. Unlike virtual machines (VMs), containers do not duplicate the complete
-operating system; multiple containers share a common operating system and are
-therefore far more resource efficient.
-The most well-known containerization technology is the open source platform
-Docker. Released in 2014, it has become the de facto standard. It allows an application
-to be packaged, sent to a server (the Docker host), and run with all its dependencies
-in isolation from other applications.\cite{treveil2020introducing}(p.80)
+\subsection{Docker}\label{subsec:docker}
+Docker\cite{docker} is a containerization platform that packages applications and their dependencies into isolated,
+lightweight containers, ensuring consistent and portable execution across different environments.
 
-\subsection{Kubernetes}
+Docker is essential for MLOps because it ensures consistent and reliable deployment of machine learning models across different environments.
+By containerizing models with all their dependencies, Docker avoids conflicts between incompatible versions and isolates resource usage,
+preventing one model from disrupting others.
+This makes Docker a key tool for efficient, scalable, and reproducible ML deployments.\cite{treveil2020introducing}(p.80)
 
-Docker with Kubernetes can provide a powerful infrastructure to host applications,
-including ML models. Leveraging these products greatly simplifies the implementa‐
-tion of the deployment strategies—like blue-green deployments or canary releases—
-although they are not aware of the nature of the deployed applications and thus can’t
-natively manage the ML performance analysis. Another major advantage of this type
-of infrastructure is the ability to easily scale the model’s deployment.\cite{treveil2020introducing}(p.81)
+Docker is not the only containerization platform out there but it's almost became a common noun nowadays for containerized applications.
 
-\subsection{Version Control and CI/CD Pipelines}
-Gitea, Gitlab, Azure Devops, Github with their relative
-\subsection{Airflow}
-General pipeline tool that as a git sync functionality to generate new pipelines.
-encountered in:
+\subsection{Kubernetes}\label{subsec:kubernetes2}
+
+Docker with Kubernetes together simplifies deployment strategies and enables scalable hosting of ML models,
+though it lacks native ML performance management capabilities.\cite{treveil2020introducing}(p.81)
+
+\subsection{Version Control and CI/CD Pipelines}\label{subsec:version-control-and-ci/cd-pipelines}
+Gitea, Gitlab, Azure Devops, GitHub with their relative
+
+\subsection{Apache Airflow}
+Apache Airflow\cite{airflow} is a platform created by the community to programmatically author, schedule and monitor workflows\cite{airflow}
+It's a general pipeline tool that can be deployed on kubernetes.
+It has a git/sync functionality to generate new pipelines.
+
 \subsection{Kubeflow}
-Machine learning pipeline tool on kubernetes.
-Kubeflow offers many
-It can be used with other pipelines tools to be integrated with other workflows.
-
-\cite{inproceedings} \cite{10855428}
+Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the deployment, management, and scaling of machine learning workflows on Kubernetes.
+It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
+Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
 
 \subsection{Argo}
+Argo\cite{argo} is a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
+
+We are particularly interested with ArgoCD and Argo Rollouts which are both mentioned and used in the literature.
+Kubeflow uses Argo for its deployment capabilities.
+
+\begin{itemize}
+    \item ArgoCD
+     is a declarative, GitOps-based continuous delivery tool for Kubernetes.
+     It automates application deployments by syncing the desired state
+    defined in a Git repository with the actual state in the cluster,
+    ensuring consistency and enabling easy rollbacks.
+
+    \item Argo Rollouts
+     is a Kubernetes controller that provides advanced deployment strategies
+     like canary and blue-green rollouts. It allows for progressive
+    delivery, enabling safer and more controlled updates by gradually
+    shifting traffic to new versions while monitoring their performance.
+\end{itemize}
 
 
 \subsection{Worth Mentioning tools}

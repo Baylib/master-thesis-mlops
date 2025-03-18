@@ -91,7 +91,7 @@ The literature consider those roles\cite{Kreuzberger2022MachineLO}:
 technical machine learning architect—plays a critical part in the maintenance of ML
 models in production}\cite{treveil2020introducing}(p.22).
 
-In figure \ref{fig:mlop-people}, they propose an example of those roles within an organization.
+In figure\ref{fig:mlop-people}, they propose an example of those roles within an organization.
 \begin{figure}[!htbp]
     \caption{Realistic picture of a machine learning model life cycle inside an average
     organization today\cite{treveil2020introducing}(p.6)}
@@ -213,7 +213,7 @@ approaches is critical to determining the best strategy.\cite{treveil2020introdu
 \end{figure}
 
 
-As explained in \cite{treveil2020introducing}(p.103), Traditional software is designed to meet fixed specifications and maintains its functionality after deployment.
+As explained in\cite{treveil2020introducing}(p.103), Traditional software is designed to meet fixed specifications and maintains its functionality after deployment.
 In contrast, ML models are defined by their statistical performance on specific data, making them prone to performance degradation as data properties change.
 Beyond typical software maintenance, ML systems require careful monitoring of performance drift,
 with ground truth-based evaluation being essential and drift detection serving as an early warning.
@@ -224,7 +224,7 @@ The frequency of model retraining depends on factors like the domain, the cost o
 Teams must balance these considerations, such as whether the retraining cost justifies the performance gain or if sufficient new data is available to enhance the model.\cite{treveil2020introducing}(p.86)
 
 \subsection{Architecture, infrastructure and existing platforms}\label{subsec:architecture-infrastructure-and-existing-platforms}
-Figure \ref{fig:infra} shows a reference architecture proposed by\cite{10855428} based on their results.
+Figure\ref{fig:infra} shows a reference architecture proposed by\cite{10855428} based on their results.
 Their proposed solution integrates GitHub Actions, Docker, and Kubernetes for the DevOps component, complemented by a robust ecosystem of tools:
 Feast for metadata storage, Mlflow as the model repository, Kubeflow for model orchestration, and Flower for distributed computing.
 This combination creates a comprehensive and scalable MLOps framework.
@@ -248,7 +248,7 @@ The Nifi project implement automatic and reusable ML model training and ML model
 Reusable MLOps is still a novel concept\cite{10690392}.
 
 The OCDL platform\cite{LIU2020704} was built on Kubernetes and other open-source frameworks to provide a scalable solution.
-It also integrates with GitHub to enable CI/CD pipelines and delivery, as illustrated in Figure \ref{fig:ocdl}.
+It also integrates with GitHub to enable CI/CD pipelines and delivery, as illustrated in Figure\ref{fig:ocdl}.
 OCDL provides an online IDE for model coding, a reusable code template, data access and GPU/CPU computing instances\cite{LIU2020704} .
 
 \begin{figure}[!htbp]
