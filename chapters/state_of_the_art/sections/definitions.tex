@@ -6,33 +6,26 @@ Devops workflow: plan, code, build, test, release, deploy, operate and monitor.
 MLOps should follow the devops principles, but it requires workflows to be extended as we will discuss later.
 remark: DevSecOps
 
-\subsubsection{GitOps} uses Git repository as the main source of truce.
-It uses git sync and ci/cd pipelines to manage all operation from git repositories.
+\subsubsection{GitOps}
+GitOps is a DevOps approach that uses a Git repository as the single source of truth for system and application configurations.
+It also provides change tracking through Git history and by storing infrastructure and configurations as code.
+Tools like ArgoCD provide GitOps implementation for kubernetes\cite{gitops}.
+One of the main aspect of GitOps is that it allows the cluster to pull changes directly from GitHub instead of a
+traditional pushing to deploy.
+
+
 \subsection{CI/CD workflows}
 \subsubsection{GitHubFlow}
 \subsubsection{GitFlow}
 \subsubsection{Trunk Based}
 \subsection{Deployment Strategies}
 
-To understand the details of a deployment pipeline, it is important to distinguish
-among concepts often used inconsistently or interchangeably.
-Integration
-The process of merging a contribution to a central repository (typically merging
-a Git feature branch to the main branch) and performing more or less complex
-tests.
-Delivery
-As used in the continuous delivery (CD) part of CI/CD, the process of building a
-fully packaged and validated version of the model ready to be deployed to
-production.
-Deployment
-The process of running a new model version on a target infrastructure. Fully
-automated deployment is not always practical or desirable and is a business deci‐
-sion as much as a technical decision, whereas continuous delivery is a tool for the
-development team to improve productivity and quality as well as measure pro‐
-gress more reliably. Continuous delivery is required for continuous deployment,
-but it also provides enormous value without.
-Release
-In principle, release is yet another step, as deploying a model version (even to the
-production infrastructure) does not necessarily mean that the production work‐
-load is directed to the new version. As we will see, multiple versions of a model
-can run at the same time on the production infrastructure.\cite{treveil2020introducing}(p.77)
+As explained in \cite{treveil2020introducing}(p.77), deployment strategies involve several key concepts.
+Integration refers to merging code changes into a central repository and running tests,
+while Delivery focuses on packaging and validating a model for production readiness.
+Deployment is the process of running the new model version on target infrastructure,
+which may or may not be fully automated, depending on business and technical considerations.
+Continuous Delivery is essential for improving productivity and quality, even if full Continuous Deployment isn't implemented.
+Finally, Release is distinct from deployment, as deploying a model doesn't always mean directing production traffic to it;
+multiple model versions can coexist in production, allowing for controlled rollouts and testing.
+

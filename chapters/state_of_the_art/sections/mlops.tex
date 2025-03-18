@@ -4,11 +4,10 @@ In this section we will try to describe key aspect of MLOps as can be found in t
 
 \subsection{Description}\label{subsec:description}
 MLOps or Machine Learning Operations is the automation of Machine learning development workflow and operations.
-It's an extension of DevOps practices adapted to machine learning model development and data operations.
-MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle\cite{Kreuzberger2022MachineLO}.
+It's an extension of DevOps practices adapted to machine learning model development and data operations\cite{Kreuzberger2022MachineLO}.
+MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle.
 
 MLOps with clearly defined workflow and infrastructure can provide transparency and accountability to Upper Management and Business.\cite{treveil2020introducing}(p.11)
-You don't need to be an engineer to understand the flow of operations and what is required to work it out.
 
 \begin{figure}[!htbp]
     \caption{MLOps lifecycle\cite{mlops-definition-tools-and-challenge}}
@@ -20,8 +19,6 @@ You don't need to be an engineer to understand the flow of operations and what i
 MLOps is essential for data teams and organizations, as it involves a complex integration of technologies, processes, and people, requiring ongoing discipline and time to implement effectively.
 It is not a one-time task but a continuous effort to ensure successful machine learning operations.\cite{treveil2020introducing}(p.38)
 
-
-\subsection{What is MLOps and Why?}\label{subsec:why-mlops?}
 A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development is evolving towards team-based development.
 They also show that in a result the adoption of DevOps practices is increasing and the required skills in infrastructure and deployment are evolving.
 
@@ -41,6 +38,24 @@ In 2025, in their systematic literature review\cite{10855428}, they still consid
 But they admit, publications are still limited.
 Variations in defining and grouping steps for creating and maintaining models arise from differing interpretations,
 model architectures, and usage methods, leading to diverse implementation approaches.
+
+\subsection{Challenges}\label{subsec:challenges}
+
+Adopting MLOps presents challenges, as highlighted by\cite{Kreuzberger2022MachineLO}, which categorizes them into organizational,
+ML system, and operational issues.
+Organizational challenges include shifting to a product-oriented mindset, addressing skill shortages,
+and fostering multidisciplinary teamwork, while ML system challenges focus on scalability and fluctuating demand,
+and operational challenges emphasize automation, governance, and reproducibility.
+These challenges are closely tied to the deployment stage in ML workflows, which involves critical steps like data management,
+model training, and deployment, each accompanied by issues such as data dispersion, resource constraints, and also ethical concerns\cite{10.1145/3533378}.
+All together, these challenges and considerations mark the complexity of implementing MLOps effectively.
+
+In their publication, a Microsoft team\cite{8804457} outlined challenges for MLOps implementation, including Data Availability, Collection, Cleaning, and Management,
+Education and Training, and Hardware Resources.
+They also highlighted the need for End-to-end Pipeline Support, Model Evolution, Evaluation, and Deployment, and effective Collaboration and Working Culture.
+Additionally, challenges like Integrating AI into Larger Systems, AI Tools, and Scale were emphasized,
+along with the importance of Guidance and Mentoring for skill development.
+These challenges highlight the multifaceted nature of MLOps, requiring both technical and organizational solutions.
 
 \subsection{Roles in MLOps}\label{subsec:actors}
 
@@ -124,6 +139,10 @@ In\cite{9792270} They propose a workflow that shares many aspect with other work
     \label{fig:developing-models-intro}
 \end{figure}
 
+\subsubsection{Training}
+
+\subsubection{Testing}
+Beyond accuracy, factors like robustness, security, transparency, fairness, and safety are critical for building reliable and ethical AI\cite{10.1145/3555803}.
 
 \subsubsection{Prepare for production}
 
@@ -178,25 +197,7 @@ starting with complex infrastructure from scratch.\cite{treveil2020introducing}(
     \label{fig:monitor-intro}
 \end{figure}
 
-How Often Should Models Be Retrained?
-One of the key questions teams have regarding monitoring and retraining is: how
-often should models be retrained? Unfortunately, there is no easy answer, as this
-question depends on many factors, including:
-The domain
-Models in areas like cybersecurity or real-time trading need to be updated regu‐
-larly to keep up with the constant changes inherent in these fields. Physical mod‐
-els, like voice recognition, are generally more stable, because the patterns don’t
-often abruptly change. However, even more stable physical models need to adapt
-to change: what happens to a voice recognition model if the person has a cough
-and the tone of their voice changes?
-The cost
-Organizations need to consider whether the cost of retraining is worth the
-improvement in performance. For example, if it takes one week to run the whole
-data pipeline and retrain the model, is it worth a 1\% improvement?
-The model performance
-In some situations, the model performance is restrained by the limited number of
-training examples, and thus the decision to retrain hinges on collecting enough
-new data.\cite{treveil2020introducing}(p.86)
+
 
 Understanding Model Degradation
 Once a machine learning model is trained and deployed in production, there are two
@@ -212,24 +213,29 @@ approaches is critical to determining the best strategy.\cite{treveil2020introdu
 \end{figure}
 
 
-Ordinary software is built to satisfy specifications. Once an application is deployed,
-its ability to fulfill its objective does not degrade. ML models, by contrast, have objec‐
-tives statistically defined by their performance on a given dataset. As a result, their
-performance changes, usually for the worse, when the statistical properties of the data
-change.
-In addition to ordinary software maintenance needs (bug correction, release
-upgrades, etc.), this performance drift has to be carefully monitored. We have seen
-that performance monitoring based on the ground truth is the cornerstone, while
-drift monitoring can provide early warning signals. Among possible drift mitigation
-measures, the workhorse is definitely retraining on new data, while model modifica‐
-tion remains an option. Once a new model is ready to be deployed, its improved per‐
-formance can be validated thanks to shadow scoring or, as a second choice, A/B
-testing. This enables proving that the new model is better in order to improve the
-performance of the system.\cite{treveil2020introducing}(p.103)
+As explained in \cite{treveil2020introducing}(p.103), Traditional software is designed to meet fixed specifications and maintains its functionality after deployment.
+In contrast, ML models are defined by their statistical performance on specific data, making them prone to performance degradation as data properties change.
+Beyond typical software maintenance, ML systems require careful monitoring of performance drift,
+with ground truth-based evaluation being essential and drift detection serving as an early warning.
+Retraining on new data is the primary solution, though model adjustments are also possible.
+Improved models can be validated using shadow scoring or A/B testing to ensure enhanced performance before deployment.
 
+The frequency of model retraining depends on factors like the domain, the cost of retraining, and the potential performance improvement.
+Teams must balance these considerations, such as whether the retraining cost justifies the performance gain or if sufficient new data is available to enhance the model.\cite{treveil2020introducing}(p.86)
 
-\section{Infrastructure}
-In\cite{10855428} they propose a reference infrastructure based on their results.
+\subsection{Architecture, infrastructure and existing platforms}\label{subsec:architecture-infrastructure-and-existing-platforms}
+Figure \ref{fig:infra} shows a reference architecture proposed by\cite{10855428} based on their results.
+Their proposed solution integrates GitHub Actions, Docker, and Kubernetes for the DevOps component, complemented by a robust ecosystem of tools:
+Feast for metadata storage, Mlflow as the model repository, Kubeflow for model orchestration, and Flower for distributed computing.
+This combination creates a comprehensive and scalable MLOps framework.
+
+\begin{figure}[!htbp]
+    \caption{MLOps reference architecture\cite{10855428}}
+    \centering
+    \includegraphics[scale=0.5]{images/infrastructure}
+    \label{fig:infra}
+\end{figure}
+
 
 The Acumos AI platform\cite{10690392} is an open-source project that propose a platform that allows to hotswap models and deploy
 them to wellknown cloud providers (targets like Kubernetes, AWS, Azure or GCP).
@@ -241,24 +247,30 @@ The Nifi project implement automatic and reusable ML model training and ML model
 
 Reusable MLOps is still a novel concept\cite{10690392}.
 
-We will use their remarks and experiment to create our own.
-
+The OCDL platform\cite{LIU2020704} was built on Kubernetes and other open-source frameworks to provide a scalable solution.
+It also integrates with GitHub to enable CI/CD pipelines and delivery, as illustrated in Figure \ref{fig:ocdl}.
+OCDL provides an online IDE for model coding, a reusable code template, data access and GPU/CPU computing instances\cite{LIU2020704} .
 
 \begin{figure}[!htbp]
-    \caption{MLOps reference architecture\cite{10855428}}
+    \caption{The OCDL architecture layers\cite{LIU2020704}}
     \centering
-    \includegraphics[scale=0.5]{images/infrastructure}
-    \label{fig:infra}
+    \includegraphics[scale=0.5]{images/ocdl-architecture}
+    \label{fig:ocdl}
 \end{figure}
 
-The more complete proposition of an architecture and workflows was found in\cite{Kreuzberger2022MachineLO}.
+We will use all their remarks and experiment to create our own.
+
+The more complete proposition of an architecture and workflows was found was in\cite{Kreuzberger2022MachineLO}.
 It will be an inspiration to implement our workflow and can be found in the Annexes.
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
-In\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
+The authors of\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
 It differs from the Microsoft and the Google MLOps maturity models,
 but they all tend to go from manual to fully automated MLOps processes using automated CI/CD and
 ML pipelines.\cite{mlops-definition-tools-and-challenge}
+
+In their research\cite{inproceedings} also identifies key motivators for MLOps and proposes three levels of MLOps maturity.
+Level 3 being the most sophisticated and recommended for enterprise solutions.
 
 \begin{figure}[!htbp]
     \caption{Maturity levels \cite{mlops-maturity-model}}
@@ -267,8 +279,10 @@ ML pipelines.\cite{mlops-definition-tools-and-challenge}
     \label{fig:maturity}
 \end{figure}
 
+\subsubsection{AutoML}
 
-\subsection{MLOps is not AI for DevOps}\label{subsec:mlops-is-not-ai-for-devops}
-In the literature, one might encounter the concept of Artificial Intelligence for DevOps (AI for DevOps)which is the study.
-It's not the same as MLOps but of course as MLOps derives from DevOps it can also benefit from AI for DevOps,
-but it's not the purpose of our actual research.
+AutoML automates the machine learning process, including tasks like data preparation, model creation, hyperparameter tuning, and evaluation,
+making it simpler and more accessible.
+It is increasingly integrated into MLOps platforms, enabling companies to deploy ML models into production more efficiently.
+Major cloud platforms now offer AutoML tools, enhancing productivity and feasibility for cloud-based ML projects.
+This combination of AutoML and MLOps is driving broader adoption across industries.\cite{gift2021practical,mlops-definition-tools-and-challenge}
