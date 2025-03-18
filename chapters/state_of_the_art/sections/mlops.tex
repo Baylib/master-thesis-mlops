@@ -5,7 +5,7 @@ In this section we will try to describe key aspect of MLOps as can be found in t
 \subsection{Description}\label{subsec:description}
 MLOps or Machine Learning Operations is the automation of Machine learning development workflow and operations.
 It's an extension of DevOps practices adapted to machine learning model development and data operations.
-MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle (articles,).
+MLOps almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle\cite{Kreuzberger2022MachineLO}.
 
 MLOps with clearly defined workflow and infrastructure can provide transparency and accountability to Upper Management and Business.\cite{treveil2020introducing}(p.11)
 You don't need to be an engineer to understand the flow of operations and what is required to work it out.
@@ -21,7 +21,7 @@ MLOps is essential for data teams and organizations, as it involves a complex in
 It is not a one-time task but a continuous effort to ensure successful machine learning operations.\cite{treveil2020introducing}(p.38)
 
 
-\subsection{Why MLOps?}\label{subsec:why-mlops?}
+\subsection{What is MLOps and Why?}\label{subsec:why-mlops?}
 A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development is evolving towards team-based development.
 They also show that in a result the adoption of DevOps practices is increasing and the required skills in infrastructure and deployment are evolving.
 
@@ -44,15 +44,7 @@ model architectures, and usage methods, leading to diverse implementation approa
 
 \subsection{Roles in MLOps}\label{subsec:actors}
 
-\begin{figure}[!htbp]
-    \caption{Realistic picture of a machine learning model life cycle inside an average
-    organization today\cite{treveil2020introducing}(p.6)}
-    \centering
-    \includegraphics[scale=0.5]{images/mlops-people}
-    \label{fig:mlop-people}
-\end{figure}
-
-As we already said, Machine learning development is now team based and requires collaboration across diverse roles.
+Machine learning development is now team based and requires collaboration across diverse roles.
 From business experts to technical architects each role contributes to the lifecycle of machine learning models.
 They will ensure maintenance, optimization, build and deployment trust, and mitigate business risks\cite{treveil2020introducing}(p.22).
 
@@ -68,17 +60,49 @@ propose roles\cite{treveil2020introducing}(p.14),
     \item Model Risk Managers
     \item Machine Learning architects
 \end{itemize}
+The literature consider those roles\cite{Kreuzberger2022MachineLO}:
+
+\begin{itemize}
+    \item Business Stakeholder
+    \item Solution Architect/Subject-Matter Experts
+    \item Data Scientist
+    \item Data Engineer
+    \item Software Engineer
+    \item DevOps Engineer
+    \item ML Engineer/MLOps Engineer
+\end{itemize}
 
 \textit{Each person—from the subject-matter-expert on the business side to the most
 technical machine learning architect—plays a critical part in the maintenance of ML
 models in production}\cite{treveil2020introducing}(p.22).
 
 In figure \ref{fig:mlop-people}, they propose an example of those roles within an organization.
-
-
-
+\begin{figure}[!htbp]
+    \caption{Realistic picture of a machine learning model life cycle inside an average
+    organization today\cite{treveil2020introducing}(p.6)}
+    \centering
+    \includegraphics[scale=0.5]{images/mlops-people}
+    \label{fig:mlop-people}
+\end{figure}
 
 \subsection{Workflow}\label{subsec:workflow}
+
+In their review\cite{Kreuzberger2022MachineLO}, they extracted good practices and principles to implement a MLOps workflow:
+
+\begin{itemize}
+    \item CI/CD automation
+    \item Workflow orchestration
+    \item Reproducibility
+    \item Versioning of data, code and model. (I would add versioning of pipelines)
+    \item Collaboration
+    \item Continuous ML training and evaluation
+    \item ML metadata tracking
+    \item Continuous Monitoring
+    \item Feedback loops
+\end{itemize}
+
+As we explained earlier those principles shares a lot with actual DevOps practices with the addition of ML considerations
+like training and metadata tracking.
 
 In\cite{9792270} They propose a workflow that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
 
@@ -206,7 +230,18 @@ performance of the system.\cite{treveil2020introducing}(p.103)
 
 \section{Infrastructure}
 In\cite{10855428} they propose a reference infrastructure based on their results.
-We will build upon this to propose our own.
+
+The Acumos AI platform\cite{10690392} is an open-source project that propose a platform that allows to hotswap models and deploy
+them to wellknown cloud providers (targets like Kubernetes, AWS, Azure or GCP).
+By using microservices, they made it easier to swap the models hidden behind a REST API\@.
+
+The Nifi project\cite{10346079} uses the Acumos project to demonstrate how to take an ML model
+to production.
+The Nifi project implement automatic and reusable ML model training and ML model serving pipelines.
+
+Reusable MLOps is still a novel concept\cite{10690392}.
+
+We will use their remarks and experiment to create our own.
 
 
 \begin{figure}[!htbp]
@@ -216,7 +251,8 @@ We will build upon this to propose our own.
     \label{fig:infra}
 \end{figure}
 
-
+The more complete proposition of an architecture and workflows was found in\cite{Kreuzberger2022MachineLO}.
+It will be an inspiration to implement our workflow and can be found in the Annexes.
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
 In\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
