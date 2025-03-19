@@ -1,0 +1,51 @@
+\section{Roles within our MLOps workflow}
+
+Each team can be assigned and linked to our type of Git repositories define earlier\ref{subsec:git-repositories}.
+All team can receive access to a Deployment/config repository that will be sync to the development environment.
+DevOps and Operations teams should be responsible for the production repositories.
+
+As we said earlier deployment repositories are synced to its defined environment but can be isolated using kubernetes namespaces,
+and projects within Airflow, Kubeflow\footnote{require Kubeflow installed in multi-user mode} or ArgoCD.
+This will ensure any team will deploy to their own namespaces with they predefined resource quotas.
+
+\subsection{DevOps Engineers}
+DevOps engineers are responsible for managing CI/CD pipeline templates, repositories, and the underlying runner infrastructure.
+They should provide standardized templates for building and releasing Docker images, code libraries, and Helm charts.
+Additionally, they should establish a process to synchronize configuration changes from a code repository to a deployment/configuration repository.
+\subsection{Data Engineers}
+The Data Team is responsible for maintaining at least one DAG repository to define their DataOps pipelines.
+For more complex tasks, they should create dedicated code repositories to build custom images used within their DAGs.
+\subsection{MLOps Engineers}
+MLOps engineers are tasked with defining the overarching workflow and architecture, as demonstrated in this project.
+They should oversee and manage relevant tools such as Airflow and Kubeflow, ensuring seamless integration and operation.
+\subsection{Model Engineers}
+Similar to the Data Team, Model Engineers should maintain at least one DAG repository to define their Kubeflow pipelines and build basic container images.
+For more advanced steps, such as model and library development or model training, they should create separate repositories.
+These repositories can follow a release workflow and be integrated as dependencies within the pipeline definitions.
+\subsection{Software Engineers}
+Software Engineers are responsible for developing the application that integrates and utilizes the model,
+ensuring it meets functional requirements.
+This application is defined as a Helm chart within our workflow, enabling deployment through ArgoCD.
+For advanced deployment strategies, ArgoCD Rollouts can be utilized to ensure more refined and controlled release processes.
+The trained model version is integrated into a REST API component, which is part of the application.
+
+\subsection{Example of minimal list of git repositories per roles/teams within an Organisation}
+
+\begin{minted}{markdown}
+Organisation
+    -> DevOps Project
+        -> CI/CD pipelines templates
+    -> DataOps Project
+        -> Airflow DAG definition with image for simple steps
+        -> dataops-step-x
+        -> dataops-step-y
+    -> ML Project
+        -> model code repository
+        -> DAG/kubeflow pipeline repository
+        -> mlops-pipeline-step-1
+    -> ML Ops project
+        -> Airflow/Kubeflow configuration
+        -> infrastructure definition
+    -> Operations
+        -> production environment repositories subject to different rules.
+\end{minted}

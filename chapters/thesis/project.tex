@@ -21,8 +21,8 @@ To benefit from containerization we will use docker to containerize our applicat
 DockerHub will be used to store and version our Docker containers and Helm charts.
 
 \subsection{Kubernetes}\label{subsec:kubernetes}
-We will use a kubernetes cluster to benefit from its orchestration and deployment strategies and the other tools available
-on kubenrets
+We will use a Kubernetes cluster to take advantage of its orchestration capabilities, advanced deployment strategies,
+and the ecosystem of tools available on the platform.
 
 \subsection{Airflow}\label{subsec:airflow}
 We will use Airflow for our DataOps pipelines and to integrate our kubeflow pipelines.
@@ -31,18 +31,21 @@ to benefit from other tools.
 
 \subsection{Kubeflow}\label{subsec:kubeflow}
 We will mainly use the storage solutions and pipelines offered by Kubeflow.
-But by using kubeflow pipelines we could easily add features during the development.
+But by using kubeflow pipelines we could easily add features during the development if required by the Data or Model engineers.
 
 \subsection{ArgoCD}\label{subsec:argocd}
 ArgoCD will be used to implement our GitOps strategy and deploy our application, models, airflow and kubeflow.
 
 \input{chapters/thesis/sections/infra}
+\input{chapters/thesis/sections/roles}
 
 \section{Workflow}\label{sec:workflow}
+
+\subsection{CI/CD pipelines}
 As we explained while describing the infrastructure, part of our global workflow can be implemented within pipelines runners definition.
 We used GitHub action and the GitHub flow to harmonise the workflow within our different type of git repositories.
 GitHub allows us to define template in a single repository that can be then versioned and used in other repositories while hiding the complexity of the defined pipelines.
-
+\subsection{CI/CD pipelines}
 
 
 \section{Conclusion}\label{sec:conclusion}
