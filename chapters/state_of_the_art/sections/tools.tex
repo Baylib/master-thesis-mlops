@@ -15,26 +15,33 @@ Docker is not the only containerization platform out there but it's almost becam
 
 \subsection{Kubernetes}\label{subsec:kubernetes2}
 
+Kubernetes\cite{kubernetes} is a container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+It enables infrastructure as code through tools like Helm, simplifying application deployment and configuration.
+By using features such as namespaces, resource quotas, and specialized node types (e.g., GPU nodes for machine learning),
+Kubernetes allows multiple teams to securely share resources while maintaining isolation.
+Its portability ensures compatibility across various Kubernetes providers, making it a flexible and scalable solution for diverse projects.
+
 Docker with Kubernetes together simplifies deployment strategies and enables scalable hosting of ML models,
-though it lacks native ML performance management capabilities.\cite{treveil2020introducing}(p.81)
+though it lacks native ML performance management capabilities on its own.\cite{treveil2020introducing}(p.81)
 
 \subsection{Version Control and CI/CD Pipelines}\label{subsec:version-control-and-ci/cd-pipelines}
 Gitea, Gitlab, Azure Devops, GitHub with their relative
 
-\subsection{Apache Airflow}
+\subsection{Apache Airflow}\label{subsec:apache-airflow}
 Apache Airflow\cite{airflow} is a platform created by the community to programmatically author, schedule and monitor workflows\cite{airflow}
-It's a general pipeline tool that can be deployed on kubernetes.
-It has a git/sync functionality to generate new pipelines.
-It's mainly used as a DataOps workflow orchestrator in publications about MLOps.
+It's a general pipeline tool that can be deployed on Kubernetes.
+It's mainly used as a DataOps workflow orchestrator in publications about MLOps\cite{???,10245408}
 
-\cite{10245408}
+An Airflow \textit{DAG} (Directed Acyclic Graph) is the core concept of Airflow\cite{airflow}.
+It's used to define pipelines as tasks that are organized with relationships.
+We will show examples later in this paper.
 
-\subsection{Kubeflow}
+\subsection{Kubeflow}\label{subsec:kubeflow2}
 Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the deployment, management, and scaling of machine learning workflows on Kubernetes.
 It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
 Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
 
-\subsection{Argo}
+\subsection{Argo}\label{subsec:argo}
 Argo\cite{argo} is a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
 
 We are particularly interested with ArgoCD and Argo Rollouts which are both mentioned and used in the literature.
@@ -56,4 +63,4 @@ Kubeflow uses Argo for its deployment capabilities.
 
 
 \subsection{Worth Mentioning tools}
-Flux,
+Flux,...

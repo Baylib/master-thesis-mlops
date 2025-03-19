@@ -21,11 +21,13 @@ To benefit from containerization we will use docker to containerize our applicat
 DockerHub will be used to store and version our Docker containers and Helm charts.
 
 \subsection{Kubernetes}\label{subsec:kubernetes}
-We will use a kubernetes cluster to benefit from its orchestration and deployment strategies.
+We will use a kubernetes cluster to benefit from its orchestration and deployment strategies and the other tools available
+on kubenrets
 
 \subsection{Airflow}\label{subsec:airflow}
-We will use airflow for our DataOps pipelines and to integrate our kubeflow pipelines.
-
+We will use Airflow for our DataOps pipelines and to integrate our kubeflow pipelines.
+We can use an Airflow DAG to trigger our Kubeflow pipelines and have a complete DataOps/MLOps pipeline while still allow respective teams
+to benefit from other tools.
 
 \subsection{Kubeflow}\label{subsec:kubeflow}
 We will mainly use the storage solutions and pipelines offered by Kubeflow.
@@ -34,51 +36,7 @@ But by using kubeflow pipelines we could easily add features during the developm
 \subsection{ArgoCD}\label{subsec:argocd}
 ArgoCD will be used to implement our GitOps strategy and deploy our application, models, airflow and kubeflow.
 
-\section{Infrastructure}\label{sec:infrastructure}
-
-In figure\ref{fig:project-infra}, we describe our infrastructure that can be first deployed on a local kubernetes single node cluster
-with independent DataOps and MLOps pipelines develop by different people with different roles.
-
-by using airflow pipelines as general pipelines to trigger our kubeflow pipelines, we can easily gain in maturity towards
-more automation by combining the DataOps pipelines and MLOps pipelines together when they are mature enough.
-
-This way we enable kubeflow features for our model developers within a more general purpose environment.
-
-By using the recent git/sync capabilities of Airflow we can synchronise our dags directly with airflow and
-even trigger them automatically in a later stage towards automation.
-
-We use Git Repositories for version control and triggering workflow pipeline runners.
-We consider 4 types of repositories:
-
-\begin{itemize}
-    \item Code Repositories that holds code for models, libraries, docker images and infrastructure as code using Helm.
-    \item MLOps and DataOps Pipelines Repositories.
-    In our infrastructure those repositories holds the definition of our Airflow DAGs.
-    In the first iteration those repositories can also hold images for
-    \item Deployment/Configuration repositories.
-    Those repositories are used to hold configuration for the deployed applications and Airflow dags.
-    We use ArgoCD GitOps implementation to synchronise changes to those repositories.
-    Airflow git/sync feature allows us to synchronise our dags with
-    Change in those repositories can be automated by the pipeline runners.
-    Depending on your team and organization those repositories can be separated into multiple repositories (per team, per domain, per environment (dev,test,staging,prod))
-    For the Dev environment we allow developers to push from their code repositories within those repositories.
-    For the production environment we use a pipeline to pull the configuration from the staging environment.
-    We called this promote our configuration to a new environment.
-    In case of full automation the pulling/promotion can be trigger automatically by ArgoCD sending webhooks on any test results desired.
-    \item Workflow pipeline templates
-    In those we define workflows that can be used in any repository to be used by the developers.
-    It includes building image workflows, versioning with tags on repositories, pushing new configurations into deployments repositories.
-    By defining them in a separate repository it allows us to version them and make it easy for developers to choose a workflow.
-    Each workflow is closely tight to the structure of the repository, so we defined one per type of repositories.
-\end{itemize}
-
-\begin{figure}[!htbp]
-    \centering
-    \caption{Proposed MLOps kubernetes infrastructure using GitOps principles}
-    \includegraphics[scale=0.35]{images/project/mthmlops-infra}
-    \label{fig:project-infra}
-\end{figure}
-
+\input{chapters/thesis/sections/infra}
 
 \section{Workflow}\label{sec:workflow}
 As we explained while describing the infrastructure, part of our global workflow can be implemented within pipelines runners definition.
