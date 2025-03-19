@@ -45,6 +45,17 @@ We consider 4 types of repositories:
     Each workflow is closely tight to the structure of the repository, so we defined one per type of repositories.
 \end{itemize}
 
+\subsubsection{General Rules for Managing Git Repositories}
+We follow the GitHub flow with adaptations to fit our workflow. However, it can be adjusted as needed.
+
+\begin{itemize}
+    \item A Pull Request is required for merging into the \texttt{main} branch, including a pipeline run and team review.
+    \item Follow GitHub flow, using \texttt{feature/} and \texttt{hotfix/} branches for development.
+    \item Approvals are required for deploying to environment-specific repositories.
+    \item The \texttt{main} branch is deployed to the production environment or released into production Docker/Helm repositories.
+    \item Other branches are deployed sequentially to all environments, passing tests and approval gates before merging to main.
+\end{itemize}
+
 \subsection{GitOps}
 With a Helm-based installation pipeline, the runner requires write access to push applications directly to Kubernetes.
 By adopting ArgoCD and a GitOps approach, we eliminate this requirement by pulling changes directly from GitHub.
@@ -69,7 +80,8 @@ This can be used as Monitoring tools for all our infrastructure too.
 \subsection{MLOps pipelines}
 Kubeflow allows us to deploy all the required steps within our MLOps pipeline by creating pods in the required namespace within our Kubernetes cluster.
 A lot like Airflow would.
-We use Kubeflow to allow our ML engineer to use other features like model and model metadata storage.
+We use Kubeflow to allow our ML engineer to use other features like model and metadata storage.
+Other features from the Kubeflow ecosystem could be added at any time if necessary.
 
 \begin{figure}[!htbp]
     \centering
