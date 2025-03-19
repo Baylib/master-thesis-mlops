@@ -59,27 +59,21 @@ These challenges highlight the multifaceted nature of MLOps, requiring both tech
 
 \subsection{Roles in MLOps}\label{subsec:actors}
 
-Machine learning development is now team based and requires collaboration across diverse roles.
-From business experts to technical architects each role contributes to the lifecycle of machine learning models.
-They will ensure maintenance, optimization, build and deployment trust, and mitigate business risks\cite{treveil2020introducing}(p.22).
+Machine learning development has evolved into a collaborative, team-based process involving diverse roles.
+Each role, from business experts to technical architects, contributes to the lifecycle of Machine Learning models.
+Their responsibilities include ensuring model maintenance, optimization, trust in deployment,
+and mitigating business risks\cite{treveil2020introducing}(p.22).
 
-Data scientist is the obvious starting role.
-Around the data scientist, in the context of MLops the literature
-propose roles\cite{treveil2020introducing}(p.14),
-\begin{itemize}
-    \item Subject-Matter Experts
-    \item Data Scientists
-    \item Data Engineers
-    \item DevOps engineers
-    \item Software engineers
-    \item Model Risk Managers
-    \item Machine Learning architects
-\end{itemize}
-The literature consider those roles\cite{Kreuzberger2022MachineLO}:
+The data scientist is often considered the central role in this process.
+However, within the context of MLOps, the literature identifies several key roles that
+collaborate to support the development and deployment of machine learning models.
+These roles include\cite{treveil2020introducing}(p.14):
+Subject-Matter Experts, Data Scientists, Data Engineers, DevOps engineers, Software engineers, Model Risk Managers, Machine Learning architects.
+Additional literature further refines these roles, proposing the following\cite{Kreuzberger2022MachineLO}:
 
 \begin{itemize}
     \item Business Stakeholder
-    \item Solution Architect/Subject-Matter Experts
+    \item Solution Architect
     \item Data Scientist
     \item Data Engineer
     \item Software Engineer
@@ -128,9 +122,18 @@ In\cite{9792270} They propose a workflow that shares many aspect with other work
     \label{fig:taxo-workflow}
 \end{figure}
 
+\subsubsection{MLOps workflow methodology}
+State-of-the-art MLOps component that should be used for any models\cite{BURGUENOROMERO2025107499}:
+\begin{itemize}
+    \item Model registry to release models.
+    \item Pipeline orchestrator allows automation and reproducibility of MLOps workflows.
+    \item Model serving platform to deploy models.
+    \item Deployed model resources usually as REST/gRPC APIs
+    \item Monitoring system as usual monitoring and feedback is mandatory
+    \item Triggers when more automation comes into places it become mandatory to describe well-defined triggers for pipelines.
+\end{itemize}
 
 \subsubsection{Developing Models}
-
 \begin{figure}[!htbp]
     \caption{Model development highlighted in the larger context of the ML project life
     cycle\cite{treveil2020introducing}(p.41)}
@@ -157,6 +160,28 @@ Beyond accuracy, factors like robustness, security, transparency, fairness, and 
 
 \subsubsection{Deploy in production}
 
+CI/CD (Continuous Integration/Continuous Deployment) principles, commonly used in traditional software engineering, are equally critical for machine learning systems and form a key part of MLOps strategies.
+After developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline.
+An example pipeline includes the following steps\cite{treveil2020introducing}(p.74).
+
+\subsubsubsection{Develop the model:}
+\begin{itemize}
+    \item Create model artifacts
+    \item Store artifacts in long-term storage
+    \item Run basic checks
+    \item Generate fairness and explainability reports
+\end{itemize}
+\subsubsubsection{Deploy to a Test Environment:}
+\begin{itemize}
+    \item Validate ML and computational performance
+    \item Conduct manual validation
+\end{itemize}
+\subsubsubsection{Deploy to Production:}
+\begin{itemize}
+    \item Roll out the model incrementally (e.g., as a canary deployment)
+    \item Fully deploy the model once validated
+\end{itemize}
+
 \begin{figure}[!htbp]
     \caption{Preparing for production highlighted in the larger context of the ML project
     life cycle\cite{treveil2020introducing}(p.73)}
@@ -165,27 +190,6 @@ Beyond accuracy, factors like robustness, security, transparency, fairness, and 
     \label{fig:deploy-prod}
 \end{figure}
 
-CI/CD concepts apply to traditional software engineering, but they apply just as well
-to machine learning systems and are a critical part of MLOps strategy. After success‐
-fully developing a model, a data scientist should push the code, metadata, and docu‐
-mentation to a central repository and trigger a CI/CD pipeline. An example of such
-pipeline could be:
-1. Build the model
-a. Build the model artifacts
-b. Send the artifacts to long-term storage
-c. Run basic checks (smoke tests/sanity checks)
-d. Generate fairness and explainability reports
-2. Deploy to a test environment
-a. Run tests to validate ML performance, computational performance
-b. Validate manually
-3. Deploy to production environment
-a. Deploy the model as canary
-b. Fully deploy the model
-Many scenarios are possible and depend on the application, the risks from which the
-system should be protected, and the way the organization chooses to operate. Gener‐
-ally speaking, an incremental approach to building a CI/CD pipeline is preferred: a
-simple or even naïve workflow on which a team can iterate is often much better than
-starting with complex infrastructure from scratch.\cite{treveil2020introducing}(p.74)
 
 \subsubsection{Monitor and FeedBack}
 
@@ -261,7 +265,14 @@ OCDL provides an online IDE for model coding, a reusable code template, data acc
 We will use all their remarks and experiment to create our own.
 
 The more complete proposition of an architecture and workflows was found was in\cite{Kreuzberger2022MachineLO}.
-It will be an inspiration to implement our workflow and can be found in the Annexes.
+It will be an inspiration to implement our workflow and can be found in fig\ref{fig:end-to-end-workflow}
+
+\begin{figure}[!htbp]
+    \caption{MLOps Architecture proposed in \cite{Kreuzberger2022MachineLO}}
+    \centering
+    \includegraphics[scale=0.5]{images/kreuz-end-to-end-workflow}
+    \label{fig:end-to-end-workflow}
+\end{figure}
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
 The authors of\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.

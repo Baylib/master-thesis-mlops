@@ -11,7 +11,7 @@ By containerizing models with all their dependencies, Docker avoids conflicts be
 preventing one model from disrupting others.
 This makes Docker a key tool for efficient, scalable, and reproducible ML deployments.\cite{treveil2020introducing}(p.80)
 
-Docker is not the only containerization platform out there but it's almost became a common noun nowadays for containerized applications.
+Docker is not the only containerization platform out there, but it's almost became a common noun nowadays for containerized applications.
 
 \subsection{Kubernetes}\label{subsec:kubernetes2}
 
@@ -42,6 +42,8 @@ Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the depl
 It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
 Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
 
+Kubeflow integrate S3-storage which is often cited to be used as a model repository as in\cite{BURGUENOROMERO2025107499}.
+
 \subsection{Argo}\label{subsec:argo}
 Argo\cite{argo} is a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
 
@@ -64,4 +66,4 @@ Kubeflow uses Argo for its deployment capabilities.
 
 
 \subsection{Worth Mentioning tools}
-Flux,...
+Flux, Prometheus, OpenSearch
