@@ -173,6 +173,17 @@
     numpages = {46},
     keywords = {accountability, privacy protection, fairness, reproducibility, transparency, explainability, generalization, robustness, Trustworthy AI}
 }
+@INPROCEEDINGS{10245408,
+    author={Jain, Samridhi and Kumar, Puneet},
+    booktitle={2023 International Conference on Data Science and Network Security (ICDSNS)},
+    title={Cost Effective Generic Machine Learning Operation: A Case Study},
+    year={2023},
+    volume={},
+    number={},
+    pages={1-6},
+    keywords={Industries;Costs;Pipelines;Organizations;Machine learning;Network security;Data science;MLOps;ML pipeline;cloud platform;Low Budget Architecture;ML Engineering},
+    doi={10.1109/ICDSNS58469.2023.10245408}}
+
 @article{gitops,
     author = {RedHat},
     title  = {What is a GitOps workflow},
@@ -194,4 +205,16 @@
 @software{docker,
     title = {Docker},
     url = {https://www.docker.com/},
+}
+@article{RODRIGUES2025104169,
+    title = {A MLOps architecture for near real-time distributed Stream Learning operation deployment},
+    journal = {Journal of Network and Computer Applications},
+    pages = {104169},
+    year = {2025},
+    issn = {1084-8045},
+    doi = {https://doi.org/10.1016/j.jnca.2025.104169},
+    url = {https://www.sciencedirect.com/science/article/pii/S1084804525000669},
+    author = {Miguel G. Rodrigues and Eduardo K. Viegas and Altair O. Santin and Fabricio Enembreck},
+    keywords = {MLOps, Stream Learning, Kubernetes, Microservices},
+    abstract = {Traditional architectures for implementing Machine Learning Operations (MLOps) usually struggle to cope with the demands of Stream Learning (SL) environments, where deployed models must be incrementally updated at scale and in near real-time to handle a constantly evolving data stream. This paper proposes a new distributed architecture adapted for deploying and updating SL models under the MLOps framework, implemented twofold. First, we structure the core components as microservices deployed on a container orchestration environment, ensuring low computational overhead and high scalability. Second, we propose a periodic model versioning strategy that facilitates seamless updates of SL models without degrading system accuracy. By leveraging the inherent characteristics of SL algorithms, we trigger the model versioning task only when their decision boundaries undergo significant adjustments. This allows our architecture to support scalable inference while handling incremental SL updates, enabling high throughput and model accuracy in production settings. Experiments conducted on a proposal’s prototype implemented as a distributed microservice architecture on Kubernetes attested to our scheme’s feasibility. Our architecture can scale inference throughput as needed, delivering updated SL models in less than 2.5 s, supporting up to 8 inference endpoints while maintaining accuracy similar to traditional single-endpoint setups.}
 }
