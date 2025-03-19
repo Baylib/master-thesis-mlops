@@ -35,17 +35,11 @@ But by using kubeflow pipelines we could easily add features during the developm
 
 \subsection{ArgoCD}\label{subsec:argocd}
 ArgoCD will be used to implement our GitOps strategy and deploy our application, models, airflow and kubeflow.
+We used Argo rollouts for canary deployment strategies.
 
 \input{chapters/thesis/sections/infra}
 \input{chapters/thesis/sections/roles}
-
-\section{Workflow}\label{sec:workflow}
-
-\subsection{CI/CD pipelines}
-As we explained while describing the infrastructure, part of our global workflow can be implemented within pipelines runners definition.
-We used GitHub action and the GitHub flow to harmonise the workflow within our different type of git repositories.
-GitHub allows us to define template in a single repository that can be then versioned and used in other repositories while hiding the complexity of the defined pipelines.
-\subsection{CI/CD pipelines}
+\input{chapters/thesis/sections/workflow}
 
 
 \section{Conclusion}\label{sec:conclusion}
