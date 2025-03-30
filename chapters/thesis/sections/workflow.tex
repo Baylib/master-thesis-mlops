@@ -37,9 +37,45 @@ operations.
     \label{fig:dataops-workflow}
 \end{figure}
 
+\begin{figure}[!htbp]
+    \centering
+    \caption{DataOps workflow define in Airflow}
+    \includegraphics[scale=0.3]{images/project/dataops-workflow-airflow}
+    \label{fig:dataops-workflow-airflow}
+\end{figure}
+
 It's defined in our project as an Airflow DAG and can be triggered manually in early stage of the project or
 automatically when the project has enough maturity.
 
 \subsection{MLOps pipelines}\label{subsec:mlops-pipelines}
 Our MLOps pipelines are developed as Kubeflow pipelines with the possibility to trigger them from an airflow DAG
 even in the early stage of the project in ensure the possibility to combined it with the DataOps pipeline to advance towards AutoML.
+
+\begin{figure}[!htbp]
+    \centering
+    \caption{MLOps workflow in Kubeflow pipelines}
+    \includegraphics[scale=0.3]{images/project/mlops-workflow-kubeflow}
+    \label{fig:mlops-workflow-kubeflow}
+\end{figure}
+
+In our MLOps workflow, we have established a seamless integration between Apache Airflow and Kubeflow Pipelines to
+efficiently manage the machine learning lifecycle.
+This integration automates the process from data availability to model deployment, ensuring a streamlined and reproducible workflow.
+
+\subsubsection{Data Availability Trigger}
+AS explained in previous section, our DataOps pipeline preprocess and prepare the data to release train and test data's.
+Airflow then triggers the Kubeflow pipeline to initiate the MLOps workflow.
+
+\subsubsection{Model Training}
+The pipeline begins with a training component that utilizes the provided datasets to train a machine learning model.
+The trained model is saved to MinIO, our S3-compatible object storage integrated with Kubeflow.
+
+\subsubsection{Model Validation}
+After training, a validation component assesses the model's performance using the test data.
+If the model meets our predefined accuracy thresholds and/or performs better than previous models,
+the workflow proceeds; otherwise, it terminates, ensuring only validated models advance.
+
+\subsubsection{Release and Deployment}
+Upon successful validation, the pipeline enters the release phase, where the model and its metadata are saved to MinIO.
+The deployment component updates our production environment with the new model, ensuring minimal disruption and continuous service delivery.
+
