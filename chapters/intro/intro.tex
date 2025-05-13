@@ -2,8 +2,17 @@
 
 \section{Introduction}
 
-The starting point of this thesis was to gain knowledge in Machine Learning Operations(MLOps) to
-elevate in maturity the development workflow of a model already in production.
-This model is actively developed within our institution.
+
+According to\cite{10.1145/3533378}, only a small percentage of machine learning projects successfully reach production deployment, due to issues and operational complexity\cite{Haakman2021}.
+The emergence of MLOps as a distinct discipline represents a response to these challenges, offering structured approaches to model development, deployment, monitoring, and governance\cite{treveil2020introducing}.
+This thesis begins with a comprehensive state-of-the-art review of MLOps methodologies, frameworks, and tools currently employed across industry and research domains.
+Our review is motivated by the need to establish a solid theoretical and practical foundation for developing a flexible MLOps workflow that can address the diverse requirements of modern enterprises and research organizations.
+We aim to identify in the literature the core components and principles that constitute effective MLOps implementations\cite{DBLP:journals/corr/abs-2103-08942}.
+
+The insights gained from this review directly inform our subsequent implementation project, where we develop a modular, adaptable MLOps workflow designed to accommodate various scales of machine learning projects.
+Our implementation strategy follows a two-phase approach: first, we develop and validate our workflow using a controlled demonstration model that shows core functionality in a simplified context.
+This allows us to establish baseline capabilities and verify fundamental workflow mechanics without the complexities of a production system.
+Following this initial validation, we demonstrate the workflow's flexibility and robustness by applying it to a real-world production system—the LSFB (Langue des Signes de Belgique Francophone) model developed at our university\cite{9534336}.
+By adapting our workflow to enhance this existing system, we provide tangible evidence of its practical utility and adaptability.
 
 \input{chapters/intro/acknowledgement}

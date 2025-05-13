@@ -1,31 +1,84 @@
-\section{Definitions}\label{sec:stdefinitions}
+\section{Definitions}
 \subsection{DevOps}
-We cannot approach MLOps without beforehand talking a bit about devops.
-Devops is a software
-Devops workflow: plan, code, build, test, release, deploy, operate and monitor.
-MLOps should follow the devops principles, but it requires workflows to be extended as we will discuss later.
-remark: DevSecOps
+DevOps is a set of practices that combines software development (Dev) and IT
+operations (Ops) to shorten the development lifecycle while delivering
+high-quality software continuously.
+It emphasizes automation, continuous integration/continuous deployment (CI/CD), and collaboration between
+teams. \url{https://github.com/resources/articles/devops/what-is-devops}
 
-\subsubsection{GitOps}
-GitOps is a DevOps approach that uses a Git repository as the single source of truth for system and application configurations.
-It also provides change tracking through Git history and by storing infrastructure and configurations as code.
-Tools like ArgoCD provide GitOps implementation for kubernetes\cite{gitops}.
-One of the main aspect of GitOps is that it allows the cluster to pull changes directly from GitHub instead of a
-traditional pushing to deploy.
+The DevOps workflow typically includes:
 
+\begin{itemize}
+    \item Plan (requirements gathering),
+    \item Code (development),
+    \item Build (compilation/packaging),
+    \item Test (validation),
+    \item Release (versioning),
+    \item Deploy (infrastructure provisioning),
+    \item Operate (runtime management),
+    \item Monitor (performance tracking).
+\end{itemize}
+MLOps
+ extends DevOps principles but introduces additional complexities due to
+ the experimental nature of machine learning (ML), data dependencies,
+and model retraining needs [2].
 
-\subsection{CI/CD workflows}
-\subsubsection{GitHubFlow}
-\subsubsection{GitFlow}
-\subsubsection{Trunk Based}
-\subsection{Deployment Strategies}
+Remark: \textit{DevSecOps} integrates security practices into DevOps, ensuring secure software delivery [3].
 
-As explained in\cite{treveil2020introducing}(p.77), deployment strategies involve several key concepts.
-Integration refers to merging code changes into a central repository and running tests,
-while Delivery focuses on packaging and validating a model for production readiness.
-Deployment is the process of running the new model version on target infrastructure,
-which may or may not be fully automated, depending on business and technical considerations.
-Continuous Delivery is essential for improving productivity and quality, even if full Continuous Deployment isn't implemented.
-Finally, Release is distinct from deployment, as deploying a model doesn't always mean directing production traffic to it;
-multiple model versions can coexist in production, allowing for controlled rollouts and testing.
+\subsection{GitOps}
+\url{https://www.redhat.com/fr/topics/devops/what-is-gitops}
+GitOps is a DevOps methodology that uses Git repositories as the single source of truth for infrastructure and application configurations. Key aspects include:
 
+\begin{itemize}
+\item Declarative infrastructure (defined as code, e.g., Kubernetes manifests),
+\item Automated synchronization (tools like ArgoCD apply Git changes to clusters),
+\item Version control and auditability (changes are tracked via Git history).
+\end{itemize}
+Unlike traditional CI/CD (push-based deployments), GitOps follows a pull-based model, where the cluster periodically checks for updates in Git and reconciles its state accordingly\cite{devopsbook} \url{https://github.com/cloudnativedevops}.
+
+\subsection{CI/CD Workflows}
+CI/CD
+ (Continuous Integration/Continuous Delivery or Deployment) automates
+software delivery pipelines. Common branching strategies include:
+
+\subsubsection{GitHub Flow}
+A lightweight workflow where:
+
+\begin{itemize}
+\item The main branch is always deployable,
+\item Feature branches are merged via pull requests (PRs),
+\item Changes are deployed immediately after merging [6].
+\end{itemize}
+
+\subsubsection*{GitFlow}
+A structured workflow with long-lived branches:
+
+\begin{itemize}
+\item main (production-ready code),
+\item develop (integration branch),
+\item Feature/hotfix/release branches [7].
+\end{itemize}
+\subsubsection*{Trunk-Based Development}
+\begin{itemize}
+\item Developers commit directly to a single branch (main/trunk),
+\item Short-lived feature branches (optional),
+\item Requires robust CI/CD to maintain stability [8].
+\end{itemize}
+
+\subsection*{Deployment Strategies}
+Deployment strategies govern how software (or ML models) are rolled out in production. Key concepts include [9, p.77]:
+
+\begin{itemize}
+    \item Integration: Merging code changes into a shared repository and running automated tests.
+    \item Delivery: Packaging and validating a model for production (e.g., containerization, artifact storage).
+    \item Deployment: Releasing the model to target infrastructure (manual or automated).
+    \item Continuous Delivery (CD): Ensuring the model is always production-ready (even if deployed manually).
+    \item Continuous Deployment (CD): Fully automated releases upon passing tests.
+    \item Release: Decoupling deployment from serving traffic (e.g., A/B testing, shadow deployments).
+\end{itemize}
+Common ML deployment strategies:
+\begin{itemize}
+    \item Blue-Green Deployment: Two identical environments; traffic switches post-validation.
+    \item Canary Release: Gradual rollout to a subset of users.
+    \item Shadow Mode: New model runs alongside the old one without affecting traffic.
+\end{itemize}

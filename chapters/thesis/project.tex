@@ -3,8 +3,10 @@
 \section{Introduction}\label{sec:introduction}
 Building upon our state-of-the-art review of MLOps practices, this chapter introduces our practical implementation of a standardized MLOps workflow.
 The proposed framework is designed with versatility in mind—capable of enhancing existing projects at various maturity levels or providing a robust foundation for new initiatives seeking accelerated production deployment.
+
 Rather than developing yet another platform, our approach integrates established tools and workflows identified in the literature into a cohesive system tailored to address modern machine learning development challenges.
 A distinguishing feature of our implementation is the incorporation of GitOps principles into the MLOps workflow, creating a synergistic relationship between these complementary methodologies.
+
 At the core of our design is the GitOps philosophy, which establishes Git repositories as the single source of truth for code, configurations, and infrastructure.
 We leverage GitHub repositories as the central foundation, with GitHub Actions orchestrating our DevOps workflows.
 This integration extends further through tools such as ArgoCD, GitSync, and custom scripts that trigger our DataOps and MLOps pipelines in a synchronized manner.
@@ -35,6 +37,7 @@ These existing elements served as foundational components that our comprehensive
 
 
 \input{chapters/thesis/sections/tools}
+% \input{chapters/thesis/sections/usecases}
 \input{chapters/thesis/sections/infra}
 \input{chapters/thesis/sections/roles}
 \input{chapters/thesis/sections/workflow}
