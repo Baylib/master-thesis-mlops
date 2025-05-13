@@ -37,12 +37,44 @@ An Airflow \textit{DAG} (Directed Acyclic Graph) is the core concept of Airflow\
 It's used to define pipelines as tasks that are organized with relationships.
 We will show examples later in this paper.
 
+Airflow offers connector with Opensearch which can be deployed as a dependency to Airflow.
+
 \subsection{Kubeflow}\label{subsec:kubeflow2}
 Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the deployment, management, and scaling of machine learning workflows on Kubernetes.
 It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
 Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
 
 Kubeflow integrate S3-storage which is often cited to be used as a model repository as in\cite{BURGUENOROMERO2025107499}.
+
+\subsection{Databricks}
+
+Is another platform to orchestrate MLOps workflows.
+It's a Data-centric approach to establish and scale machine learning specialized into MLOps for large language models LLM.
+\url{https://blog.infocruncher.com/resources/ml-productionisation/The%20Big%20Book%20of%20MLOps%20(Databricks,%20v6,%202022).pdf}
+\url{https://docs.databricks.com/aws/en/machine-learning/mlops/mlops-workflow}
+
+Databricks is a unified data analytics platform that integrates data engineering, data science, and machine learning workflows.
+
+In an MLOps context, It provides an end-to-end MLOps platform with MLflow integration for experiment tracking, model registry, and deployment
+Features automated CI/CD pipelines specifically optimized for ML workflows
+Offers Delta Lake for reliable data management with ACID transactions
+Includes feature store capabilities for feature engineering and sharing
+Supports both batch and real-time serving for ML models
+
+Cited by \cite{mlflow}.
+
+\subsection{Airbytes}
+Airbyte is an open-source data integration platform focused on ETL/ELT processes.
+
+\begin{itemize}
+\item Provides pre-built connectors for data sources and destinations
+\item Features a centralized configuration for data pipelines
+\item Offers incremental data syncing capabilities
+\item Includes data transformation capabilities using SQL and dbt
+\item Integrates with data catalogs and lineage tools
+\end{itemize}
+
+While primarily a data engineering tool, Airbyte plays a crucial role in MLOps by ensuring quality data ingestion into ML pipelines.
 
 \subsection{Argo}\label{subsec:argo}\cite{argo}
 It's a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
@@ -65,7 +97,7 @@ Kubeflow uses Argo for its deployment capabilities.
 
     \item Argo Workflow
     is a workflow orchestrator for Kubernetes.
-    It's used by Kubeflow for example to orchestrate MLOps pipelines.
+    It's used by Kubeflow to orchestrate MLOps pipelines.
 
 \end{itemize}
 
@@ -74,8 +106,10 @@ Kubeflow uses Argo for its deployment capabilities.
 Open-Metadata is a platform that can also be used to orchestrate DataOps workflow or even MLops workflow.
 It depends on OpenSearch as an observability tool and airflow for pipeline orchestration.
 
-\subsection{Worth Mentioning tools}
-Flux is another GitOps operator, Prometheus, OpenSearch, OpenMetadata, AirBytes, ElasticSearch,
+\subsection{MLflow}\url{https://mlflow.org/docs/latest/}
+MLflow is an open-source platform for managing the ML lifecycle, including experimentation, reproducibility,
+deployment, and a central model registry.\cite{mlflow}
 
-Terraform can be used as a IAC tool to deploy a kubernetes cluster on any cloud provider.
-classic python ml framworks/libraries scikit-learn, keras, tensorflow.
+\subsection{ZenML}
+ZenML is an extensible, open-source MLOps framework for creating portable, production-ready ML pipelines cited by\cite{blockchain-mlops}.
+
