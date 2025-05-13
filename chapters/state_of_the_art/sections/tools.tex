@@ -44,8 +44,8 @@ Kubeflow is used or mention in many publication and MLOps platforms\cite{inproce
 
 Kubeflow integrate S3-storage which is often cited to be used as a model repository as in\cite{BURGUENOROMERO2025107499}.
 
-\subsection{Argo}\label{subsec:argo}
-Argo\cite{argo} is a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
+\subsection{Argo}\label{subsec:argo}\cite{argo}
+It's a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
 
 We are particularly interested with ArgoCD and Argo Rollouts which are both mentioned and used in the literature.
 Kubeflow uses Argo for its deployment capabilities.
@@ -54,16 +54,28 @@ Kubeflow uses Argo for its deployment capabilities.
     \item ArgoCD
      is a declarative, GitOps-based continuous delivery tool for Kubernetes.
      It automates application deployments by syncing the desired state
-    defined in a Git repository with the actual state in the cluster,
-    ensuring consistency and enabling easy rollbacks.
+     defined in a Git repository with the actual state in the cluster,
+     ensuring consistency and enabling easy rollbacks.
 
     \item Argo Rollouts
      is a Kubernetes controller that provides advanced deployment strategies
-     like canary and blue-green rollouts. It allows for progressive
-    delivery, enabling safer and more controlled updates by gradually
-    shifting traffic to new versions while monitoring their performance.
+     like canary and blue-green rollouts.
+     It allows for progressive delivery, enabling safer and more controlled updates by gradually
+     shifting traffic to new versions while monitoring their performance.
+
+    \item Argo Workflow
+    is a workflow orchestrator for Kubernetes.
+    It's used by Kubeflow for example to orchestrate MLOps pipelines.
+
 \end{itemize}
 
+\subsection{Open-Metadata}\label{subsec:openmetadata}
+
+Open-Metadata is a platform that can also be used to orchestrate DataOps workflow or even MLops workflow.
+It depends on OpenSearch as an observability tool and airflow for pipeline orchestration.
 
 \subsection{Worth Mentioning tools}
-Flux, Prometheus, OpenSearch
+Flux is another GitOps operator, Prometheus, OpenSearch, OpenMetadata, AirBytes, ElasticSearch,
+
+Terraform can be used as a IAC tool to deploy a kubernetes cluster on any cloud provider.
+classic python ml framworks/libraries scikit-learn, keras, tensorflow.

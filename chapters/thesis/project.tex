@@ -8,6 +8,23 @@ base to be fast in production.
 We don't want to create a platform, but we want to use and integrate together reviewed
 tools and workflows we encountered in the literature to propose our own.
 
+In this project, we want to apply the GitOps principle to our MLOps workflow in order to combine those two ideas together.
+GitOps uses Git repositories as the main source of truce for the code, the configurations and the infrastructure.
+In this matter we defined all the project within GitHub repositories to use GitHub Actions to trigger our DevOps workflow.
+With the help of tools like ArgoCD, GitSync or custom scripts we also manage to trigger our DataOps and MLOps pipelines.
+
+All our infrastructure can be deployed within one or more kubernetes clusters, depending on the actual requirements of
+the ML project, this allows to define a workflow independently of hardware consideration.
+Dedicated nodes with special requirements (high CPU, memory, GPU) for machine learning or data operations can be define
+to run dedicated steps.
+A kubernetes cluster can be deployed on premise or within the cloud depending on current infrastructure.
+A single node kubernetes cluster running on the engineer laptop can be used as a development environment
+within its hardware capabilities.
+
+By combining DevOps, DataOps and MLOps pipelines with get a full MLOps workflow that can be easily deployed on any kubernetes clusters.
+
+We will now briefly describe the tools we chose to implement our workflow squeleton.
+
 \section{Tools}\label{sec:tools2}
 In this section we will list all the tools we picked from our previous research.
 As our workflow should be standard it should remain tools agnostic.
