@@ -14,53 +14,27 @@ This architecture decouples the workflow definition from hardware considerations
 The Kubernetes implementation supports dedicated nodes with specialized resources (high CPU, memory, GPU) for compute-intensive machine learning or data processing operations.
 Furthermore, this approach accommodates diverse deployment scenarios:
 
-
 \begin{itemize}
-
 \item Cloud-based Kubernetes clusters
-
 \item On-premises infrastructure
-
 \item Single-node Kubernetes configurations running on development laptops (within hardware constraints)
-
 \end{itemize}
 
-The seamless integration of DevOps, DataOps, and MLOps pipelines culminates in a comprehensive MLOps workflow that is portable across any Kubernetes environment. This integration addresses the full machine learning lifecycle from development to deployment while maintaining consistent practices throughout.
+The seamless integration of DevOps, DataOps, and MLOps pipelines culminates in a comprehensive MLOps workflow that is portable across any Kubernetes environment.
+This integration addresses the full machine learning lifecycle from development to deployment while maintaining consistent practices throughout.
 
+Our implementation was specifically developed to support our promoter's ongoing LSFB (Langue des Signes de Belgique Francophone) project, which is already operational in a production environment.
+The practical application of our workflow to an existing, real-world machine learning system provided valuable insights into the challenges of MLOps adoption beyond theoretical constructs.
+By enhancing the established LSFB project infrastructure, we could demonstrate the adaptability and incremental benefits of our approach while supporting continued model development and improvement for this important initiative.
 
 In the following sections, we detail the specific tools selected to implement our workflow framework and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
+Notably, our tool selection was significantly influenced by the existing LSFB project infrastructure.
+The current production system consists of a Python-based model deployed as a Docker image that exposes an API consumed by a web frontend.
+The project already utilizes GitHub for code management and Airflow for certain pipeline operations, which represents partial implementation of practices identified in our literature review.
+These existing elements served as foundational components that our comprehensive workflow needed to accommodate and enhance rather than replace, demonstrating the practical flexibility of our approach.
 
 
-
-\section{Tools}\label{sec:tools2}
-In this section we will list all the tools we picked from our previous research.
-As our workflow should be standard it should remain tools agnostic.
-
-\subsection{Git Repositories and CI/CD}\label{subsec:github}
-GitHub will be used to store and version control our codes repositories and configurations.
-It will also be used to implement our CI/CD pipelines with GitHub actions.
-
-\subsection{IAC, Containers and Registry}\label{subsec:dockerhub}
-To benefit from containerization we will use docker to containerize our applications and models.
-DockerHub will be used to store and version our Docker containers and Helm charts.
-
-\subsection{Kubernetes}\label{subsec:kubernetes}
-We will use a Kubernetes cluster to take advantage of its orchestration capabilities, advanced deployment strategies,
-and the ecosystem of tools available on the platform.
-
-\subsection{Airflow}\label{subsec:airflow}
-We will use Airflow for our DataOps pipelines and to integrate our kubeflow pipelines.
-We can use an Airflow DAG to trigger our Kubeflow pipelines and have a complete DataOps/MLOps pipeline while still allow respective teams
-to benefit from other tools.
-
-\subsection{Kubeflow}\label{subsec:kubeflow}
-We will mainly use the storage solutions and pipelines offered by Kubeflow.
-But by using kubeflow pipelines we could easily add features during the development if required by the Data or Model engineers.
-
-\subsection{ArgoCD}\label{subsec:argocd}
-ArgoCD will be used to implement our GitOps strategy and deploy our application, models, airflow and kubeflow.
-We used Argo rollouts for canary deployment strategies.
-
+\input{chapters/thesis/sections/tools}
 \input{chapters/thesis/sections/infra}
 \input{chapters/thesis/sections/roles}
 \input{chapters/thesis/sections/workflow}
