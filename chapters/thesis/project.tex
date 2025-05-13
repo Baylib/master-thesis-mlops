@@ -1,29 +1,36 @@
 \chapter{Thesis project: A standard MLOps/GitOps workflow}\label{ch:thesis-project:-a-standard-mlops-ci/cd-workflow}
 \chaptermark{Thesis : MLOps/GitOps WorkFlow}
 \section{Introduction}\label{sec:introduction}
-Following our state-of-the-art research we wanted to describe and implement a standard MLOps workflow.
-I should be easily used on current project to improve their level of maturity or to initiate a new project with a solid
-base to be fast in production.
+Building upon our state-of-the-art review of MLOps practices, this chapter introduces our practical implementation of a standardized MLOps workflow.
+The proposed framework is designed with versatility in mind—capable of enhancing existing projects at various maturity levels or providing a robust foundation for new initiatives seeking accelerated production deployment.
+Rather than developing yet another platform, our approach integrates established tools and workflows identified in the literature into a cohesive system tailored to address modern machine learning development challenges.
+A distinguishing feature of our implementation is the incorporation of GitOps principles into the MLOps workflow, creating a synergistic relationship between these complementary methodologies.
+At the core of our design is the GitOps philosophy, which establishes Git repositories as the single source of truth for code, configurations, and infrastructure.
+We leverage GitHub repositories as the central foundation, with GitHub Actions orchestrating our DevOps workflows.
+This integration extends further through tools such as ArgoCD, GitSync, and custom scripts that trigger our DataOps and MLOps pipelines in a synchronized manner.
 
-We don't want to create a platform, but we want to use and integrate together reviewed
-tools and workflows we encountered in the literature to propose our own.
+Our infrastructure is deployable across one or multiple Kubernetes clusters, depending on specific project requirements.
+This architecture decouples the workflow definition from hardware considerations, offering significant flexibility.
+The Kubernetes implementation supports dedicated nodes with specialized resources (high CPU, memory, GPU) for compute-intensive machine learning or data processing operations.
+Furthermore, this approach accommodates diverse deployment scenarios:
 
-In this project, we want to apply the GitOps principle to our MLOps workflow in order to combine those two ideas together.
-GitOps uses Git repositories as the main source of truce for the code, the configurations and the infrastructure.
-In this matter we defined all the project within GitHub repositories to use GitHub Actions to trigger our DevOps workflow.
-With the help of tools like ArgoCD, GitSync or custom scripts we also manage to trigger our DataOps and MLOps pipelines.
 
-All our infrastructure can be deployed within one or more kubernetes clusters, depending on the actual requirements of
-the ML project, this allows to define a workflow independently of hardware consideration.
-Dedicated nodes with special requirements (high CPU, memory, GPU) for machine learning or data operations can be define
-to run dedicated steps.
-A kubernetes cluster can be deployed on premise or within the cloud depending on current infrastructure.
-A single node kubernetes cluster running on the engineer laptop can be used as a development environment
-within its hardware capabilities.
+\begin{itemize}
 
-By combining DevOps, DataOps and MLOps pipelines with get a full MLOps workflow that can be easily deployed on any kubernetes clusters.
+\item Cloud-based Kubernetes clusters
 
-We will now briefly describe the tools we chose to implement our workflow squeleton.
+\item On-premises infrastructure
+
+\item Single-node Kubernetes configurations running on development laptops (within hardware constraints)
+
+\end{itemize}
+
+The seamless integration of DevOps, DataOps, and MLOps pipelines culminates in a comprehensive MLOps workflow that is portable across any Kubernetes environment. This integration addresses the full machine learning lifecycle from development to deployment while maintaining consistent practices throughout.
+
+
+In the following sections, we detail the specific tools selected to implement our workflow framework and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
+
+
 
 \section{Tools}\label{sec:tools2}
 In this section we will list all the tools we picked from our previous research.
