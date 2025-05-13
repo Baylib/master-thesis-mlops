@@ -1,0 +1,41 @@
+\section{Tools Selection Rationale}\label{sec:tools2}
+Having established the theoretical foundations and component descriptions in our state-of-the-art review, this section focuses specifically on our tool selection rationale.
+While our workflow is designed to be fundamentally tool-agnostic, the following choices were made to address the specific requirements of our implementation context, particularly the existing LSFB project infrastructure.
+
+\subsection{Python}\label{subsec:python}
+The foundational programming language for our entire workflow implementation, selected primarily to maintain compatibility with the LSFB project's existing codebase and the broader machine learning ecosystem.
+The project's current use of Keras for model development and our demonstration implementations using scikit-learn both benefit from Python's extensive machine learning library ecosystem and developer familiarity.
+Notably, Python's pervasive role extends to our pipeline implementations, as both Airflow DAGs and Kubeflow pipelines are defined using Python, creating a consistent development environment across all workflow components.
+
+\subsection{Git Repositories and CI/CD}\label{subsec:github}
+We selected GitHub as our version control and CI/CD platform primarily due to its established presence in the LSFB project ecosystem.
+This choice provides continuity with existing development practices while enabling us to leverage GitHub Actions for workflow automation without introducing additional integration complexity.
+GitHub's robust API and extensive integration capabilities further support our goal of building an interconnected MLOps workflow.
+
+\subsection{IAC, Containers and Registry}\label{subsec:dockerhub}
+Docker was the natural containerization choice given the LSFB project's existing Docker-based model deployment.
+DockerHub serves as our container registry and Helm chart repository, offering reliable accessibility and established integration paths with our other selected tools.
+This approach maintains compatibility with the current production environment while enabling more sophisticated deployment patterns.
+
+\subsection{Kubernetes}\label{subsec:kubernetes}
+Kubernetes was selected as our orchestration platform for its exceptional flexibility and robust ecosystem.
+Its ability to operate across various infrastructure environments (cloud, on-premises, development workstations) directly supports our portability requirements.
+Furthermore, Kubernetes provides the foundation for advanced deployment strategies needed in ML systems and enables seamless integration with specialized tools like Kubeflow and Airflow.
+
+
+\subsection{Airflow}\label{subsec:airflow}
+We chose Airflow for DataOps orchestration to maintain compatibility with existing pipelines in the LSFB project.
+This selection allows us to extend current functionality while providing a bridge to new MLOps capabilities.
+Airflow's Python-based DAG definitions integrate naturally with our development workflow and allow data scientists to define complex pipelines using familiar syntax.
+Airflow's ability to trigger Kubeflow pipelines creates a unified workflow that respects team boundaries and specialized tooling preferences while maintaining end-to-end process integrity.
+
+\subsection{Kubeflow}\label{subsec:kubeflow}
+Kubeflow was selected primarily for its storage solutions and pipeline capabilities that directly address ML-specific workflow requirements.
+The Python SDK for Kubeflow Pipelines enables seamless integration with our existing Python codebase, allowing model developers to define reproducible ML workflows using familiar programming patterns.
+This choice provides a growth path for the LSFB project, allowing incremental adoption of additional MLOps features as project maturity increases, without requiring architectural redesign.
+
+\subsection{ArgoCD}\label{subsec:argocd}
+ArgoCD was chosen as our GitOps implementation tool for its native Kubernetes integration and declarative approach to deployment automation.
+This selection enables us to maintain infrastructure and application configurations as code within our GitHub repositories.
+Additionally, Argo Rollouts provides sophisticated canary deployment capabilities essential for responsible model updates in production environments.
+
