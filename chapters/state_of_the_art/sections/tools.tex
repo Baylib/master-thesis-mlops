@@ -1,4 +1,4 @@
-\section{Tools and Frameworks}\label{sec:tools}
+\section{Tools and Platforms}\label{sec:tools}
 
 In this section we will present some of the tools that the literature recommend to implement MLOps workflow.
 
@@ -31,20 +31,35 @@ Github uses Github Actions to define their CI/CD pipelines.
 \subsection{Apache Airflow}\label{subsec:apache-airflow}
 Apache Airflow\cite{airflow} is a platform created by the community to programmatically author, schedule and monitor workflows\cite{airflow}
 It's a general pipeline tool that can be deployed on Kubernetes.
-It's mainly used as a DataOps workflow orchestrator in publications about MLOps\cite{???,10245408}
+
+Defining a general MLOps workflow with explicit input-output interfaces is a good practice because it reduces common failure modes and improves clarity.
+Tools like Apache Airflow can then better manage execution by identifying independent tasks and running them in parallel,leading to more efficient and reliable workflows.\cite{mlflow}
+It can be used as a DataOps/MLOps workflow orchestrator\cite{10245408,mlflow}
 
 An Airflow \textit{DAG} (Directed Acyclic Graph) is the core concept of Airflow\cite{airflow}.
 It's used to define pipelines as tasks that are organized with relationships.
 We will show examples later in this paper.
 
-Airflow offers connector with Opensearch which can be deployed as a dependency to Airflow.
+Airflow offers connector with OpenSearch to ease the integration of data observability and analytics component to the workflow.
 
 \subsection{Kubeflow}\label{subsec:kubeflow2}
 Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the deployment, management, and scaling of machine learning workflows on Kubernetes.
 It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
 Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
 
-Kubeflow integrate S3-storage which is often cited to be used as a model repository as in\cite{BURGUENOROMERO2025107499}.
+Kubeflow is a platform with 6 components that can be used as standalone component\cite{Kubeflow}.
+\begin{itemize}
+    \item Pipelines (KFP) to implement and run MLOps pipelines.
+    \item Notebooks for web based development.
+    \item Kubeflow Central Dashboard integrate together all Kubeflow components within a single web interface.
+    \item Model Training (Kubeflow Trainer) to ease integration with python machine learning frameworks like tensorflow and more.
+    \item AutoML (Katib)
+    \item Model Serving (Kserve) to help delivery and deployments to production.
+\end{itemize}
+
+Kubeflow offer a Domain Specific Language as a python library to orchestrate the workflow.
+Kubeflow pipeline integrate with S3-storage (Amazon Simple Storage Service) which is a standard storage solution used as a model repository like in\cite{BURGUENOROMERO2025107499}.
+We'll investigate the kubeflow pipelines and storage later in this paper.
 
 \subsection{Databricks}
 
@@ -63,8 +78,8 @@ Supports both batch and real-time serving for ML models
 
 Cited by \cite{mlflow}.
 
-\subsection{Airbytes}
-Airbyte is an open-source data integration platform focused on ETL/ELT processes.
+\subsection{Airbyte}
+Airbyte is an open-source data integration platform focused on ETL/ELT processes\cite{airbyte}.
 
 \begin{itemize}
 \item Provides pre-built connectors for data sources and destinations
@@ -98,17 +113,17 @@ Kubeflow uses Argo for its deployment capabilities.
     \item Argo Workflow
     is a workflow orchestrator for Kubernetes.
     It's used by Kubeflow to orchestrate MLOps pipelines.
-
 \end{itemize}
 
 \subsection{Open-Metadata}\label{subsec:openmetadata}
-
 Open-Metadata is a platform that can also be used to orchestrate DataOps workflow or even MLops workflow.
-It depends on OpenSearch as an observability tool and airflow for pipeline orchestration.
+It depends on OpenSearch as an observability tool and Airflow for pipeline orchestration.
 
 \subsection{MLflow}\url{https://mlflow.org/docs/latest/}
 MLflow is an open-source platform for managing the ML lifecycle, including experimentation, reproducibility,
 deployment, and a central model registry.\cite{mlflow}
+
+Unlike Airflow or Kubeflow, MLflow cannot be deployed on kubernetes and orchestrate container based workflows.
 
 \subsection{ZenML}
 ZenML is an extensible, open-source MLOps framework for creating portable, production-ready ML pipelines cited by\cite{blockchain-mlops}.
