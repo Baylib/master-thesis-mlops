@@ -26,7 +26,7 @@ MLOps with clearly defined workflow and infrastructure can provide transparency 
 \end{figure}
 
 MLOps is essential for data teams and organisations, as it involves a complex integration of technologies, processes, and people, requiring ongoing discipline and time to implement effectively.
-It is not a one-time task but a continuous effort to ensure successful machine learning operations.\cite{treveil2020introducing}(p.38)
+It is not a one-time task but a continuous effort to ensure successful machine learning operations\cite{treveil2020introducing}(p.38).
 
 A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development was evolving towards team-based development.
 They also show that in a result the adoption of DevOps practices is increasing and the required skills in infrastructure and deployment are evolving.
@@ -99,11 +99,49 @@ In figure\ref{fig:mlop-people}, they propose a picture of the model lifecycle an
     \caption{Machine learning model life cycle inside an average
     organisation\cite{treveil2020introducing}(p.6)}
     \centering
-    \includegraphics[scale=0.4]{images/mlops-people}
+    \includegraphics[scale=0.3]{images/mlops-people}
     \label{fig:mlop-people}
 \end{figure}
 
 \subsection{Workflow}\label{subsec:workflow}
+
+As we already stated establishing and MLOPs workflow is beneficial for enterprise.
+In this section we'll try to picture what a good MLOPs workflow should be according to the literature.
+
+In\cite{9792270} They propose a general workflow~\ref{fig:taxo-workflow} that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
+It is high level but shows the initiation process coming from the business requirements going to an automate MLOps workflow.
+
+\begin{figure}[!htbp]
+    \caption{Proposed workflow in\cite{9792270}}
+    \centering
+    \includegraphics[scale=0.3]{images/taxo-workflow}
+    \label{fig:taxo-workflow}
+\end{figure}
+
+The more complete proposition of an MLOps workflow was found in\cite{Kreuzberger2022MachineLO}.
+It split the workflow in 4 phases as shown in figure~\ref{fig:end-to-end-workflow}.:
+
+\begin{itemize}
+    \item MLOps project initialization that involves analyzing the business problem, designing the system architecture and selecting technologies, deriving the ML task, identifying required data, and connecting to raw data for initial analysis.
+    \item Project initiation with the definition of requirements and implementation of DataOps pipelines
+    \item Experimentation were development of the model occurs
+    \item Automated MLOps pipelines to prepare for production
+\end{itemize}
+
+\begin{figure}[!htbp]
+    \caption{MLOps Architecture proposed in \cite{Kreuzberger2022MachineLO}}
+    \centering
+    \includegraphics[scale=0.5]{images/kreuz-end-to-end-workflow}
+    \label{fig:end-to-end-workflow}
+\end{figure}
+
+Figure~\ref{fig:mlops-workflow} show a simple MLOps workflow representation that also integrate DataOps.
+\begin{figure}[!htbp]
+    \caption{MLOps workflow\cite{8804457}}
+    \centering
+    \includegraphics[scale=0.6]{images/mlops-workflow-9-stages}
+    \label{fig:mlops-workflow}
+\end{figure}
 
 \subsubsection{Good practices and essential components}
 
@@ -125,29 +163,17 @@ We complete their list by adding the State-of-the-art MLOps component that shoul
 As we explained earlier those principles shares a lot with actual DevOps practices with the addition of ML considerations
 like training and metadata tracking.
 
-In\cite{9792270} They propose a general workflow~\ref{fig:taxo-workflow} that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
-
-\begin{figure}[!htbp]
-    \caption{Proposed workflow in\cite{9792270}}
-    \centering
-    \includegraphics[scale=0.3]{images/taxo-workflow}
-    \label{fig:taxo-workflow}
-\end{figure}
-
-The more complete proposition of an MLOps workflow was found was in\cite{Kreuzberger2022MachineLO}.
-It will be an inspiration to implement our workflow and can be found in fig\ref{fig:end-to-end-workflow}
-
-\begin{figure}[!htbp]
-    \caption{MLOps Architecture proposed in \cite{Kreuzberger2022MachineLO}}
-    \centering
-    \includegraphics[scale=0.5]{images/kreuz-end-to-end-workflow}
-    \label{fig:end-to-end-workflow}
-\end{figure}
-
 \subsubsection{Developing Models}
 CI/CD principles, commonly used in traditional software engineering, are essential for machine learning systems.
-While developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline.
+While developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline\cite{10855428}.
 An example pipeline includes the following steps\cite{treveil2020introducing}(p.74).
+
+\begin{figure}[!htbp]
+    \caption{MLOps pipeline\cite{inproceedings}}
+    \centering
+    \includegraphics[scale=0.5]{images/mlops-pipeline}
+    \label{fig:mlops-pipeline}
+\end{figure}
 
 \subsubsubsection{Develop the model:}
 \begin{itemize}
@@ -166,20 +192,6 @@ An example pipeline includes the following steps\cite{treveil2020introducing}(p.
     \item Roll out the model incrementally (e.g., as a canary deployment)
     \item Fully deploy the model once validated
 \end{itemize}
-
-\begin{figure}[!htbp]
-    \caption{MLOps workflow\cite{8804457}}
-    \centering
-    \includegraphics[scale=0.6]{images/mlops-workflow-9-stages}
-    \label{fig:mlops-workflow}
-\end{figure}
-
-\begin{figure}[!htbp]
-    \caption{MLOps pipeline\cite{inproceedings}}
-    \centering
-    \includegraphics[scale=0.5]{images/mlops-pipeline}
-    \label{fig:mlops-pipeline}
-\end{figure}
 
 \subsubsection{Training}
 
