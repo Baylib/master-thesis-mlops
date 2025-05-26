@@ -1,2 +1,60 @@
 \section{Results}\label{sec:stresults}
 
+As a result of our literature review, we compiled in the table~\ref{tab:tools} the tools presented earlier with a focus on their primary purpose regarding DevOps, MLOps or DataOps.
+We wanted to know how much they were cited by the literature
+and what are their deployment focus either cloud based or Kubernetes focused.
+
+\footnotesize
+\begin{longtable}{|p{2cm}|p{3.5cm}|p{2cm}|p{2cm}|p{1.5cm}|p{1.5cm}|}
+    \caption{Tools Support and references} \label{tab:tools}
+    \hline
+    \textbf{Tool} & \textbf{Primary Purpose} & \textbf{Kubernetes Support} & \textbf{Cloud Support} & \textbf{Primary Focus} & \textbf{Cited by} \\
+    \hline
+    \endfirsthead
+
+    \hline
+    \textbf{Tool} & \textbf{Primary Purpose} & \textbf{Kubernetes Support} & \textbf{Cloud Support} & \textbf{Primary Focus} & \textbf{Cited by} \\
+    \hline
+    \endhead
+
+    \hline
+    \endfoot
+
+    \hline
+    \endlastfoot
+
+    \textbf{Kubeflow} & End-to-end ML platform on Kubernetes & Native & Multi-cloud & MLOps & \cite{FANNOUCH2025100321,Kreuzberger2022MachineLO,9792270,inproceedings, mlops-definition-tools-and-challenge} \\
+    \hline
+
+    \textbf{MLflow} & ML lifecycle management & Limited & Multi-cloud & MLOps & \cite{mlflow,Haakman2021,Kreuzberger2022MachineLO,BURGUENOROMERO2025107499,inproceedings} \\
+    \hline
+
+    \textbf{Argo} & Kubernetes workflow orchestration & Native & Multi-cloud & DevOps & \cite{inproceedings} \\
+    \hline
+
+    \textbf{ZenML} & Portable ML pipelines & Good & Multi-cloud & MLOps & \cite{} \\
+    \hline
+
+    \textbf{Airflow} & General workflow orchestration & Good & Multi-cloud & DataOps & \cite{mlflow,Kreuzberger2022MachineLO,BURGUENOROMERO2025107499} \\
+    \hline
+
+    \textbf{TensorFlow Extended (TFX)} & Production ML pipelines & Good & Multi-cloud (GCP focused) & MLOps & \cite{Kreuzberger2022MachineLO} \\
+    \hline
+
+    \textbf{BentoML} & Model serving and deployment & Good & Multi-cloud & MLOps & \cite{9792270,BURGUENOROMERO2025107499,mlops-definition-tools-and-challenge} \\
+    \hline
+
+    \textbf{Open Metadata} & Data and ML metadata management & Good & Multi-cloud & DataOps & \cite{} \\
+    \hline
+
+    \textbf{GitHub} & Version control and CI/CD & Good & Multi-cloud & DevOps & \cite{} \\
+    \hline
+
+    \textbf{Azure DevOps} & Microsoft DevOps platform & Good & Multi-cloud (Azure focused) & DevOps & \cite{Kreuzberger2022MachineLO,gift2021practical} \\
+    \hline
+
+    \textbf{GitLab} & DevOps platform with Git & Good & Multi-cloud & DevOps & \cite{9792270} \\
+    \hline
+
+\end{longtable}
+\normalsize

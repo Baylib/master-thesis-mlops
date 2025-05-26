@@ -1,5 +1,37 @@
-\section{Definitions}
-\subsection{DevOps}
+\section{Definitions}\label{sec:definitions}
+
+\subsection{Containerization}\label{subsec:containerization}
+
+Containerization is a technology that packages applications and their dependencies into isolated, lightweight containers,
+ensuring consistent and portable execution across various environments.
+This approach eliminates common problems by providing a standardized runtime environment.
+
+In the context of MLOps, containerization is crucial for the reliable and reproducible deployment of machine learning models.
+By encapsulating models along with their software dependencies and environment configurations, containers prevent version conflicts and isolate resource usage.
+This isolation ensures that different models or services can run simultaneously without interfering with one another,
+enabling scalable and maintainable ML systems.\cite{treveil2020introducing}(p.80)
+
+While Docker\cite{docker} is the most widely adopted containerization platform, other tools such as Podman, containerd,
+and CRI-O are also gaining traction, each with their own advantages in terms of security, rootless execution,
+and integration with orchestration systems like Kubernetes.
+
+
+\subsection{Kubernetes}\label{subsec:kubernetes2}
+
+Kubernetes\cite{kubernetes} is a container orchestration platform that automates the deployment, scaling, and management of containerized applications.
+It enables infrastructure as code through tools like Helm, simplifying application deployment and configuration.
+By using features such as namespaces, resource quotas, and specialized node types (e.g., GPU nodes for machine learning),
+Kubernetes allows multiple teams to securely share resources while maintaining isolation.
+Its portability ensures compatibility across various Kubernetes providers, making it a flexible and scalable solution for diverse projects.
+
+Docker with Kubernetes together simplifies deployment strategies and enables scalable hosting of ML models,
+though it lacks native ML performance management capabilities on its own.\cite{treveil2020introducing}(p.81)
+
+\subsection{Helm}\label{subsec:helm}
+is a package manager for Kubernetes that simplifies the deployment and management of applications\cite{9792270}.
+It's used to define the Infrastructure-as-code as charts with templates of Kubernetes manifest.
+
+\subsection{DevOps}\label{subsec:devops}
 DevOps is a set of practices that combines software development (Dev) and IT
 operations (Ops) to shorten the development lifecycle while delivering
 high-quality software continuously.
@@ -18,36 +50,38 @@ The DevOps workflow typically includes:
     \item Operate (runtime management),
     \item Monitor (performance tracking).
 \end{itemize}
-MLOps
+We will see later that MLOps
  extends DevOps principles but introduces additional complexities due to
  the experimental nature of machine learning (ML), data dependencies,
-and model retraining needs [2].
+and model retraining needs.
 
-Remark: \textit{DevSecOps} integrates security practices into DevOps, ensuring secure software delivery [3].
+\textit{DevSecOps} integrates security practices into DevOps, ensuring secure software delivery.
 
-\subsection{GitOps}
-\url{https://www.redhat.com/fr/topics/devops/what-is-gitops}
-GitOps is a DevOps methodology that uses Git repositories as the single source of truth for infrastructure and application configurations. Key aspects include:
+\subsection{GitOps}\label{subsec:gitops}
+% \url{https://www.redhat.com/fr/topics/devops/what-is-gitops}
+GitOps is a DevOps methodology that uses Git repositories as the single source of truth for infrastructure and application code and configurations\cite{inproceedings}.
+GitOps include:
 
 \begin{itemize}
 \item Declarative infrastructure (defined as code, e.g., Kubernetes manifests),
 \item Automated synchronization (tools like ArgoCD apply Git changes to clusters),
 \item Version control and auditability (changes are tracked via Git history).
 \end{itemize}
-Unlike traditional CI/CD (push-based deployments), GitOps follows a pull-based model, where the cluster periodically checks for updates in Git and reconciles its state accordingly\cite{devopsbook} \url{https://github.com/cloudnativedevops}.
+Unlike traditional CI/CD (push-based deployments), GitOps follows a pull-based model, where the cluster periodically checks for updates in Git and reconciles its state accordingly\cite{devopsbook}.
 
-\subsection{CI/CD Workflows}
+\subsection{CI/CD Workflows}\label{subsec:ci/cd-workflows}
 CI/CD
  (Continuous Integration/Continuous Delivery or Deployment) automates
-software delivery pipelines. Common branching strategies include:
+software delivery pipelines.
+Common branching strategies include:
 
-\subsubsection{GitHub Flow}
+\subsubsection*{GitHub Flow}
 A lightweight workflow where:
 
 \begin{itemize}
 \item The main branch is always deployable,
 \item Feature branches are merged via pull requests (PRs),
-\item Changes are deployed immediately after merging [6].
+\item Changes are deployed immediately after merging.
 \end{itemize}
 
 \subsubsection*{GitFlow}
@@ -56,31 +90,18 @@ A structured workflow with long-lived branches:
 \begin{itemize}
 \item main (production-ready code),
 \item develop (integration branch),
-\item Feature/hotfix/release branches [7].
+\item Feature/hotfix/release branches.
 \end{itemize}
 \subsubsection*{Trunk-Based Development}
 \begin{itemize}
 \item Developers commit directly to a single branch (main/trunk),
 \item Short-lived feature branches (optional),
-\item Requires robust CI/CD to maintain stability [8].
-\end{itemize}
-
-\subsection*{Deployment Strategies}
-Deployment strategies govern how software (or ML models) are rolled out in production. Key concepts include [9, p.77]:
-
-\begin{itemize}
-    \item Integration: Merging code changes into a shared repository and running automated tests.
-    \item Delivery: Packaging and validating a model for production (e.g., containerization, artifact storage).
-    \item Deployment: Releasing the model to target infrastructure (manual or automated).
-    \item Continuous Delivery (CD): Ensuring the model is always production-ready (even if deployed manually).
-    \item Continuous Deployment (CD): Fully automated releases upon passing tests.
-    \item Release: Decoupling deployment from serving traffic (e.g., A/B testing, shadow deployments).
-\end{itemize}
-Common ML deployment strategies:
-\begin{itemize}
-    \item Blue-Green Deployment: Two identical environments; traffic switches post-validation.
-    \item Canary Release: Gradual rollout to a subset of users.
-    \item Shadow Mode: New model runs alongside the old one without affecting traffic.
+\item Requires robust CI/CD to maintain stability.
 \end{itemize}
 
 \subsection{S3-Storage}
+Amazon S3 (Simple Storage Service) is a cloud-based object storage service that provides scalable, durable, and highly available storage infrastructure.
+In the context of MLOps\cite{10.1145/3533378}, S3 serves as a critical component for storing machine learning models, datasets, and artifacts throughout the ML lifecycle.
+S3 provides virtually unlimited storage capacity with high durability for large ML models and datasets.
+It allows teams to maintain multiple versions of models for rollback and testing.
+S3 integrates seamlessly with popular ML platforms like Kubeflow and MLflow, offering multiple storage classes to optimize costs\cite{10.1145/3533378}.

@@ -5,7 +5,16 @@ In this section we will try to describe key aspect of MLOps as can be found in t
 \subsection{Description}\label{subsec:description}
 MLOps or Machine Learning Operations is the organisation and automation of Machine learning development workflow and operations.
 It's an extension of DevOps practices adapted to machine learning model development and data operations\cite{Kreuzberger2022MachineLO}.
-MLOps is almost never taken alone and DataOps is an integrated part of the full MLOps lifecycle.
+
+MLOps is build upon DevOps, Data Engineering and Machine Learning as stated by\cite{9792270}.
+
+\begin{figure}[!htbp]
+    \caption{MLOps field\cite{9792270}}
+    \centering
+    \includegraphics[scale=0.5]{images/ml-dev-data-ops}
+    \label{fig:ml-dev-data-ops}
+\end{figure}
+
 
 MLOps with clearly defined workflow and infrastructure can provide transparency and accountability to Upper Management and Business.\cite{treveil2020introducing}(p.11)
 
@@ -85,83 +94,49 @@ Additional literature further refines these roles, proposing the following\cite{
 technical machine learning architect—plays a critical part in the maintenance of ML
 models in production}\cite{treveil2020introducing}(p.22).
 
-In figure\ref{fig:mlop-people}, they propose an example of those roles within an organization.
+In figure\ref{fig:mlop-people}, they propose a picture of the model lifecycle and roles within an organisation.
 \begin{figure}[!htbp]
-    \caption{Realistic picture of a machine learning model life cycle inside an average
-    organisation today\cite{treveil2020introducing}(p.6)}
+    \caption{Machine learning model life cycle inside an average
+    organisation\cite{treveil2020introducing}(p.6)}
     \centering
-    \includegraphics[scale=0.5]{images/mlops-people}
+    \includegraphics[scale=0.4]{images/mlops-people}
     \label{fig:mlop-people}
 \end{figure}
 
 \subsection{Workflow}\label{subsec:workflow}
 
-In their review\cite{Kreuzberger2022MachineLO}, they extracted good practices and principles to implement a MLOps workflow:
+\subsubsection{Good practices and essential components}
+
+In the review\cite{Kreuzberger2022MachineLO}, they extracted good practices and principles to implement a MLOps workflow.
+We complete their list by adding the State-of-the-art MLOps component that should be used for any models as described in~\cite{BURGUENOROMERO2025107499}.
 
 \begin{itemize}
     \item CI/CD automation
-    \item Workflow orchestration
-    \item Reproducibility
-    \item Versioning of data, code and model. (I would add versioning of pipelines)
-    \item Collaboration
-    \item Continuous ML training and evaluation
+    \item Pipeline/Workflow orchestration
+    \item Reproducibility using pipeline orchestrator
+    \item Versioning of data, code and model with model registry, code repositories and container registries
+    \item Collaboration with collaborative development platform (GitHub, Gitlab, Azure Devops)
+    \item Continuous ML training and evaluation with well-defined triggers for pipelines
     \item ML metadata tracking
-    \item Continuous Monitoring
+    \item Continuous Monitoring (Monitoring system)
     \item Feedback loops
 \end{itemize}
 
 As we explained earlier those principles shares a lot with actual DevOps practices with the addition of ML considerations
 like training and metadata tracking.
 
-In\cite{9792270} They propose a workflow that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
+In\cite{9792270} They propose a general workflow~\ref{fig:taxo-workflow} that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
 
 \begin{figure}[!htbp]
     \caption{Proposed workflow in\cite{9792270}}
     \centering
-    \includegraphics[scale=0.5]{images/taxo-workflow}
+    \includegraphics[scale=0.3]{images/taxo-workflow}
     \label{fig:taxo-workflow}
 \end{figure}
 
-\subsubsection{MLOps workflow methodology}
-State-of-the-art MLOps component that should be used for any models\cite{BURGUENOROMERO2025107499}:
-\begin{itemize}
-    \item Model registry to release models.
-    \item Pipeline orchestrator allows automation and reproducibility of MLOps workflows.
-    \item Model serving platform to deploy models.
-    \item Deployed model resources usually as REST/gRPC APIs
-    \item Monitoring system as usual monitoring and feedback is mandatory
-    \item Triggers when more automation comes into places it become mandatory to describe well-defined triggers for pipelines.
-\end{itemize}
-
 \subsubsection{Developing Models}
-\begin{figure}[!htbp]
-    \caption{Model development highlighted in the larger context of the ML project life
-    cycle\cite{treveil2020introducing}(p.41)}
-    \centering
-    \includegraphics[scale=0.5]{images/developing-models-intro}
-    \label{fig:developing-models-intro}
-\end{figure}
-
-\subsubsection{Training}
-
-\subsubsection{Testing}
-Beyond accuracy, factors like robustness, security, transparency, fairness, and safety are critical for building reliable and ethical AI\cite{10.1145/3555803}.
-
-\subsubsection{Prepare for production}
-
-\begin{figure}[!htbp]
-    \caption{Preparing for production highlighted in the larger context of the ML project
-    life cycle\cite{treveil2020introducing}(p.59)}
-    \centering
-    \includegraphics[scale=0.5]{images/prep-prod-intro}
-    \label{fig:prep-prod-intro}
-\end{figure}
-
-
-\subsubsection{Deploy in production}
-
-CI/CD (Continuous Integration/Continuous Deployment) principles, commonly used in traditional software engineering, are equally critical for machine learning systems and form a key part of MLOps strategies.
-After developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline.
+CI/CD principles, commonly used in traditional software engineering, are essential for machine learning systems.
+While developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline.
 An example pipeline includes the following steps\cite{treveil2020introducing}(p.74).
 
 \subsubsubsection{Develop the model:}
@@ -183,36 +158,65 @@ An example pipeline includes the following steps\cite{treveil2020introducing}(p.
 \end{itemize}
 
 \begin{figure}[!htbp]
-    \caption{Preparing for production highlighted in the larger context of the ML project
-    life cycle\cite{treveil2020introducing}(p.73)}
+    \caption{MLOps workflow\cite{8804457}}
     \centering
-    \includegraphics[scale=0.5]{images/deploy-prod}
-    \label{fig:deploy-prod}
+    \includegraphics[scale=0.6]{images/mlops-workflow-9-stages}
+    \label{fig:mlops-workflow}
 \end{figure}
+
+\begin{figure}[!htbp]
+    \caption{MLOps pipeline\cite{inproceedings}}
+    \centering
+    \includegraphics[scale=0.5]{images/mlops-pipeline}
+    \label{fig:mlops-pipeline}
+\end{figure}
+
+\subsubsection{Training}
+
+key aspect of training in mlops pipelines.
+but also retraining, pretrained models, example with llm
+data and hardware availabilityu
+
+\subsubsection{Testing}
+Beyond accuracy, factors like robustness, security, transparency, fairness, and safety are critical for building reliable and ethical AI\cite{10.1145/3555803}.
+
+\subsubsection{Deploy in production}
+
+
+
+\subsubsubsection{Deployment Strategies}\label{subsec:deployment-strategies}
+govern how software (or ML models) are rolled out in production.
+Key concepts include [9, p.77]:
+
+\begin{itemize}
+    \item Integration: Merging code changes into a shared repository and running automated tests.
+    \item Delivery: Packaging and validating a model for production (e.g., containerization, artifact storage).
+    \item Deployment: Releasing the model to target infrastructure (manual or automated).
+    \item Continuous Delivery (CD): Ensuring the model is always production-ready (even if deployed manually).
+    \item Continuous Deployment (CD): Fully automated releases upon passing tests.
+    \item Release: Decoupling deployment from serving traffic (e.g., A/B testing, shadow deployments).
+\end{itemize}
+Common ML deployment strategies:
+\begin{itemize}
+    \item Blue-Green Deployment: Two identical environments; traffic switches post-validation.
+    \item Canary Release: Gradual rollout to a subset of users.
+    \item Shadow Mode: New model runs alongside the old one without affecting traffic.
+\end{itemize}
 
 
 \subsubsection{Monitor and FeedBack}
 
-\begin{figure}[!htbp]
-    \caption{Monitoring and feedback loop highlighted in the larger context of the ML
-    project life cycle\cite{treveil2020introducing}(p.85)}
-    \centering
-    \includegraphics[scale=0.5]{images/monitor-intro}
-    \label{fig:monitor-intro}
-\end{figure}
-
-
-
 Understanding Model Degradation
 Once a machine learning model is trained and deployed in production, there are two
 approaches to monitor its performance degradation: ground truth evaluation and
-input drift detection. Understanding the theory behind and limitations of these
+input drift detection.
+Understanding the theory behind and limitations of these
 approaches is critical to determining the best strategy.\cite{treveil2020introducing}(p.89)
 
 \begin{figure}[!htbp]
     \caption{Continuous delivery for end-to-end machine learning process\cite{treveil2020introducing}(p.95)}
     \centering
-    \includegraphics[scale=0.5]{images/feedback-loop-intro}
+    \includegraphics[scale=0.4]{images/feedback-loop-intro}
     \label{fig:feedback-loop-intro}
 \end{figure}
 
@@ -236,7 +240,7 @@ This combination creates a comprehensive and scalable MLOps framework.
 \begin{figure}[!htbp]
     \caption{MLOps reference architecture\cite{10855428}}
     \centering
-    \includegraphics[scale=0.5]{images/infrastructure}
+    \includegraphics[scale=0.35]{images/infrastructure}
     \label{fig:infra}
 \end{figure}
 
@@ -297,3 +301,9 @@ making it simpler and more accessible.
 It is increasingly integrated into MLOps platforms, enabling companies to deploy ML models into production more efficiently.
 Major cloud platforms now offer AutoML tools, enhancing productivity and feasibility for cloud-based ML projects.
 This combination of AutoML and MLOps is driving broader adoption across industries.\cite{gift2021practical,mlops-definition-tools-and-challenge}
+
+As explained in\cite{mlops-definition-tools-and-challenge} AutoML (Automated Machine Learning) refers to the automation of the various steps involved in creating a machine learning model,
+such as data preparation, model selection, hyperparameter adjustment and evaluation.
+More and more companies are using it to speed up and simplify the deployment of ML models.
+Although less flexible and more resource-intensive than conventional approaches, AutoML facilitates retraining and integrates effectively with modern MLOps systems.
+Auto-sklearn, Auto-Keras or Katib are some example of AutoML tools.

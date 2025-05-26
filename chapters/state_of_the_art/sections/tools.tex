@@ -2,50 +2,29 @@
 
 In this section we will present some of the tools that the literature recommend to implement MLOps workflow.
 
-\subsection{Docker}\label{subsec:docker}
-Docker\cite{docker} is a containerization platform that packages applications and their dependencies into isolated,
-lightweight containers, ensuring consistent and portable execution across different environments.
-
-Docker is essential for MLOps because it ensures consistent and reliable deployment of machine learning models across different environments.
-By containerizing models with all their dependencies, Docker avoids conflicts between incompatible versions and isolates resource usage,
-preventing one model from disrupting others.
-This makes Docker a key tool for efficient, scalable, and reproducible ML deployments.\cite{treveil2020introducing}(p.80)
-
-Docker is not the only containerization platform out there, but it's almost became a common noun nowadays for containerized applications.
-
-\subsection{Kubernetes}\label{subsec:kubernetes2}
-
-Kubernetes\cite{kubernetes} is a container orchestration platform that automates the deployment, scaling, and management of containerized applications.
-It enables infrastructure as code through tools like Helm, simplifying application deployment and configuration.
-By using features such as namespaces, resource quotas, and specialized node types (e.g., GPU nodes for machine learning),
-Kubernetes allows multiple teams to securely share resources while maintaining isolation.
-Its portability ensures compatibility across various Kubernetes providers, making it a flexible and scalable solution for diverse projects.
-
-Docker with Kubernetes together simplifies deployment strategies and enables scalable hosting of ML models,
-though it lacks native ML performance management capabilities on its own.\cite{treveil2020introducing}(p.81)
-
 \subsection{Version Control and CI/CD Pipelines}\label{subsec:version-control-and-ci/cd-pipelines}
 Majority of the article we found in the literature are using Git and particularly GitHub\cite{github} as their collaborative development platform.
 Github uses Github Actions to define their CI/CD pipelines.
+It offers the possibility to host self-hosted runners to run private pipelines on premise.
+Azure devops, Gitlab, Gitea and Bamboo pipelines can also be found in some articles\cite{Kreuzberger2022MachineLO}
 
 \subsection{Apache Airflow}\label{subsec:apache-airflow}
-Apache Airflow\cite{airflow} is a platform created by the community to programmatically author, schedule and monitor workflows\cite{airflow}
+Apache Airflow\cite{airflow} is a platform created by the community to programmatically author, schedule and monitor workflows\cite{airflow}.
 It's a general pipeline tool that can be deployed on Kubernetes.
+It can also be used for ML workflow orchestration\cite{Kreuzberger2022MachineLO}.
 
 Defining a general MLOps workflow with explicit input-output interfaces is a good practice because it reduces common failure modes and improves clarity.
 Tools like Apache Airflow can then better manage execution by identifying independent tasks and running them in parallel,leading to more efficient and reliable workflows.\cite{mlflow}
-It can be used as a DataOps/MLOps workflow orchestrator\cite{10245408,mlflow}
+It can be used as a DataOps/MLOps workflow orchestrator\cite{10245408,mlflow}.
 
-An Airflow \textit{DAG} (Directed Acyclic Graph) is the core concept of Airflow\cite{airflow}.
+An Airflow \textit{DAG} (Directed Acyclic Graph) is the core concept of Airflow\cite{Kreuzberger2022MachineLO, airflow}.
 It's used to define pipelines as tasks that are organized with relationships.
-We will show examples later in this paper.
 
-Airflow offers connector with OpenSearch to ease the integration of data observability and analytics component to the workflow.
 
 \subsection{Kubeflow}\label{subsec:kubeflow2}
 Kubeflow\cite{Kubeflow} is an open-source platform designed to simplify the deployment, management, and scaling of machine learning workflows on Kubernetes.
 It provides tools for building portable, scalable, and efficient ML pipelines, including components for training, hyperparameter tuning, and serving models.
-Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428}
+Kubeflow is used or mention in many publication and MLOps platforms\cite{inproceedings,10855428,Kreuzberger2022MachineLO}
 
 Kubeflow is a platform with 6 components that can be used as standalone component\cite{Kubeflow}.
 \begin{itemize}
@@ -65,8 +44,8 @@ We'll investigate the kubeflow pipelines and storage later in this paper.
 
 Is another platform to orchestrate MLOps workflows.
 It's a Data-centric approach to establish and scale machine learning specialized into MLOps for large language models LLM.
-\url{https://blog.infocruncher.com/resources/ml-productionisation/The%20Big%20Book%20of%20MLOps%20(Databricks,%20v6,%202022).pdf}
-\url{https://docs.databricks.com/aws/en/machine-learning/mlops/mlops-workflow}
+% \url{https://blog.infocruncher.com/resources/ml-productionisation/The%20Big%20Book%20of%20MLOps%20(Databricks,%20v6,%202022).pdf}
+% \url{https://docs.databricks.com/aws/en/machine-learning/mlops/mlops-workflow}
 
 Databricks is a unified data analytics platform that integrates data engineering, data science, and machine learning workflows.
 
@@ -74,9 +53,14 @@ In an MLOps context, It provides an end-to-end MLOps platform with MLflow integr
 Features automated CI/CD pipelines specifically optimized for ML workflows
 Offers Delta Lake for reliable data management with ACID transactions
 Includes feature store capabilities for feature engineering and sharing
-Supports both batch and real-time serving for ML models
+Supports both batch and real-time serving for ML models\cite{Kreuzberger2022MachineLO, mlflow}.
 
-Cited by \cite{mlflow}.
+
+
+== commercial example
+The Databricks platform offers managed services based on
+other cloud providers’ infrastructure, e.g., managed
+MLflow.
 
 \subsection{Airbyte}
 Airbyte is an open-source data integration platform focused on ETL/ELT processes\cite{airbyte}.
@@ -94,8 +78,8 @@ While primarily a data engineering tool, Airbyte plays a crucial role in MLOps b
 \subsection{Argo}\label{subsec:argo}\cite{argo}
 It's a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
 
-We are particularly interested with ArgoCD and Argo Rollouts which are both mentioned and used in the literature.
-Kubeflow uses Argo for its deployment capabilities.
+We are particularly interested with ArgoCD and Argo Rollouts which are both mentioned in the literature\cite{inproceedings}.
+Kubeflow uses Argo workflow for its pipeline orchestration capabilities.
 
 \begin{itemize}
     \item ArgoCD
@@ -119,12 +103,18 @@ Kubeflow uses Argo for its deployment capabilities.
 Open-Metadata is a platform that can also be used to orchestrate DataOps workflow or even MLops workflow.
 It depends on OpenSearch as an observability tool and Airflow for pipeline orchestration.
 
-\subsection{MLflow}\url{https://mlflow.org/docs/latest/}
+Airflow offers connector with OpenSearch to ease the integration of data observability and analytics component to the workflow.
+
+\subsection{MLflow}
 MLflow is an open-source platform for managing the ML lifecycle, including experimentation, reproducibility,
 deployment, and a central model registry.\cite{mlflow}
 
-Unlike Airflow or Kubeflow, MLflow cannot be deployed on kubernetes and orchestrate container based workflows.
+MLflow provides an advanced experiment tracking functionality, a model registry, and
+model serving component\cite{Kreuzberger2022MachineLO}.
 
 \subsection{ZenML}
 ZenML is an extensible, open-source MLOps framework for creating portable, production-ready ML pipelines cited by\cite{blockchain-mlops}.
 
+\subsection{TensorFlow Extended}
+TensorFlow Extended provides a library to define each tasks of an end-to-end ML
+pipeline\cite{Kreuzberger2022MachineLO}.

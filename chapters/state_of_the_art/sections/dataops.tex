@@ -1,5 +1,5 @@
 \section{DataOps in MLOps Workflows}\label{sec:dataops}
-Machine Learning Operations (MLOps) workflows heavily depend on reliable, high-quality data pipelines.
+Machine Learning Operations (MLOps) workflows heavily depend on reliable, high-quality data pipelines\cite{dataops-mlops}.
 This is where DataOps comes into play as a critical component of any comprehensive MLOps strategy.
 DataOps applies DevOps principles to data management, ensuring that data is treated as a first-class citizen in ML systems.
 
@@ -17,6 +17,14 @@ Finally, the use of an agile methodology brings iterative, collaborative develop
 
 \subsection{DataOps Workflow}\label{subsec:dataops-workflow}
 The DataOps framework integrates methodologies from Agile, DevOps, data management and analytics.
+
+\begin{figure}[!htbp]
+    \caption{DataOps lifecycle\cite{FANNOUCH2025100321}}
+    \centering
+    \includegraphics[scale=0.5]{images/dataops-workflow}
+    \label{fig:dataops-workflow}
+\end{figure}
+
 Below are the key steps derived from a systematic literature review\cite{FANNOUCH2025100321}:
 
 \subsubsection{Data Orchestration}
@@ -27,7 +35,7 @@ from raw data to cleaned data and then to analysis-ready formats—so that every
 
 \subsubsection{Data Governance}
 Good data governance means making sure the data is accurate and trustworthy.
-This includes checking and cleaning the data so it's consistent and correct.
+This includes checking and cleaning the data, so it's consistent and correct.
 It also means protecting the data through encryption and access controls,
 and ensuring that all processes follow legal regulations such as GDPR.
 
@@ -37,7 +45,7 @@ They also involve automatically testing pipelines to catch problems early,
 which helps maintain quality and reliability as the system evolves.
 
 \subsubsection{Monitoring and Observability}
-Monitoring is about keeping an eye on how the system is performing—measuring things like speed, error rates,
+Monitoring is about checking how the system is performing—measuring things like speed, error rates,
 and resource usage.
 Observability adds transparency by logging changes and tracking how data is accessed,
 which helps with debugging and maintaining trust in the system.
@@ -61,7 +69,7 @@ and is similar to the MLOps evolution we'll see later (fig:~\ref{fig:maturity}).
 \begin{figure}[!htbp]
     \caption{DataOps Evolution\cite{ad-hoc-dataops}}
     \centering
-    \includegraphics[scale=0.5]{images/dataops-evo}
+    \includegraphics[scale=0.6]{images/dataops-evo}
     \label{fig:dataops-evo}
 \end{figure}
 
