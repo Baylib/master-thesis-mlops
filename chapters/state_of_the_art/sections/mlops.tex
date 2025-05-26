@@ -105,11 +105,12 @@ In figure\ref{fig:mlop-people}, they propose a picture of the model lifecycle an
 
 \subsection{Workflow}\label{subsec:workflow}
 
-As we already stated establishing and MLOPs workflow is beneficial for enterprise.
-In this section we'll try to picture what a good MLOPs workflow should be according to the literature.
+Establishing an MLOps workflow is beneficial for organisations.
+This section outlines what constitutes an effective MLOps workflow according to current literature and best practices.
 
-In\cite{9792270} They propose a general workflow~\ref{fig:taxo-workflow} that shares many aspect with other workflows like those found in\cite{treveil2020introducing,gift2021practical}
-It is high level but shows the initiation process coming from the business requirements going to an automate MLOps workflow.
+The literature presents several complementary perspectives on MLOps workflows\cite{treveil2020introducing,gift2021practical,Kreuzberger2022MachineLO}.
+In their taxonomic study\cite{9792270}, the authors propose a general workflow that emphasizes the initiation process flowing from business requirements into an automated MLOps workflow.
+This high-level view demonstrates how business needs drive technical implementation decisions~\ref{fig:taxo-workflow}.
 
 \begin{figure}[!htbp]
     \caption{Proposed workflow in\cite{9792270}}
@@ -163,9 +164,10 @@ We complete their list by adding the State-of-the-art MLOps component that shoul
 As we explained earlier those principles shares a lot with actual DevOps practices with the addition of ML considerations
 like training and metadata tracking.
 
-\subsubsection{Developing Models}
-CI/CD principles, commonly used in traditional software engineering, are essential for machine learning systems.
-While developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline\cite{10855428}.
+\subsubsection{Model development workflow}
+The model development process follows CI/CD principles adapted for machine learning contexts.
+When data scientists push code, metadata, and documentation to central repositories,
+they trigger automated pipelines that ensure quality and consistency\cite{10855428}.
 An example pipeline includes the following steps\cite{treveil2020introducing}(p.74).
 
 \begin{figure}[!htbp]
@@ -193,7 +195,7 @@ An example pipeline includes the following steps\cite{treveil2020introducing}(p.
     \item Fully deploy the model once validated
 \end{itemize}
 
-\subsubsection{Training}
+\subsubsection{Training Consideration}
 
 Model training involves feeding the selected model with a dataset to learn data patterns.
 The model training infrastructure provides computational resources (CPUs, RAM, GPUs) in either distributed or non-distributed configurations, with scalable distributed systems.
@@ -212,13 +214,14 @@ HPO selects optimal hyper-parameters (e.g., decision tree depth, neural network 
 Large datasets further complicate HPO by increasing training time per search\cite{10.1145/3533378}.
 Defining a complete search space is often impractical due to insufficient problem knowledge, limiting state-of-the-art HPO adoption.
 
-\subsubsection{Testing and Validating}
+\subsubsection{Testing and Validation}
 Model verification ensures generalization, robustness, and compliance with functional requirements.
 This process involves three key steps: requirement encoding, formal verification, and test-based verification\cite{10.1145/3533378}.
 
 Beyond accuracy, factors like robustness, security, transparency, fairness, and safety are critical for building reliable and ethical AI\cite{10.1145/3555803}.
-Defining domain-specific metrics (e.g., business KPIs) is critical, as proxy metrics (e.g., clicks) may not align with business goals\cite{10.1145/3533378}.
-Cross-disciplinary collaboration is essential to establish good metrics.
+Defining appropriate evaluation metrics requires close collaboration between technical teams and business stakeholders\cite{10.1145/3533378}.
+Metrics must align with actual business objectives to ensure model value.
+This alignment often requires cross-disciplinary collaboration to establish meaningful success criteria.
 
 \subsubsection{Deploy in production}
 Maintaining machine learning systems in production presents unique challenges that differ from traditional software systems.
