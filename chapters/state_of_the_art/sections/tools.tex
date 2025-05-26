@@ -40,7 +40,7 @@ Kubeflow offer a Domain Specific Language as a python library to orchestrate the
 Kubeflow pipeline integrate with S3-storage (Amazon Simple Storage Service) which is a standard storage solution used as a model repository like in\cite{BURGUENOROMERO2025107499}.
 We'll investigate the kubeflow pipelines and storage later in this paper.
 
-\subsection{Databricks}
+\subsection{Databricks}\label{subsec:databricks}
 
 Is another platform to orchestrate MLOps workflows.
 It's a Data-centric approach to establish and scale machine learning specialized into MLOps for large language models LLM.
@@ -62,7 +62,7 @@ The Databricks platform offers managed services based on
 other cloud providers’ infrastructure, e.g., managed
 MLflow.
 
-\subsection{Airbyte}
+\subsection{Airbyte}\label{subsec:airbyte}
 Airbyte is an open-source data integration platform focused on ETL/ELT processes\cite{airbyte}.
 
 \begin{itemize}
@@ -105,16 +105,23 @@ It depends on OpenSearch as an observability tool and Airflow for pipeline orche
 
 Airflow offers connector with OpenSearch to ease the integration of data observability and analytics component to the workflow.
 
-\subsection{MLflow}
+\subsection{MLflow}\label{subsec:mlflow}
 MLflow is an open-source platform for managing the ML lifecycle, including experimentation, reproducibility,
 deployment, and a central model registry.\cite{mlflow}
 
 MLflow provides an advanced experiment tracking functionality, a model registry, and
 model serving component\cite{Kreuzberger2022MachineLO}.
 
-\subsection{ZenML}
+\subsection{ZenML}\label{subsec:zenml}
 ZenML is an extensible, open-source MLOps framework for creating portable, production-ready ML pipelines cited by\cite{blockchain-mlops}.
+ZenML is designed to enable collaboration between Data Scientists, ML Engineers, and MLOps Developers throughout the development-to-production process\cite{landscape}.
+It provides interfaces and abstractions specifically tailored for machine learning workflows.
 
-\subsection{TensorFlow Extended}
+\subsection{TensorFlow Extended}\label{subsec:tensorflow-extended}
 TensorFlow Extended provides a library to define each tasks of an end-to-end ML
 pipeline\cite{Kreuzberger2022MachineLO}.
+
+\subsection{Dagster}\label{subsec:dagster}
+Dagster is a data orchestrator designed to manage data assets like tables, ML models, and reports throughout the entire data development lifecycle—from local development to production\cite{landscape}.
+It supports orchestration of various ML pipelines (e.g., feature engineering, training, batch inference) but
+compared to Prefect, another orchestrator, Dagster emphasizes a full-lifecycle, first-principles approach to data engineering enabling seamless deployment across different infrastructures\cite{landscape}.
