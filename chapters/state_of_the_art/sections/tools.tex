@@ -43,8 +43,8 @@ We'll investigate the kubeflow pipelines and storage later in this paper.
 \subsection{Databricks}\label{subsec:databricks}
 
 Is another platform to orchestrate MLOps workflows.
-It's a Data-centric approach to establish and scale machine learning specialized into MLOps for large language models LLM.
-% \url{https://blog.infocruncher.com/resources/ml-productionisation/The%20Big%20Book%20of%20MLOps%20(Databricks,%20v6,%202022).pdf}
+It's a Data-centric approach to establish and scale machine learning specialized into MLOps for large language models LLM\cite{BURGUENOROMERO2025107499}.
+
 % \url{https://docs.databricks.com/aws/en/machine-learning/mlops/mlops-workflow}
 
 Databricks is a unified data analytics platform that integrates data engineering, data science, and machine learning workflows.
@@ -55,25 +55,18 @@ Offers Delta Lake for reliable data management with ACID transactions
 Includes feature store capabilities for feature engineering and sharing
 Supports both batch and real-time serving for ML models\cite{Kreuzberger2022MachineLO, mlflow}.
 
+%\subsection{Airbyte}\label{subsec:airbyte}
+%Airbyte is an open-source data integration platform focused on ETL/ELT processes\cite{airbyte}.
 
+%\begin{itemize}
+%\item Provides pre-built connectors for data sources and destinations
+%\item Features a centralized configuration for data pipelines
+%\item Offers incremental data syncing capabilities
+%\item Includes data transformation capabilities using SQL and dbt
+%\item Integrates with data catalogs and lineage tools
+%\end{itemize}
 
-== commercial example
-The Databricks platform offers managed services based on
-other cloud providers’ infrastructure, e.g., managed
-MLflow.
-
-\subsection{Airbyte}\label{subsec:airbyte}
-Airbyte is an open-source data integration platform focused on ETL/ELT processes\cite{airbyte}.
-
-\begin{itemize}
-\item Provides pre-built connectors for data sources and destinations
-\item Features a centralized configuration for data pipelines
-\item Offers incremental data syncing capabilities
-\item Includes data transformation capabilities using SQL and dbt
-\item Integrates with data catalogs and lineage tools
-\end{itemize}
-
-While primarily a data engineering tool, Airbyte plays a crucial role in MLOps by ensuring quality data ingestion into ML pipelines.
+%While primarily a data engineering tool, Airbyte plays a crucial role in MLOps by ensuring quality data ingestion into ML pipelines.
 
 \subsection{Argo}\label{subsec:argo}\cite{argo}
 It's a suite of open-source tools for Kubernetes, designed to improve workflows, deployments, and continuous delivery.
@@ -98,12 +91,6 @@ Kubeflow uses Argo workflow for its pipeline orchestration capabilities.
     is a workflow orchestrator for Kubernetes.
     It's used by Kubeflow to orchestrate MLOps pipelines.
 \end{itemize}
-
-\subsection{Open-Metadata}\label{subsec:openmetadata}
-Open-Metadata is a platform that can also be used to orchestrate DataOps workflow or even MLops workflow.
-It depends on OpenSearch as an observability tool and Airflow for pipeline orchestration.
-
-Airflow offers connector with OpenSearch to ease the integration of data observability and analytics component to the workflow.
 
 \subsection{MLflow}\label{subsec:mlflow}
 MLflow is an open-source platform for managing the ML lifecycle, including experimentation, reproducibility,

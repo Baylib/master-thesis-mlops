@@ -377,4 +377,18 @@ Level 3 being the most sophisticated and recommended for enterprise solutions.
 \end{figure}
 
 It expands on Google maturity model\cite{google-mlops} which involves 3 levels: Manual process, ML pipeline automation, CI/CD automation.
+In this recent paper\cite{unknown}, they compare different maturity models for MLOps while introducing LLMOPs (Large Language Model Operations).
 
+\subsection{GitOps in MLOps workflow}\label{subsec:gitops-in-mlops-workflow}
+
+This paper\cite{mlops-gitops} propose an MLops workflow that follows the GitOps principles.
+They explain that to maintain the GitOps approach, they have established a separate git repository
+where they push their configuration changes (e.g., Docker image tags) during a step in their GitHub Action pipeline.
+They use ArgoCD to sync this repository with predefined environments (development, staging and production).
+
+\begin{figure}[!htbp]
+    \caption{Proposed MLOps/GitOps infrastructure\cite{mlops-gitops}}
+    \centering
+    \includegraphics[scale=0.3]{images/mlops-gitops}
+    \label{fig:mlops-gitops}
+\end{figure}
