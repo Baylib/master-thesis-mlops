@@ -58,3 +58,29 @@ and what are their deployment focus either cloud based or Kubernetes focused.
 
 \end{longtable}
 \normalsize
+
+
+Based on our research we propose this checklist of components following the good practices reviewed before.
+\begin{longtable}{|p{7cm}|p{6cm}|}
+    \hline
+    \textbf{Good Practice} & \textbf{Tool Used (examples)} \\
+    \hline
+    CI/CD automation & GitHub Actions\\
+    \hline
+    Pipeline/Workflow orchestration & Kubeflow Pipelines, Apache Airflow\\
+    \hline
+    Reproducibility using pipeline orchestrator & Kubeflow, Airflow \\
+    \hline
+    Versioning of data, code and model with model registry, code repositories and container registries & GitHub, Docker Hub \\
+    \hline
+    Collaboration with collaborative development platform (GitHub, Gitlab, Azure Devops) & GitHub \\
+    \hline
+    Continuous ML training and evaluation with well-defined triggers for pipelines & Apache Airflow, Kubeflow Pipelines\\
+    \hline
+    ML metadata tracking & Kubeflow \\
+    \hline
+    Continuous Monitoring (Monitoring system) & OpenSearch \\
+    \hline
+    Feedback loops & Data Drift Detectors, Human Verifications \\
+    \hline
+\end{longtable}

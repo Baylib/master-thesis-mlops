@@ -28,7 +28,7 @@ MLOps with clearly defined workflow and infrastructure can provide transparency 
 MLOps is essential for data teams and organisations, as it involves a complex integration of technologies, processes, and people, requiring ongoing discipline and time to implement effectively.
 It is not a one-time task but a continuous effort to ensure successful machine learning operations.\cite{treveil2020introducing}(p.38)
 
-A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development is evolving towards team-based development.
+A survey in 2021\cite{DBLP:journals/corr/abs-2103-08942} already show that Machine Learning development was evolving towards team-based development.
 They also show that in a result the adoption of DevOps practices is increasing and the required skills in infrastructure and deployment are evolving.
 
 In this regard, they also identified the following obstacles among others\cite{DBLP:journals/corr/abs-2103-08942}:
@@ -134,6 +134,16 @@ In\cite{9792270} They propose a general workflow~\ref{fig:taxo-workflow} that sh
     \label{fig:taxo-workflow}
 \end{figure}
 
+The more complete proposition of an MLOps workflow was found was in\cite{Kreuzberger2022MachineLO}.
+It will be an inspiration to implement our workflow and can be found in fig\ref{fig:end-to-end-workflow}
+
+\begin{figure}[!htbp]
+    \caption{MLOps Architecture proposed in \cite{Kreuzberger2022MachineLO}}
+    \centering
+    \includegraphics[scale=0.5]{images/kreuz-end-to-end-workflow}
+    \label{fig:end-to-end-workflow}
+\end{figure}
+
 \subsubsection{Developing Models}
 CI/CD principles, commonly used in traditional software engineering, are essential for machine learning systems.
 While developing a model, a data scientist should push code, metadata, and documentation to a central repository, triggering a CI/CD pipeline.
@@ -173,15 +183,38 @@ An example pipeline includes the following steps\cite{treveil2020introducing}(p.
 
 \subsubsection{Training}
 
-key aspect of training in mlops pipelines.
-but also retraining, pretrained models, example with llm
-data and hardware availabilityu
+Model training involves feeding the selected model with a dataset to learn data patterns.
+The model training infrastructure provides computational resources (CPUs, RAM, GPUs) in either distributed or non-distributed configurations, with scalable distributed systems.
+It's usually implemented through local machines, cloud computing, or worker nodes using frameworks like Kubernetes\cite{Kreuzberger2022MachineLO, Haakman2021}.
 
-\subsubsection{Testing}
+Model training primarily occurs in secure on-premises environments, accessing data from connected lakes\cite{Haakman2021}.
+Due to strict security policies, some isolated systems prohibit internet connectivity to external cloud services
+It requires practitioners to use pre-approved tools from internal repositories, but it ensures data protection for sensitive information\cite{Haakman2021}.
+
+Environmental impact is a concern, as ML training increases energy consumption and CO\textsubscript{2} emissions\cite{10.1145/3533378}.
+Privacy is also critical, with risks like membership inference attacks\cite{10.1145/3533378, 10.1145/3555803}.
+A major concern is the economic cost due to computational resources, particularly in Natural Language Processing\cite{10.1145/3533378}.
+
+\subsubsubsection{Hyper-parameter Optimization (HPO)}
+HPO selects optimal hyper-parameters (e.g., decision tree depth, neural network layers) and often requires multiple training cycles, making it computationally expensive.
+Large datasets further complicate HPO by increasing training time per search\cite{10.1145/3533378}.
+Defining a complete search space is often impractical due to insufficient problem knowledge, limiting state-of-the-art HPO adoption.
+
+\subsubsection{Testing and Validating}
+Model verification ensures generalization, robustness, and compliance with functional requirements.
+This process involves three key steps: requirement encoding, formal verification, and test-based verification\cite{10.1145/3533378}.
+
 Beyond accuracy, factors like robustness, security, transparency, fairness, and safety are critical for building reliable and ethical AI\cite{10.1145/3555803}.
+Defining domain-specific metrics (e.g., business KPIs) is critical, as proxy metrics (e.g., clicks) may not align with business goals\cite{10.1145/3533378}.
+Cross-disciplinary collaboration is essential to establish good metrics.
 
 \subsubsection{Deploy in production}
+Maintaining machine learning systems in production presents unique challenges that differ from traditional software systems.
+While DevOps principles provide useful foundations for system maintenance, ML systems require specialized approaches due to their distinct characteristics\cite{10.1145/3533378}.
 
+The survey~\cite{10.1145/3533378} review key challenges which include the lack of standardized methods for collecting telemetry data and difficulties in obtaining accurate labels during operation.
+
+These differences have led to the development of specific practices for production ML systems that build upon but extend beyond conventional DevOps methodologies\cite{gift2021practical,10.1145/3533378}.
 
 
 \subsubsubsection{Deployment Strategies}\label{subsec:deployment-strategies}
@@ -196,7 +229,7 @@ Key concepts include [9, p.77]:
     \item Continuous Deployment (CD): Fully automated releases upon passing tests.
     \item Release: Decoupling deployment from serving traffic (e.g., A/B testing, shadow deployments).
 \end{itemize}
-Common ML deployment strategies:
+Common ML deployment strategies\cite{gift2021practical}:
 \begin{itemize}
     \item Blue-Green Deployment: Two identical environments; traffic switches post-validation.
     \item Canary Release: Gradual rollout to a subset of users.
@@ -230,6 +263,22 @@ Improved models can be validated using shadow scoring or A/B testing to ensure e
 
 The frequency of model retraining depends on factors like the domain, the cost of retraining, and the potential performance improvement.
 Teams must balance these considerations, such as whether the retraining cost justifies the performance gain or if sufficient new data is available to enhance the model.\cite{treveil2020introducing}(p.86)
+
+\subsubsection{AutoML}
+
+AutoML automates the machine learning process, including tasks like data preparation, model creation, hyperparameter tuning, and evaluation,
+making it simpler and more accessible.
+It is increasingly integrated into MLOps platforms, enabling companies to deploy ML models into production more efficiently.
+Major cloud platforms now offer AutoML tools, enhancing productivity and feasibility for cloud-based ML projects.
+This combination of AutoML and MLOps is driving broader adoption across industries.\cite{gift2021practical,mlops-definition-tools-and-challenge}
+
+As explained in\cite{mlops-definition-tools-and-challenge} AutoML (Automated Machine Learning) refers to the automation of the various steps involved in creating a machine learning model,
+such as data preparation, model selection, hyperparameter adjustment and evaluation.
+More and more companies are using it to speed up and simplify the deployment of ML models.
+Although less flexible and more resource-intensive than conventional approaches, AutoML facilitates retraining and integrates effectively with modern MLOps systems.
+Auto-sklearn, Auto-Keras or Katib are some example of AutoML tools.
+
+
 
 \subsection{Architecture, infrastructure and existing platforms}\label{subsec:architecture-infrastructure-and-existing-platforms}
 Figure\ref{fig:infra} shows a reference architecture proposed by\cite{10855428} based on their results.
@@ -268,15 +317,7 @@ OCDL provides an online IDE for model coding, a reusable code template, data acc
 
 We will use all their remarks and experiment to create our own.
 
-The more complete proposition of an architecture and workflows was found was in\cite{Kreuzberger2022MachineLO}.
-It will be an inspiration to implement our workflow and can be found in fig\ref{fig:end-to-end-workflow}
 
-\begin{figure}[!htbp]
-    \caption{MLOps Architecture proposed in \cite{Kreuzberger2022MachineLO}}
-    \centering
-    \includegraphics[scale=0.5]{images/kreuz-end-to-end-workflow}
-    \label{fig:end-to-end-workflow}
-\end{figure}
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
 The authors of\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
@@ -294,16 +335,4 @@ Level 3 being the most sophisticated and recommended for enterprise solutions.
     \label{fig:maturity}
 \end{figure}
 
-\subsubsection{AutoML}
 
-AutoML automates the machine learning process, including tasks like data preparation, model creation, hyperparameter tuning, and evaluation,
-making it simpler and more accessible.
-It is increasingly integrated into MLOps platforms, enabling companies to deploy ML models into production more efficiently.
-Major cloud platforms now offer AutoML tools, enhancing productivity and feasibility for cloud-based ML projects.
-This combination of AutoML and MLOps is driving broader adoption across industries.\cite{gift2021practical,mlops-definition-tools-and-challenge}
-
-As explained in\cite{mlops-definition-tools-and-challenge} AutoML (Automated Machine Learning) refers to the automation of the various steps involved in creating a machine learning model,
-such as data preparation, model selection, hyperparameter adjustment and evaluation.
-More and more companies are using it to speed up and simplify the deployment of ML models.
-Although less flexible and more resource-intensive than conventional approaches, AutoML facilitates retraining and integrates effectively with modern MLOps systems.
-Auto-sklearn, Auto-Keras or Katib are some example of AutoML tools.
