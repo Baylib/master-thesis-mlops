@@ -293,13 +293,15 @@ More and more companies are using it to speed up and simplify the deployment of 
 Although less flexible and more resource-intensive than conventional approaches, AutoML facilitates retraining and integrates effectively with modern MLOps systems.
 Auto-sklearn, Auto-Keras or Katib are some example of AutoML tools.
 
-
-
 \subsection{Architecture, infrastructure and existing platforms}\label{subsec:architecture-infrastructure-and-existing-platforms}
+The architectural design of MLOps systems significantly impacts their scalability, maintainability, and operational effectiveness.
+This section examines reference architectures, infrastructure patterns, and existing platforms that enable enterprise-grade MLOps implementations.
+
 Figure\ref{fig:infra} shows a reference architecture proposed by\cite{10855428} based on their results.
-Their proposed solution integrates GitHub Actions, Docker, and Kubernetes for the DevOps component, complemented by a robust ecosystem of tools:
-Feast for metadata storage, Mlflow as the model repository, Kubeflow for model orchestration, and Flower for distributed computing.
-This combination creates a comprehensive and scalable MLOps framework.
+Their proposed solution integrates GitHub Actions, Docker, and Kubernetes for the DevOps foundation,
+complemented by specialized ML tools including Feast for metadata storage, MLflow as the model repository, Kubeflow for model orchestration,
+and Flower for distributed computing.
+This combination demonstrates how established DevOps practices can be extended with ML-specific capabilities to create scalable MLOps frameworks.
 
 \begin{figure}[!htbp]
     \caption{MLOps reference architecture\cite{10855428}}
@@ -308,16 +310,42 @@ This combination creates a comprehensive and scalable MLOps framework.
     \label{fig:infra}
 \end{figure}
 
+\subsubsection{Architecture Components}
+In the review\cite{Amou_Najafabadi_2024}, they group architecture components in MLOps workflows into 6 categories (see figure~\ref{fig:archi}):
+data curation, storage and versioning, model training, CI/CD, Inference, Infrastructure and supporting services.
+According to them\cite{Amou_Najafabadi_2024}, tool diversity is highest in Storage/Versioning and CI/CD categories, while components like Model Repository and ML Model Deployer show the most varied tool implementations.
+Several components including Dataset Catalogue, Raw Data Store, and various monitoring elements currently lack specific tool mappings in the analyzed literature.
+
+\begin{figure}[!htbp]
+    \caption{MLOps reference architecture\cite{Amou_Najafabadi_2024}}
+    \centering
+    \includegraphics[scale=0.5]{images/archi-components}
+    \label{fig:archi}
+\end{figure}
+
+A prototype system was developed by\cite{RODRIGUES2025104169} to validate their proposed architecture for stream learning (SL) in production-like conditions.
+Implemented as containerized Python microservices managed by Kubernetes, the system includes three core modules: Inference Endpoints, Model Versioning, and Model Update.
+Inference Endpoints handle scalable model inference using APIs, and regularly check for updated models.
+Model Versioning stores SL model versions using MLFlow, serving them to endpoints.
+Model Update uses Apache Kafka for ingesting labeled events and incrementally updates models, periodically creating new versions.
+The architecture supports horizontal scaling, seamless model updates without downtime, efficient version management,
+and is portable for cloud or on-premise deployment.
+It improves adaptability to evolving data while maintaining performance and stability.
+
+\subsubsection{Specialized platform examples}
 
 The Acumos AI platform\cite{10690392} is an open-source project that propose a platform that allows to hotswap models and deploy
 them to wellknown cloud providers (targets like Kubernetes, AWS, Azure or GCP).
 By using microservices, they made it easier to swap the models hidden behind a REST API\@.
 
+MLOps architectures increasingly adopt microservices patterns for model deployment, enabling independent scaling, versioning, and management of individual models.
+This approach facilitates A/B testing, canary deployments, and rollback procedures while supporting diverse model types and serving requirements within the same infrastructure\cite{gift2021practical, 10.1145/3533378}.
+
 The Nifi project\cite{10346079} uses the Acumos project to demonstrate how to take an ML model
 to production.
 The Nifi project implement automatic and reusable ML model training and ML model serving pipelines.
 
-Reusable MLOps is still a novel concept\cite{10690392}.
+According to~\cite{10690392}, Reusable MLOps is still a novel concept.
 
 The OCDL platform\cite{LIU2020704} was built on Kubernetes and other open-source frameworks to provide a scalable solution.
 It also integrates with GitHub to enable CI/CD pipelines and delivery, as illustrated in Figure\ref{fig:ocdl}.
@@ -330,9 +358,7 @@ OCDL provides an online IDE for model coding, a reusable code template, data acc
     \label{fig:ocdl}
 \end{figure}
 
-We will use all their remarks and experiment to create our own.
-
-
+We will use all their remarks and experiment to create our own in the next chapter.
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
 The authors of\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
@@ -350,4 +376,5 @@ Level 3 being the most sophisticated and recommended for enterprise solutions.
     \label{fig:maturity}
 \end{figure}
 
+It expands on Google maturity model\cite{google-mlops} which involves 3 levels: Manual process, ML pipeline automation, CI/CD automation.
 
