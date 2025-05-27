@@ -1,10 +1,9 @@
 \section{DataOps in MLOps Workflows}\label{sec:dataops}
 Machine Learning Operations (MLOps) workflows heavily depend on reliable, high-quality data pipelines\cite{dataops-mlops}.
 This is where DataOps comes into play as a critical component of any comprehensive MLOps strategy.
-DataOps applies DevOps principles to data management, ensuring that data is treated as a first-class citizen in ML systems.
+DataOps applies DevOps principles to data management, ensuring data important role in ML systems.
 
 \subsection{DataOps Definition and Principles}\label{subsec:dataops-definition}
-
 DataOps is a methodology that applies agile and DevOps principles to data management, fostering better collaboration,
 automated workflows, and seamless integration between data engineers and data users\cite{ad-hoc-dataops}.
 It represents the alignment of people, process, and technology to enable the rapid, automated, and secure management of data.
@@ -50,26 +49,4 @@ and resource usage.
 Observability adds transparency by logging changes and tracking how data is accessed,
 which helps with debugging and maintaining trust in the system.
 
-\subsection{DataOps Integration with MLOps}\label{subsec:dataops-mlops-integration}
-
-The integration of DataOps with MLOps creates a seamless workflow from raw data to deployed ML models.
-This integration addresses several critical challenges\cite{ad-hoc-dataops}:
-DataOps serves as the foundation for MLOps by ensuring robust and reliable data processes that support the entire machine learning lifecycle.
-It enables effective data preparation by cleaning, transforming, and validating data before it enters ML pipelines.
-Through feature engineering, DataOps helps convert raw data into meaningful inputs that improve model performance.
-Data versioning is also a key component, allowing teams to track data lineage and ensure the reproducibility of machine learning experiments.
-Additionally, data quality monitoring plays a vital role in detecting data drift or anomalies that could negatively impact model outcomes, ensuring models remain accurate and trustworthy over time.
-
-According to\cite{dataops-mlops}, organizations that implement integrated DataOps and MLOps practices
-realize significant advantages in
-operational efficiency.
-
-The evolution from ad hoc data analytics towards DataOps shows (fig:~\ref{fig:dataops-evo}) it follows the path to more automation
-and is similar to the MLOps evolution we'll see later (fig:~\ref{fig:maturity}).
-\begin{figure}[!htbp]
-    \caption{DataOps Evolution\cite{ad-hoc-dataops}}
-    \centering
-    \includegraphics[scale=0.6]{images/dataops-evo}
-    \label{fig:dataops-evo}
-\end{figure}
 

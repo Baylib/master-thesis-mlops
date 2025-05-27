@@ -95,6 +95,10 @@ technical machine learning architect—plays a critical part in the maintenance 
 models in production}\cite{treveil2020introducing}(p.22).
 
 In figure\ref{fig:mlop-people}, they propose a picture of the model lifecycle and roles within an organisation.
+Their model is divided into five parts: Business Questions, Develop Models, Prepare for Production, Deploy to Production, and Monitoring and Feedback.
+Roles are assigned to each part; however, the terminology MLOps Engineer is not used, despite its prevalence in the literature\cite{Kreuzberger2022MachineLO}.
+The role of an MLOps Engineer or Architect would typically involve defining the overall workflow and ensuring its coherence and scalability.
+
 \begin{figure}[!htbp]
     \caption{Machine learning model life cycle inside an average
     organisation\cite{treveil2020introducing}(p.6)}
@@ -170,13 +174,6 @@ When data scientists push code, metadata, and documentation to central repositor
 they trigger automated pipelines that ensure quality and consistency\cite{10855428}.
 An example pipeline includes the following steps\cite{treveil2020introducing}(p.74).
 
-\begin{figure}[!htbp]
-    \caption{MLOps pipeline\cite{inproceedings}}
-    \centering
-    \includegraphics[scale=0.5]{images/mlops-pipeline}
-    \label{fig:mlops-pipeline}
-\end{figure}
-
 \subsubsubsection{Develop the model:}
 \begin{itemize}
     \item Create model artifacts
@@ -195,6 +192,17 @@ An example pipeline includes the following steps\cite{treveil2020introducing}(p.
     \item Fully deploy the model once validated
 \end{itemize}
 
+Figure~\ref{fig:mlops-pipeline} presents a MLOps pipeline derived from\cite{inproceedings}.
+It illustrates how each step generates artifacts that are passed to the next stage.
+The figure also highlights that new data and monitoring are triggers for continuous training and ongoing development.
+
+\begin{figure}[!htbp]
+    \caption{MLOps pipeline\cite{inproceedings}}
+    \centering
+    \includegraphics[scale=0.5]{images/mlops-pipeline}
+    \label{fig:mlops-pipeline}
+\end{figure}
+
 \subsubsection{Training Consideration}
 
 Model training involves feeding the selected model with a dataset to learn data patterns.
@@ -208,6 +216,10 @@ It requires practitioners to use pre-approved tools from internal repositories, 
 Environmental impact is a concern, as ML training increases energy consumption and CO\textsubscript{2} emissions\cite{10.1145/3533378}.
 Privacy is also critical, with risks like membership inference attacks\cite{10.1145/3533378, 10.1145/3555803}.
 A major concern is the economic cost due to computational resources, particularly in Natural Language Processing\cite{10.1145/3533378}.
+
+Online training doesn't follow the same path as regular offline training that is usually performed in an offline training environment.
+It's recommended to deploy a shadow copy of the model in production for online training\cite{treveil2020introducing}.
+We will not explore further this type of training in this paper.
 
 \subsubsubsection{Hyper-parameter Optimization (HPO)}
 HPO selects optimal hyper-parameters (e.g., decision tree depth, neural network layers) and often requires multiple training cycles, making it computationally expensive.
@@ -359,6 +371,29 @@ OCDL provides an online IDE for model coding, a reusable code template, data acc
 \end{figure}
 
 We will use all their remarks and experiment to create our own in the next chapter.
+
+\subsection{DataOps Integration with MLOps}\label{subsec:dataops-mlops-integration}
+
+The integration of DataOps with MLOps creates a seamless workflow from raw data to deployed ML models.
+This integration addresses several critical challenges\cite{ad-hoc-dataops}:
+DataOps serves as the foundation for MLOps by ensuring robust and reliable data processes that support the entire machine learning lifecycle.
+It enables effective data preparation by cleaning, transforming, and validating data before it enters ML pipelines.
+Through feature engineering, DataOps helps convert raw data into meaningful inputs that improve model performance.
+Data versioning is also a key component, allowing teams to track data lineage and ensure the reproducibility of machine learning experiments.
+Additionally, data quality monitoring plays a vital role in detecting data drift or anomalies that could negatively impact model outcomes, ensuring models remain accurate and trustworthy over time.
+
+According to\cite{dataops-mlops}, organizations that implement integrated DataOps and MLOps practices
+realize significant advantages in
+operational efficiency.
+
+The evolution from ad hoc data analytics towards DataOps shows (fig:~\ref{fig:dataops-evo}) it follows the path to more automation
+and is similar to the MLOps evolution we'll see later (fig:~\ref{fig:maturity}).
+\begin{figure}[!htbp]
+    \caption{DataOps Evolution\cite{ad-hoc-dataops}}
+    \centering
+    \includegraphics[scale=0.6]{images/dataops-evo}
+    \label{fig:dataops-evo}
+\end{figure}
 
 \subsection{Maturity Models}\label{subsec:matutiry-models}
 The authors of\cite{mlops-maturity-model}, they propose a maturity model that goes from manual MLOps to fully automated MLOps.
