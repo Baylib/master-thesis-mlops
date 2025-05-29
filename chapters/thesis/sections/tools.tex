@@ -28,6 +28,7 @@ We chose Airflow for DataOps orchestration to maintain compatibility with existi
 This selection allows us to extend current functionality while providing a bridge to new MLOps capabilities.
 Airflow's Python-based DAG definitions integrate naturally with our development workflow and allow data scientists to define complex pipelines using familiar syntax.
 Airflow's ability to trigger Kubeflow pipelines creates a unified workflow that respects team boundaries and specialized tooling preferences while maintaining end-to-end process integrity.
+Moreover, by leveraging Airflow's recent GitSync capabilities, we were able to successfully implement GitOps principles within our MLOps project.
 
 \subsection{Kubeflow}\label{subsec:kubeflow}
 Kubeflow was selected primarily for its storage solutions and pipeline capabilities that directly address ML-specific workflow requirements.
@@ -37,5 +38,11 @@ This choice provides a growth path for the LSFB project, allowing incremental ad
 \subsection{ArgoCD}\label{subsec:argocd}
 ArgoCD was chosen as our GitOps implementation tool for its native Kubernetes integration and declarative approach to deployment automation.
 This selection enables us to maintain infrastructure and application configurations as code within our GitHub repositories.
-Additionally, Argo Rollouts provides sophisticated canary deployment capabilities essential for responsible model updates in production environments.
+Additionally, Argo Rollouts provides sophisticated deployment capabilities essential for our model updates in any environments.
 
+ArgoCD can be configured to trigger integration tests defined via helm test.
+Its notification service may be used to send webhooks to GitHub upon successful deployment.
+This contributes to a more fully automated workflow.
+
+Additionally, ArgoCD’s project abstraction enables fine-grained, role-based access control (RBAC), allowing developers to deploy only predefined resources within authorized clusters and namespaces.
+When combined with Kubernetes resource quotas, this approach empowers the infrastructure team to enforce secure and isolated development environments.

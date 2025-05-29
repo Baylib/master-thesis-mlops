@@ -1,7 +1,7 @@
-\chapter{Thesis project: A standard MLOps/GitOps workflow}\label{ch:thesis-project:-a-standard-mlops-ci/cd-workflow}
+\chapter{Thesis project: Implementing a MLOps/GitOps workflow}\label{ch:thesis-project:-a-standard-mlops-ci/cd-workflow}
 \chaptermark{Thesis : MLOps/GitOps WorkFlow}
 \section{Introduction}\label{sec:introduction}
-Building upon our state-of-the-art review of MLOps practices, this chapter introduces our practical implementation of a standardized MLOps workflow.
+Building upon our state-of-the-art review of MLOps practices, this chapter introduces our practical implementation of a MLOps/GitOps workflow.
 The proposed framework is designed with versatility in mind—capable of enhancing existing projects at various maturity levels or providing a robust foundation for new initiatives seeking accelerated production deployment.
 
 Rather than developing yet another platform, our approach integrates established tools and workflows identified in the literature into a cohesive system tailored to address modern machine learning development challenges.
@@ -9,7 +9,7 @@ A distinguishing feature of our implementation is the incorporation of GitOps pr
 
 At the core of our design is the GitOps philosophy, which establishes Git repositories as the single source of truth for code, configurations, and infrastructure.
 We leverage GitHub repositories as the central foundation, with GitHub Actions orchestrating our DevOps workflows.
-This integration extends further through tools such as ArgoCD, GitSync, and custom scripts that trigger our DataOps and MLOps pipelines in a synchronized manner.
+This integration extends further through tools such as ArgoCD, GitSync, and custom scripts that trigger our DataOps and MLOps pipelines. % in a synchronized manner.
 
 Our infrastructure is deployable across one or multiple Kubernetes clusters, depending on specific project requirements.
 This architecture decouples the workflow definition from hardware considerations, offering significant flexibility.
@@ -23,13 +23,13 @@ Furthermore, this approach accommodates diverse deployment scenarios:
 \end{itemize}
 
 The seamless integration of DevOps, DataOps, and MLOps pipelines culminates in a comprehensive MLOps workflow that is portable across any Kubernetes environment.
-This integration addresses the full machine learning lifecycle from development to deployment while maintaining consistent practices throughout.
+This integration addresses the full machine learning lifecycle from development to deployment while maintaining consistent practices. % throughout.
 
 Our implementation was specifically developed to support our promoter's ongoing LSFB (Langue des Signes de Belgique Francophone) project, which is already operational in a production environment.
 The practical application of our workflow to an existing, real-world machine learning system provided valuable insights into the challenges of MLOps adoption beyond theoretical constructs.
 By enhancing the established LSFB project infrastructure, we could demonstrate the adaptability and incremental benefits of our approach while supporting continued model development and improvement for this important initiative.
 
-In the following sections, we detail the specific tools selected to implement our workflow framework and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
+In the following sections, we detail the specific tools selected to implement our workflow and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
 Notably, our tool selection was significantly influenced by the existing LSFB project infrastructure.
 The current production system consists of a Python-based model deployed as a Docker image that exposes an API consumed by a web frontend.
 The project already utilizes GitHub for code management and Airflow for certain pipeline operations, which represents partial implementation of practices identified in our literature review.
@@ -42,6 +42,25 @@ These existing elements served as foundational components that our comprehensive
 \input{chapters/thesis/sections/roles}
 \input{chapters/thesis/sections/workflow}
 
+\section{Future Work}\label{sec:future-work}
+Our project is currently a prototype that can be used in development and testing environments.
+Future project should implement this in production.
+The current implementation still lack some of the consideration explained before and a more mature DevOps infrastructure.
+We focused on the MLOps part and workflow but .
+
+Add a vault secret manager for secret management \url{https://argo-cd.readthedocs.io/en/stable/operator-manual/secret-management/}.
+
+We used the ArgoCD the app-of-apps pattern in our implementation but to offer more self-service to development teams it could be interesting to use application sets
+
+At the moment we think it's usefull to use 3 different pipeline orchestrator but it's probable that in the future we could use only one as
+GitHub now propose a Model regitry, Kubeflow is extending it's Data and airflow is also going towards more MLOPs integration.
+
+\url{https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-self-service-of-argo-cd-applications-on-multitenant-clusters}.
+
 
 \section{Conclusion}\label{sec:conclusion}
 Airflow pipelines and kubeflow pipelines to easily integrate DataOps and MLOps pipelines together to reach more automation as the project gains maturity.
+By using the same GitOps workflow for our DataOps and MLOps pipelines that for our HelmCharts to deploy our infrastructure and applications,
+we successfully
+
+We

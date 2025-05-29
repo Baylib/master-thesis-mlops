@@ -20,3 +20,34 @@ pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-format=pdf
 biber out/main
 pdflatex -file-line-error -interaction=nonstopmode -synctex=1 -output-format=pdf -output-directory=./out -shell-escape main.tex
 ```
+
+```bash
+dataops-pipeline/
+├── dags/
+│ ├── dag-x.py
+│ ├── dag-y.py
+│ ├── requirements.txt
+│ └── config.yaml
+├── images/ # steps
+│ ├── kubeflow-pipeline/
+│ │ ├── Dockerfile
+│ │ ├── main.py
+│ │ └── config.yml
+│ └── step-x-definition/
+│ ├── main.py
+│ └── config.yml
+└── README.md
+```
+```bash
+model-api-helm/
+├── helm/
+│ ├── templates
+│ ├── Chart.yaml
+│ └── values.yaml
+├── images/
+│ ├── model-api/
+│ │ ├── Dockerfile
+│ │ ├── main.py
+│ │ └── requirements.txt
+└── README.md
+```
