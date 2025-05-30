@@ -2,7 +2,7 @@
 \chaptermark{Thesis : MLOps/GitOps WorkFlow}
 \section{Introduction}\label{sec:introduction}
 Building upon our state-of-the-art review of MLOps practices, this chapter introduces our practical implementation of a MLOps/GitOps workflow.
-The proposed framework is designed with versatility in mind—capable of enhancing existing projects at various maturity levels or providing a robust foundation for new initiatives seeking accelerated production deployment.
+The proposed workflow is designed with versatility in mind—capable of enhancing existing projects at various maturity levels or providing a robust foundation for new initiatives seeking accelerated production deployment.
 
 Rather than developing yet another platform, our approach integrates established tools and workflows identified in the literature into a cohesive system tailored to address modern machine learning development challenges.
 A distinguishing feature of our implementation is the incorporation of GitOps principles into the MLOps workflow, creating a synergistic relationship between these complementary methodologies.
@@ -29,15 +29,14 @@ Our implementation was specifically developed to support our promoter's ongoing 
 The practical application of our workflow to an existing, real-world machine learning system provided valuable insights into the challenges of MLOps adoption beyond theoretical constructs.
 By enhancing the established LSFB project infrastructure, we could demonstrate the adaptability and incremental benefits of our approach while supporting continued model development and improvement for this important initiative.
 
-In the following sections, we detail the specific tools selected to implement our workflow and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
+In the following sections, we detail our use cases and the specific tools selected to implement our workflow and explain how they interconnect to create a modular system that can adapt as projects evolve in complexity and maturity.
 Notably, our tool selection was significantly influenced by the existing LSFB project infrastructure.
 The current production system consists of a Python-based model deployed as a Docker image that exposes an API consumed by a web frontend.
 The project already utilizes GitHub for code management and Airflow for certain pipeline operations, which represents partial implementation of practices identified in our literature review.
 These existing elements served as foundational components that our comprehensive workflow needed to accommodate and enhance rather than replace, demonstrating the practical flexibility of our approach.
 
-
+\input{chapters/thesis/sections/usecases}
 \input{chapters/thesis/sections/tools}
-% \input{chapters/thesis/sections/usecases}
 \input{chapters/thesis/sections/infra}
 \input{chapters/thesis/sections/roles}
 \input{chapters/thesis/sections/workflow}
@@ -52,14 +51,14 @@ Add a vault secret manager for secret management \url{https://argo-cd.readthedoc
 
 We used the ArgoCD the app-of-apps pattern in our implementation but to offer more self-service to development teams it could be interesting to use application sets
 
-At the moment we think it's usefull to use 3 different pipeline orchestrator but it's probable that in the future we could use only one as
-GitHub now propose a Model regitry, Kubeflow is extending it's Data and airflow is also going towards more MLOPs integration.
+At the moment we think it's usefully to use 3 different pipeline orchestrator, but it's probable that in the future we could use only one as
+GitHub now propose a Model registry, Kubeflow is extending its Data management and Airflow is also going towards more MLOPs integration.
 
 \url{https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-self-service-of-argo-cd-applications-on-multitenant-clusters}.
 
 
 \section{Conclusion}\label{sec:conclusion}
-Airflow pipelines and kubeflow pipelines to easily integrate DataOps and MLOps pipelines together to reach more automation as the project gains maturity.
+Airflow pipelines and Kubeflow pipelines to easily integrate DataOps and MLOps pipelines together to reach more automation as the project gains maturity.
 By using the same GitOps workflow for our DataOps and MLOps pipelines that for our HelmCharts to deploy our infrastructure and applications,
 we successfully
 

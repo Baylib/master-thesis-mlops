@@ -47,6 +47,33 @@ operations.
 It's defined in our project as an Airflow DAG and can be triggered manually in early stage of the project or
 automatically when the project has enough maturity.
 
+Each step of the pipeline can be defined as a container image using the Airflow Domain specific language (e.g.\ ContainerSpec).
+We use the same parameter definition strategy outlined in our model development section (\ref{subsec:model-development}),
+so that each step in the pipeline can be easily replaced with an alternative implementation.
+
+We demonstrate this by replacing the original data-collector step with the LSFB dataset library\cite{9534336}, encapsulated within a container.
+Since the LSFB dataset comes pre-split and prepared, we can skip several steps in our DataOps pipeline.
+
+Below, we provide a detailed explanation of each step in our pipeline.
+\subsubsection{acquire}
+Data is collected from external sources or internal repositories.
+
+\subsubsection{observe}
+Initial analysis is performed to understand the data's structure and content.
+In this step we load the data into an observability stack (Elastic Search or Opensearch)
+
+\subsubsection{clean}
+Missing values are handled and inconsistencies are corrected.
+
+\subsubsection{transform}
+Within this step we format the data according to project requirements.
+
+\subsubsection{split}
+We then divide and release the dataset into training, validation, and test sets.
+
+\subsubsection{MLOps pipeline Triggers}
+Airflow triggers the Kubeflow pipeline to initiate the MLOps workflow.
+
 \subsection{MLOps pipelines}\label{subsec:mlops-pipelines}
 Our MLOps pipelines are developed as Kubeflow pipelines with the possibility to trigger them from an airflow DAG
 even in the early stage of the project in ensure the possibility to combined it with the DataOps pipeline to advance towards AutoML.
@@ -62,22 +89,32 @@ In our MLOps workflow, we have established a seamless integration between Apache
 efficiently manage the machine learning lifecycle.
 This integration automates the process from data availability to model deployment, ensuring a streamlined and reproducible workflow.
 
-\subsubsection{Data Availability Trigger}
-AS explained in previous section, our DataOps pipeline preprocess and prepare the data to release train and test data's.
-Airflow then triggers the Kubeflow pipeline to initiate the MLOps workflow.
 
 \subsubsection{Model Training}
 The pipeline begins with a training component that utilizes the provided datasets to train a machine learning model.
 The trained model is saved to MinIO, our S3-compatible object storage integrated with Kubeflow.
+During this step we mount the volume with the data in read only mode to load the training data and train the model.
 
 \subsubsection{Model Validation}
 After training, a validation component assesses the model's performance using the test data.
 If the model meets our predefined accuracy thresholds and/or performs better than previous models,
 the workflow proceeds; otherwise, it terminates, ensuring only validated models advance.
 
-\subsubsection{Release and Deployment}
+\subsubsection{Release model}
 Upon successful validation, the pipeline enters the release phase, where the model and its metadata are saved to MinIO.
 The deployment component updates our production environment with the new model, ensuring minimal disruption and continuous service delivery.
+metadata...
 
-\subsubsection{Metadata}
-google/ml-metadata
+\subsubsection{Reject the model}
+If validation fails, the pipeline is halted, and no updates are made to the model or its metadata.
+The production environment remains intact, preventing any disruptions and maintaining continuous service.
+
+
+\subsubsection{Deploy}
+This part is crucial in our implementation as instead of using Kubeflow serve capabilities we rather use a GitOps methodology
+and use this step to commit configuration changes in our configuration git repository that is synced by ArgoCD
+using the deployment strategy define in the deployment or rollout manifest within our HelmChart.
+In addition, with our helm tests we can run our integration tests before,
+during or after the deployment to ensure a successful deployment in any environments.
+This way we ensure consistency between all our deployments. % and we are happy :)
+ArgoCD notifications can close the loop by confirming the deployment through a webhook call.

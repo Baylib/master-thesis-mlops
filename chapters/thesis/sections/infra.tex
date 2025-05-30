@@ -1,10 +1,9 @@
 \section{Infrastructure and Workflow}\label{sec:infrastructure}
 
-Now that we have established our tools requirements, in this section,
-we will describe the implementation of our workflow and the minimal infrastructure required to sustend it.
+Having established the tool requirements, we now detail the implementation of our workflow along with the minimal infrastructure necessary to sustain it.
 
 In figure~\ref{fig:project-infra}, we describe our infrastructure that can be first deployed on a local kubernetes single node cluster
-with independent DataOps and MLOps pipelines develop by potentially different people with different roles.
+with independent DataOps and MLOps pipelines develop by potentially different teams with different roles.
 
 \begin{figure}[!htbp]
     \centering
@@ -13,18 +12,18 @@ with independent DataOps and MLOps pipelines develop by potentially different pe
     \label{fig:project-infra}
 \end{figure}
 
-By using airflow pipelines as general pipelines to trigger our kubeflow pipelines, we can easily gain in maturity towards
+By using Airflow pipelines as general pipelines to trigger our Kubeflow pipelines, we can easily gain in maturity towards
 more automation by combining the DataOps pipelines and MLOps pipelines together when they are mature enough.
 
 This way we enable kubeflow features for our model developers within a more general purpose environment.
 
-By using the recent git-sync capabilities of Airflow we can synchronise our dags directly with airflow and
+By using the git-sync capabilities of Airflow we can synchronise our dags directly with airflow and
 even trigger them automatically in a later stage towards automation.
 
 Notably our infrastructure shows the GitOps pull based strategy.
 Only the GitHub actions runners do pushes to other git repositories or other
-storage like HelmChart repository, images repository any library repository.
-
+storage like HelmChart repository, images repository or any library repository.
+Our Kubernetes environments only pull changes from those repositories, making our infrastructure fully private and easily deployable anywhere.
 We will now further describe the component of our workflow.
 
 \subsection{General workflow}\label{subsec:general-development-workflow}
@@ -60,8 +59,6 @@ Within our infrastructure, we consider 4 types of Git Repositories:
     \item MLOps and DataOps Pipelines Repositories.
     In our infrastructure those repositories holds the definition of our Airflow DAGs.
     In the first iteration those repositories can also hold images for.
-
-
     \item Deployment/Configuration repositories.
     Those repositories are used to hold configuration for the deployed applications and Airflow dags.
     We use ArgoCD GitOps implementation to synchronise changes to those repositories.
@@ -80,7 +77,7 @@ Within our infrastructure, we consider 4 types of Git Repositories:
 \end{itemize}
 
 Following GitOps principle those are the source of truth for all our code and configurations, for the infrastructure, the pipelines, the model and the software development.
-We adopt a consistent structure (figure~\ref{fig:sidebyside}) for both our DataOps and MLOps pipeline repositories, incorporating a config.yml file that mirrors the organizational pattern of our Helm chart repositories.
+We adopt a consistent structure (figure~\ref{fig:sidebyside}) for both our DataOps and MLOps pipeline repositories, incorporating a config.yml file that mirrors the organizational pattern of Helm chart project (values.yaml).
 In both cases, an images directory is used to define containerized steps for the pipelines and for deployment configurations within the Helm charts.
 This consistency permit to reuse our Devops pipelines templates.
 
@@ -105,7 +102,7 @@ However, it can be adjusted as needed.
     \item Other branches are deployed sequentially to all environments, passing tests and approval gates before merging to main.
 \end{itemize}
 
-\subsection{GitOps}
+\subsection{GitOps}\label{subsec:gitops2}
 With a Helm-based installation pipeline, the runner requires write access to push applications directly to Kubernetes.
 By adopting ArgoCD and a GitOps approach, we eliminate this requirement by pulling changes directly from GitHub.
 This enables all operations to be managed within GitHub.
@@ -113,11 +110,11 @@ However, it necessitates properly configured permissions in GitHub to prevent po
 
 Airflow also integrate a Git/Sync feature that allows us to load and trigger the DAGs within Airflow.
 
-\subsection{DataOps pipelines}
+\subsection{DataOps pipelines}\label{subsec:dataops-pipelines2}
 DataOps pipelines are defined as Airflow DAGs that will, with the KubernetesExecutor functionality of Airflow,
 create pods for every step defined in the pipeline.
-They can be connected to an observability stack like OpenSearch to analyse and store the data.
-This can be used as Monitoring tools for all our infrastructure too.
+They can be connected to an observability stack like OpenSearch or Elasticsearch to analyse and store the data.
+Those can be used as Monitoring tools for all our infrastructure too.
 
 \begin{figure}[!htbp]
     \centering
@@ -126,7 +123,7 @@ This can be used as Monitoring tools for all our infrastructure too.
     \label{fig:project-data-ops-airflow-dag}
 \end{figure}
 
-\subsection{MLOps pipelines}
+\subsection{MLOps pipelines}\label{subsec:mlops-pipelines2}
 Kubeflow allows us to deploy all the required steps within our MLOps pipeline by creating pods in the required namespace within our Kubernetes cluster.
 A lot like Airflow would.
 We use Kubeflow to allow our ML engineer to use other features like model and metadata storage.
@@ -138,4 +135,43 @@ Other features from the Kubeflow ecosystem could be added at any time if necessa
     \includegraphics[scale=0.5]{images/project/data-ops-airflow-dag}
     \label{fig:project-ml-ops-airflow-dag}
 \end{figure}
+
+\subsection{Storage}\label{subsec:storage}
+Here we detail the storage found in our infrastructure (\ref{fig:archi}) and their purpose in our workflow.
+
+\begin{itemize}
+    \item Model repository manage by Kubeflow to store our trained, pretrained and untrained models.
+    It's an S3 storage that can be mounted as a volume in kubernetes and attached to a running container.
+    \item Image repository where we store our container images to be pull by our cluster during deployment.
+    \item HelmChart repository to hold and version our infrastructure-as-code templates as packages.
+    \item Metadata Database manage by Kubeflow to store model metadata and experiment tracking info.
+    \item Git repositories to store code and configuration as already stated.
+\end{itemize}
+
+\subsection{Model development}\label{subsec:model-development}
+As previously mentioned, we use Helm and Docker to package our model code.
+In this section, we'll go into detail about how the model is defined.
+The model's Docker image supports three operational modes, each configurable via parameters:
+\begin{itemize}
+    \item Training mode that loads and trains the untrained model on training data.
+    \item A validation mode to load, test and validate the model.
+    \item A listen mode define as a REST API server to interface with external frontends or services.
+\end{itemize}
+
+To integrate smoothly with our DataOps and MLOps pipelines, we define parameters that specify storage locations.
+This ensures that any container image meeting these requirements can be seamlessly used within the pipeline.
+Since we use the container layered model, it allows us to take any base image and add a layer that satisfies our pipeline's interface requirements.
+While it's convenient to define all stages (training, validation, and listening) within a single image, it may be preferable to split them into two or three separate images.
+One downside of the single-image approach is that the model's code is packaged into the same container that's deployed to production.
+
+To deploy our production REST API server to Kubernetes, we created a standard Helm project with template manifests for a Service,
+ServiceAccount, Ingress, and Deployment.
+In the Helm (values.yaml) configuration file, we specify which trained model version should be loaded, allowing for seamless model hot-swapping when needed.
+For more advanced deployment strategies, we can replace the standard Deployment manifest with a Rollout manifest (Custom Resource Definition (CRD) managed by Argo Rollouts).
+
+To use the model within our MLops Kubeflow pipeline, we use our training and validation mode and our data location parameters with Kubeflow Domain specific language container components.
+We use the same approach for our DataOps pipelines steps to ensure consistency as we'll demonstrate later in this paper.
+
+% image de argocd api deployment.
+
 
