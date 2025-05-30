@@ -1,0 +1,47 @@
+\section{Conclusion}\label{sec:conclusion}
+
+During this project, we were able to implement the techniques and concepts learned throughout our master's program, specializing in areas such as Kubernetes clusters, DevOps, DataOps, MLOps, Docker, Helm, and Python programming.
+Through literature research and reviewing various documentation, we successfully implemented an MLOps workflow prototype capable of supporting enterprise-level infrastructure and being reused across multiple data engineering and machine learning projects.
+We also explored integrating a GitOps methodology with our MLOps workflow, following feedback from our peers.
+
+We answered our research question \textit{"How can a state-of-the-art MLOps-GitOps workflow be implemented or proposed to initiate a machine learning project and support its progression toward greater maturity?"}
+, by implementing a state-of-the-art MLOps-GitOps workflow that can be use as a project bootstrap and gain maturity over time.
+
+As the project matures, we integrated Airflow and Kubeflow pipelines to enable seamless automation of both our DataOps and MLOps workflows.
+By applying the same GitOps methodology for managing our DataOps and MLOps pipelines as well as for deploying infrastructure and applications via HelmCharts,
+we have successfully established a consistent and unified workflow for all development processes, whether for application deployment, Airflow DAG orchestration or Kubeflow pipelines orchestration.
+
+The LSFB dataset provided by our promoters was instrumental in demonstrating the applicability of our workflow, using a real model already in production.
+Their expertise offered valuable insights and served as a strong foundation for initiating our project.
+
+We integrated all necessary elements for our implementation in accordance with the findings from our state-of-the-art review.
+To conclude, we have summarized our results in the table below.
+
+%tableau avec infos ur notre implémentation.
+%\begin{landscape}
+\footnotesize
+\begin{longtable}{|p{5cm}|p{4cm}|p{8cm}|}
+    \hline
+    \textbf{Good Practice} & \textbf{Tool Used} & \textbf{Remarks}\\
+    \hline
+    CI/CD automation & GitHub Actions & We implemented the GitOps principles into our DevOps pipelines \\
+    \hline
+    Pipeline/Workflow orchestration & Kubeflow/Airflow Pipelines & We chose a container based approach to ease reusability \\
+    \hline
+    Reproducibility using pipeline orchestrator & Kubeflow, Airflow &  Both Airflow and Kubeflow DSL ease the experiment tracking and reproducibility \\
+    \hline
+    Versioning of data, code and model with model registry, code repositories and container registries & GitHub, Docker Hub & Makes it easy to create free account for student usage\\
+    \hline
+    Collaboration with collaborative development platform & GitHub & We specified rules and branch strategy to manage our repositories \\
+    \hline
+    Continuous ML training and evaluation with well-defined triggers for pipelines & Apache Airflow, Kubeflow Pipelines & We implemented and demonstrated use of configurable pipelines with clearly defined input/output parameters\\
+    \hline
+    ML metadata tracking & Kubeflow & We used Kubeflow DSL to ease metadata management\\
+    \hline
+    Continuous Monitoring (Monitoring system) & ElasticSearch & Not integrated yet\\
+    \hline
+    Feedback loops and Data Drift Detectors, Human Verifications & ElasticSearch & Not integrated yet\\
+    \hline
+\end{longtable}
+%\end{landscape}
+\normalsize
