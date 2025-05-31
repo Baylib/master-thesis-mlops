@@ -1,0 +1,17 @@
+\section{Future Work}\label{sec:future-work}
+This project is currently a prototype suitable for development and testing environments.
+Future iterations should aim to harden the implementation for production use.
+While the focus has primarily been on the MLOps workflow, several areas remain to be improved:
+
+\begin{itemize}
+    \item Production-Ready Infrastructure: The current setup lacks some of the considerations and robustness needed for a mature DevOps environment.
+    \item Secret Management: Integrating a dedicated secrets manager such as HashiCorp Vault would enhance security and secret handling.
+    \item Improved ArgoCD Usage: While we adopted the app-of-apps pattern in ArgoCD, enabling ApplicationSets could provide better self-service capabilities for development teams and simplify multi-environment management.
+    \item Pipeline Orchestration Simplification: Currently, we use three different orchestrators.
+    However, as platforms evolve—GitHub introducing a model registry, Kubeflow expanding its data management capabilities, and Airflow moving toward deeper MLOps integration—it may become feasible to consolidate to a single orchestrator in the future.
+    \item Repository Naming: Standardizing and renaming Git repositories to clearer, more meaningful names will improve maintainability and team onboarding.
+\end{itemize}
+
+These improvements will help transition our prototype into a scalable, production-grade MLOps-GitOps solution.
+% \url{https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-self-service-of-argo-cd-applications-on-multitenant-clusters}.
+%\url{https://argo-cd.readthedocs.io/en/stable/operator-manual/secret-management/}.

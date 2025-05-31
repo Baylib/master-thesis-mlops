@@ -1,0 +1,19 @@
+\section{Limitations and Critical Assessment}\label{sec:limitations-and-critical-assessment}
+
+While our MLOps implementation demonstrates practical value, several aspects allows critical examination.
+\subsection*{Architectural Complexity}
+Our dual use of Kubeflow and Airflow may introduce unnecessary complexity and could potentially be simplified.
+However, we deliberately maintained this separation for clear role distinction: Airflow handles data orchestration while Kubeflow manages ML-specific workflows.
+We also found Airflow easier to manage multi-user and namespaces within kubernetes.
+Future iterations could explore more integrated solutions, particularly as Airflow expands its MLOps capabilities.
+
+\subsection*{Limited Production Validation}
+Our implementation's real-world validation remains limited.
+While we demonstrated practical utility through the LSFB dataset pipeline, we only validated the complete ML lifecycle using demonstration models rather than production-grade systems.
+This restricts generalizability and leaves questions about performance.
+\subsection*{Evolving Technology Landscape}
+The rapidly evolving MLOps ecosystem, including developments like GitHub's beta model repository, may consolidate functionality that our implementation currently addresses through separate tools.
+While our containerized approach provides adaptation flexibility, this field requires frequent architectural reassessment.
+
+Despite these limitations, we maintain confidence in our implementation's core design principles and reusability through state-of-the-art practices including containerization, automated triggers, and well-defined parameters.
+

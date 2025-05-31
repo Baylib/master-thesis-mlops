@@ -40,42 +40,6 @@ These existing elements served as foundational components that our comprehensive
 \input{chapters/thesis/sections/infra}
 \input{chapters/thesis/sections/roles}
 \input{chapters/thesis/sections/workflow}
-
-\section{Limitations and Critical Assessment}\label{sec:limitations-and-critical-assessment}
-
-While our MLOps implementation demonstrates practical value, several aspects allows critical examination.
-\subsection*{Architectural Complexity}
-Our dual use of Kubeflow and Airflow may introduce unnecessary complexity and could potentially be simplified.
-However, we deliberately maintained this separation for clear role distinction: Airflow handles data orchestration while Kubeflow manages ML-specific workflows.
-Future iterations could explore more integrated solutions, particularly as Airflow expands its MLOps capabilities.
-\subsection*{Limited Production Validation}
-Our implementation's real-world validation remains limited.
-While we demonstrated practical utility through the LSFB dataset pipeline, we only validated the complete ML lifecycle using demonstration models rather than production-grade systems.
-This restricts generalizability and leaves questions about performance.
-\subsection*{Evolving Technology Landscape}
-The rapidly evolving MLOps ecosystem, including developments like GitHub's beta model repository, may consolidate functionality that our implementation currently addresses through separate tools.
-While our containerized approach provides adaptation flexibility, this field requires frequent architectural reassessment.
-
-Despite these limitations, we maintain confidence in our implementation's core design principles and reusability through state-of-the-art practices including containerization, automated triggers, and well-defined parameters.
-
-\section{Future Work}\label{sec:future-work}
-Our project is currently a prototype that can be used in development and testing environments.
-Future project should implement this in production.
-The current implementation still lack some of the consideration explained before and a more mature DevOps infrastructure.
-We focused on the MLOps part and workflow but .
-
-Add a vault secret manager for secret management \url{https://argo-cd.readthedocs.io/en/stable/operator-manual/secret-management/}.
-
-We used the ArgoCD the app-of-apps pattern in our implementation but to offer more self-service to development teams it could be interesting to use application sets
-
-At the moment we think it's usefully to use 3 different pipeline orchestrator, but it's probable that in the future we could use only one as
-GitHub now propose a Model registry, Kubeflow is extending its Data management and Airflow is also going towards more MLOPs integration.
-
-\url{https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Use-Cases/#use-case-self-service-of-argo-cd-applications-on-multitenant-clusters}.
-
-renaming git repositories to more convenient names.
-
-
-
-
+\input{chapters/thesis/sections/critics}
+\input{chapters/thesis/sections/futur}
 \input{chapters/thesis/sections/conclusion}
