@@ -1,5 +1,7 @@
 \section{Workflow pipelines}\label{sec:workflow}
 
+In this section we will further describe our pipelines definitions.
+
 \subsection{DevOps CI/CD pipelines}\label{subsec:ci/cd-pipelines-and-development-workflow}
 As we explained while describing the infrastructure, part of our global workflow can be implemented within pipelines runners definition.
 We used GitHub action and the GitHub flow to harmonise the workflow within our different type of git repositories.
@@ -34,7 +36,17 @@ There are our development pipelines for any git repositories except for the depl
 Artifact that are not deployed but released to a repository follows the same path but are deployed as dependencies within other projects.
 Airflow DAGS and Kubeflow pipelines follows the same development workflow and are release into our previously defined git deployment repositories.
 
-% image of github action runners.
+We can see in figure~\ref{fig:github-pipeline} the implementation of our DevOps pipeline within GitHub.
+The promotion step involves pushing new configuration to our git repositories that will be synced by ArgoCD or Airflow Git-Sync.
+We use a Matrix strategy to create build and push jobs for our docker images only if changes were detected in the directory defining this steps.
+This automation requires squashing commit when we merge to the main branch.
+
+\begin{figure}[!htbp]
+    \centering
+    \caption{GitHub pipeline implementation running on a feature branch}
+    \includegraphics[scale=0.4]{images/project/github-pipeline}
+    \label{fig:github-pipeline}
+\end{figure}
 
 \subsection{DataOps pipelines}\label{subsec:dataops-pipelines}
 Inspired by our research in the literature we create a sample DataOps pipeline that can be implemented with specific
@@ -130,11 +142,16 @@ The model is released along with its metadata, which currently includes primaril
 If validation fails, the pipeline is halted, and no updates are made to the model or its metadata.
 The production environment remains intact, preventing any disruptions and maintaining continuous service.
 
+Although we chose to implement our pipeline this way, a rejection doesn't have to halt the process.
+Instead, it can trigger model or parameter tuning and start a new training cycle for a defined number of iterations.
+
 \subsubsection{Deploy}
 This part is crucial in our implementation as instead of using Kubeflow serve capabilities we rather use a GitOps methodology
 and use this step to commit configuration changes in our configuration git repository that is synced by ArgoCD
 using the deployment strategy define in the deployment or rollout manifest within our HelmChart.
+
 In addition, with our helm tests we can run our integration tests before,
 during or after the deployment to ensure a successful deployment in any environments.
+
 This way we ensure consistency between all our deployments. % and we are happy :)
 ArgoCD notifications can close the loop by confirming the deployment through a webhook call.

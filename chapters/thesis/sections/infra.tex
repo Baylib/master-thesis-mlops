@@ -125,6 +125,31 @@ In our project, for consistency, we use Airflow’s integrated Git-Sync feature 
 similar to how ArgoCD manages deployments.
 
 % image of argocd infra
+Figure~\ref{fig:argocd-infra} shows a screenshot of our deployed infrastructure as displayed in the ArgoCD web interface.
+
+We used the official Airflow Helm chart, along with a companion application to define additional dependencies such as ingress, service accounts, and volumes.
+
+We also deployed Kubeflow Pipelines using Kustomize, along with its required dependencies, in a separate ArgoCD application.
+
+Our custom REST API, mthmlops-app, which hosts the machine learning model, was deployed as well.
+
+\begin{figure}[!htbp]
+    \centering
+    \caption{Infrastructure deployed by ArgoCD}
+    \includegraphics[width=\textwidth]{images/project/argocd-deployments}
+    \label{fig:argocd-infra}
+\end{figure}
+
+Implementation details and usage instructions can be found in the corresponding GitHub repositories (refer to the annexes for links).
+To support this setup, we created a dedicated ArgoCD project, allowing us to separate this ML workflow from other ML development projects.
+Figure~\ref{fig:app-of-apps-pattern} displays our parent application, illustrating the use of the ArgoCD app-of-apps pattern.
+
+\begin{figure}[!htbp]
+    \centering
+    \caption{ArgoCD App-of-apps pattern usage}
+    \includegraphics[scale=0.3]{images/project/app-of-apps-pattern}
+    \label{fig:app-of-apps-pattern}
+\end{figure}
 
 \subsection{DataOps pipelines with Airflow}\label{subsec:dataops-pipelines2}
 DataOps pipelines are defined as Airflow DAGs that leverage Airflow’s KubernetesExecutor, which creates a pod (i.e., a running container) for each step defined in the pipeline.
@@ -139,8 +164,8 @@ These tools can also serve as monitoring solutions for our entire infrastructure
 
 \begin{figure}[!htbp]
     \centering
-    \caption{Example of a DataOps pipeline define within Airflow}
-    \includegraphics[scale=0.5]{images/project/data-ops-airflow-dag}
+    \caption{Example of a pipeline define within Airflow}
+    \includegraphics[scale=0.3]{images/project/data-ops-airflow-dag}
     \label{fig:project-data-ops-airflow-dag}
 \end{figure}
 
@@ -151,8 +176,8 @@ Furthermore, other components from the Kubeflow ecosystem can be integrated at a
 
 \begin{figure}[!htbp]
     \centering
-    \caption{Example of a MLOps pipeline define within Airflow}
-    \includegraphics[scale=0.5]{images/project/data-ops-airflow-dag}
+    \caption{Example of a pipeline define within Kubeflow}
+    \includegraphics[scale=0.3]{images/project/mlops-workflow-kubeflow}
     \label{fig:project-ml-ops-airflow-dag}
 \end{figure}
 
@@ -193,6 +218,12 @@ For more advanced deployment strategies, we can replace the standard Deployment 
 To use the model within our MLops Kubeflow pipeline, we use our training and validation mode and our data location parameters with Kubeflow Domain specific language container components.
 We use the same approach for our DataOps pipelines steps to ensure consistency as we'll demonstrate later in this paper.
 
+Figure~\ref{fig:model-api} shows the model HelmChart and it's component deployed using ArgoCD\@.
+
 % image of argocd api deployment.
-
-
+\begin{figure}[!htbp]
+    \centering
+    \caption{Our model REST API HelmChart deployed using ArgoCD}
+    \includegraphics[width=\textwidth]{images/project/argocd-model-api}
+    \label{fig:model-api}
+\end{figure}
