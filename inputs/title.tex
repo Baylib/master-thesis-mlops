@@ -1,30 +1,58 @@
 \begin{titlepage}
-	\centering
-    %\vspace*{0.5 cm}
-    % University Logo
-    \includegraphics[scale = 0.75]{images/ULogo.jpg}\\[1.0 cm]
-    % University Name
-    \textsc{\LARGE Université de Namur}\\[1.0 cm]	
-    % Course Name and Code
-    \textsc{University Thesis | IHDCM050 }\\[0.5 cm]
-    \textsc{2024-2025}\\[0.5 cm]
-	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
-	{ \LARGE \bfseries \thetitle}\\ 
-	\rule{\linewidth}{0.2 mm} \\[1 cm]
-	% Title mini page
-	\begin{minipage}{\textwidth}
-        \begin{center}
-        \begin{tabular}{c}
-            \begin{tabular}{@{} c @{}}
-            \textsc{\small Author :}\\
-            Benjamin Jonard\\
-            \end{tabular}\\\\
-            \begin{tabular}{@{} c @{}}
-            \textsc{Promoters :}\\
-            Benoît Frenay\\
-            Jérôme FINK\\
-            \end{tabular}\\
-        \end{tabular}
-        \end{center}
-	\end{minipage}~\\[1 cm]
+    \fancyfoot[C]{} % Retrait footer
+    \pagestyle{fancyplain}
+
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north west,yshift=50pt,xshift=100pt]
+        at (current page.north west)
+            {\includegraphics[height=4cm]{images/ULogo}};
+    \end{tikzpicture}
+
+    \centerline{UNIVERSITÉ DE NAMUR}
+    \centerline{Faculté d'informatique}
+    \centerline{Année académique 2024-2025} % ==> ANNEE ACADEMIQUE
+
+    \vspace{2.5cm}
+    \begin{center}
+        \fbox{ \begin{minipage}[c][4.8cm]{9.6cm}
+                   \large
+                   \begin{spacing}{1.1}
+                       \begin{center}
+                           \centering \textbf{\thetitle}
+                           \\
+                           \vspace{0.8cm}
+                           \auteurMemoire
+                       \end{center}
+                   \end{spacing}
+        \end{minipage}}
+    \end{center}
+
+    % ==> CADRE A COMPLETER
+    \vspace{2cm}
+    \centerline{
+        \begin{minipage}[c][2.5cm]{9.6cm}
+            \begin{spacing}{1.5}
+                \begin{center}
+                    \leftline{........................ (Signature pour approbation du dépôt - REE art. 40)}
+                    \leftline{Promoteur : Benoit Frenay}
+                    \leftline{Co-promoteur : Jerome Fink}
+                \end{center}
+            \end{spacing}
+        \end{minipage}
+    }
+
+    \vspace{1.5cm}
+    \centering\mbox{
+        \begin{minipage}[c][4cm]{9.6cm}
+            \begin{spacing}{1.8}
+                \begin{center}
+                    \vspace{0.5cm}
+                    \centerline{\large Mémoire présenté en vue de l'obtention du grade de Master 60 en Sciences Informatiques}
+                    \vspace{1.2cm}
+                    \centerline{\small Faculté d'Informatique – Université de Namur}
+                    \centerline{\small RUE GRANDGAGNAGE, 21 \ding{108} B-5000 NAMUR(BELGIUM)}
+                \end{center}
+            \end{spacing}
+        \end{minipage}
+    }
 \end{titlepage}
