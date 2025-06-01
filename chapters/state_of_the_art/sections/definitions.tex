@@ -8,7 +8,7 @@ It requires only a prior general knowledge about machine learning, software deve
 
 Containerization is a technology that packages applications and their dependencies into isolated, lightweight containers,
 ensuring consistent and portable execution across various environments.
-This approach eliminates common problems by providing a standardized runtime environment.
+This approach eliminates common problems by providing a standardized runtime environment\cite{docker}.
 
 In the context of MLOps, containerization is crucial for the reliable and reproducible deployment of machine learning models.
 By encapsulating models along with their software dependencies and environment configurations, containers prevent version conflicts and isolate resource usage.
@@ -29,7 +29,7 @@ Kubernetes allows multiple teams to securely share resources while maintaining i
 Its portability ensures compatibility across various Kubernetes providers, making it a flexible and scalable solution for diverse projects.
 
 Docker with Kubernetes together simplifies deployment strategies and enables scalable hosting of ML models,
-though it lacks native ML performance management capabilities on its own.\cite{treveil2020introducing}(p.81)
+though it lacks native ML performance management capabilities on its own\cite{treveil2020introducing}(p.81).
 
 \subsection{Helm}\label{subsec:helm}
 is a package manager for Kubernetes that simplifies the deployment and management of applications\cite{9792270}.
@@ -42,7 +42,7 @@ high-quality software continuously\cite{devops}.
 It emphasizes automation, continuous integration/continuous deployment (CI/CD), and collaboration between
 teams.
 
-The DevOps workflow typically includes:
+The DevOps workflow typically includes\cite{devops}:
 
 \begin{itemize}
     \item Plan (requirements gathering),
@@ -61,7 +61,7 @@ data dependencies, and model retraining needs\cite{10.1145/3533378}.
 
 \subsection{GitOps}\label{subsec:gitops}
 GitOps\cite{gitops} is a DevOps methodology that uses Git repositories as the single source of truth for infrastructure and application code and configurations\cite{inproceedings}.
-GitOps include:
+GitOps include\cite{gitops}:
 
 \begin{itemize}
 \item Declarative infrastructure (defined as code, e.g., Kubernetes manifests),
@@ -79,27 +79,22 @@ software delivery pipelines.
 Common branching strategies include:
 
 \subsubsection*{GitHub Flow}
-A lightweight workflow where:
-
+A lightweight workflow where\cite{rodriguez2021unifying}:
 \begin{itemize}
-\item The main branch is always deployable,
-\item Feature branches are merged via pull requests (PRs),
-\item Changes are deployed immediately after merging.
+    \item The main branch is always deployable,
+    \item Feature branches are merged via pull requests (PRs),
+    \item Changes are deployed immediately after merging.
 \end{itemize}
-
 \subsubsection*{GitFlow}
-A structured workflow with long-lived branches:
-
+A structured workflow with long-lived branches\cite{rodriguez2021unifying}:
 \begin{itemize}
-\item main (production-ready code),
-\item develop (integration branch),
-\item Feature/hotfix/release branches.
+    \item main (production-ready code),
+    \item develop (integration branch),
+    \item Feature/hotfix/release branches.
 \end{itemize}
 \subsubsection*{Trunk-Based Development}
 \begin{itemize}
-\item Developers commit directly to a single branch (main/trunk),
-\item Short-lived feature branches (optional),
-\item Requires robust CI/CD to maintain stability.
+    \item Developers commit directly to a single branch (main/trunk)\cite{shahin2017continuous}
 \end{itemize}
 
 \subsection{S3-Storage}
